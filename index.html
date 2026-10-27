@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AKC V32 - Free Money Version</title>
+<title>AKC V32.3 - Clean</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -17,79 +17,63 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 .btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:12px;display:block}
 .btn-primary{background:#1e40af;color:#fff}
 .btn-secondary{background:#e5e7eb;color:#111}
-.btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
 .btn-green{background:#16a34a;color:#fff}
-.btn-whatsapp{background:#25D366;color:#fff}
 .topbar{position:sticky;top:0;background:#1e40af;color:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;z-index:50}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:6px 0 16px;z-index:50;overflow-x:auto}
-.bottom-nav button{border:none;background:none;display:flex;flex-direction:column;align-items:center;font-size:8px;color:#6b7280;padding:3px 4px;min-width:45px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:6px 0 16px;z-index:50}
+.bottom-nav button{border:none;background:none;display:flex;flex-direction:column;align-items:center;font-size:10px;color:#6b7280;padding:3px 6px;min-width:50px}
 .bottom-nav button.active{color:#1e40af;font-weight:700}
 .tab{padding:15px 15px 110px;display:none}
 .tab.active{display:block}
 .card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.card-data{border-left:4px solid #25D366;background:#f0fdf4}
-.card-cake{border-left:4px solid #ec4899;background:#fdf2f8}
-.card-event{border-left:4px solid #8b5cf6;background:#f5f3ff}
 .card-plumbing{border-left:4px solid #06b6d4;background:#ecfeff}
 .badge{padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700}
 .badge-owner{background:#fef3c7;color:#92400e;border:1px solid #fbbf24}
-.badge-live{background:#dcfce7;color:#166534;border:1px solid #16a34a}
-.badge-online{background:#16a34a;color:#fff}
-.badge-profit{background:#fef3c7;color:#92400e;border:1px solid #f59e0b}
 .small{font-size:12px;color:#6b7280}
 .chip{display:inline-block;padding:6px 12px;border-radius:20px;background:#f3f4f6;margin:3px;font-size:12px;border:1px solid #eee;cursor:pointer}
 .chip.active{background:#1e40af;color:#fff}
-.link-box{background:#f9fafb;border:2px dashed #9ca3af;padding:12px;border-radius:12px;margin-top:10px}
 #mapFull{height:60vh;border-radius:14px;border:2px solid #e5e7eb;margin:12px 0;z-index:1}
-.live-dot{width:10px;height:10px;background:#16a34a;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-.online-dot{width:8px;height:8px;background:#fff;border-radius:50%;display:inline-block;margin-right:4px;animation:pulse 1.5s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
-.top-online{display:flex;align-items:center;background:#16a34a;color:#fff;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.4)}
-.top-right-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
 .pin-box{background:#fffbeb;border:2px solid #f59e0b;padding:12px;border-radius:12px;margin-top:12px}
-.data-plan{display:flex;justify-content:space-between;align-items:center;background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:12px;margin:8px 0}
 </style>
 </head>
 <body>
 
 <div id="authPage" class="auth-wrap">
 <div class="auth-card">
-<h1 style="text-align:center">AKC V32</h1>
-<p style="text-align:center;color:#666;font-size:13px;margin-bottom:5px;font-weight:600">Akungba Market - FREE MONEY</p>
-<p style="text-align:center;color:#16a34a;font-size:11px;margin-bottom:15px;font-weight:700">💰 Data Shop + 🚿 Plumbing + No Capital Needed!</p>
+<h1 style="text-align:center">AKC V32.3</h1>
+<p style="text-align:center;color:#666;font-size:12px;margin-bottom:15px">Akungba Market</p>
 <div id="loginBox">
 <label>Phone</label><input id="loginPhone" placeholder="081...">
 <label>Password</label><input id="loginPass" type="password">
-<div class="pin-box"><label style="color:#92400e;margin-top:0">🔐 OWNER PIN</label><input id="ownerCodeInput" type="password" placeholder="Leave empty if student"><p id="ownerMsg" class="small" style="font-weight:700"></p></div>
+<div class="pin-box"><label>🔐 OWNER PIN</label><input id="ownerCodeInput" type="password" placeholder="Leave empty if student"></div>
 <button class="btn btn-primary" onclick="doLogin()">LOG IN</button>
 <button type="button" class="btn btn-secondary" onclick="showSignup()">SIGN UP</button>
 </div>
+
 <div id="signupBox" class="hidden">
-<label>Full Name</label><input id="suName" placeholder="Full name">
+<label>Full Name</label><input id="suName" placeholder="Your full name">
 <label>Phone</label><input id="suPhone" placeholder="081...">
-<label>Gender</label><select id="suGender"><option value="">Select</option><option>Male</option><option>Female</option></select>
-<label>Password</label><input id="suPass" type="password">
-<label>Location</label><select id="suLocation"><option>Akungba Student - AAUA</option><option>Akungba Indigene</option><option>Non-Indigene</option></select>
+<label>Gender</label><select id="suGender"><option value="">Select Gender</option><option>Male</option><option>Female</option></select>
+<label>Password</label><input id="suPass" type="password" placeholder="Create password">
+<label>Location</label>
+<select id="suLocation">
+<option value="Akungba Student">Akungba - AAUA Student</option>
+<option value="Akungba Resident">Akungba Resident</option>
+<option value="Outside Akungba">Outside Akungba</option>
+</select>
 <label>What do you do?</label>
 <select id="suSkill">
-<option value="">General Buyer/Seller</option>
+<option value="">General Buyer / Seller</option>
 <option value="food">🍚 Food Seller</option>
-<option value="fashion">👕 Fashion</option>
-<option value="electronics">📱 Electronics</option>
-<option value="hair">💇 Hair / Beauty</option>
-<option value="books">📚 Books</option>
-<option value="logistics">🚗 Logistics</option>
+<option value="fashion">👕 Fashion / Clothes</option>
 <option value="plumbing">🚿 Plumbing - Pipe, Toilet, Borehole</option>
 <option value="electrical">🔌 Electrical</option>
-<option value="building">🏗️ Building - Carpentry, Tiling</option>
-<option value="services">🔧 Services</option>
-<option value="provisions">🛒 Provisions</option>
+<option value="building">🏗️ Building - Carpentry, Tiling, POP</option>
 <option value="cake">🎂 Cake Baker</option>
 <option value="event">🎉 Event Planner</option>
-<option value="both">🎂🎉 Both Cake & Event</option>
+<option value="logistics">🚗 Logistics / Okada</option>
 <option value="all_business">💼 All Business</option>
 </select>
-<label>Verification</label><div style="display:flex;gap:8px"><input id="suCodeInput" placeholder="Code"><button type="button" class="btn btn-secondary" style="margin:0;width:110px" onclick="generateCode()">Generate</button></div>
+<label>Verification</label><div style="display:flex;gap:8px"><input id="suCodeInput" placeholder="Enter code"><button type="button" class="btn btn-secondary" style="margin:0;width:110px" onclick="generateCode()">Generate</button></div>
 <p id="codeDisplay" class="small" style="color:#1e40af;font-weight:700"></p>
 <button type="button" class="btn btn-primary" onclick="doSignup()">SIGN UP NOW</button>
 <button type="button" class="btn btn-secondary" onclick="showLogin()">LOG IN</button>
@@ -99,69 +83,50 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><b>AKC V32</b><span id="topBadge" class="badge badge-owner">AKC</span></div>
-<div class="top-right-stack">
-<div id="onlineCountTop" class="top-online"><span class="online-dot"></span><span id="onlineCountText">🟢 1 Online</span></div>
-<div style="display:flex;align-items:center;gap:6px"><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px">Logout</button></div>
-</div>
+<div><b>AKC V32.3</b> <span id="topBadge" class="badge badge-owner">AKC</span></div>
+<div style="display:flex;gap:6px;align-items:center"><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px">Logout</button></div>
 </div>
 
 <div id="tab-buy" class="tab active">
-<h2>🛒 Market + 🚿 Plumbing</h2>
+<h2>🛒 Market</h2>
 <div style="display:flex;gap:4px;margin:10px 0;flex-wrap:wrap">
 <span class="chip active" id="filterAll" onclick="setBuyFilter('all')">All</span>
 <span class="chip" id="filterPlumbing" onclick="setBuyFilter('plumbing')">🚿 Plumbing</span>
 <span class="chip" id="filterFood" onclick="setBuyFilter('food')">🍚 Food</span>
 <span class="chip" id="filterCake" onclick="setBuyFilter('cake')">🎂 Cake</span>
-<span class="chip" id="filterLive" onclick="setBuyFilter('live')">📍 Live</span>
 </div>
 <input id="searchBuy" placeholder="Search plumbing, food, cake..." oninput="renderBuy()" style="margin:8px 0">
 <div id="buyList"></div>
 </div>
 
-<div id="tab-data" class="tab">
-<h2>💰 Buy Cheap Data - MAKE MONEY!</h2>
-<div class="card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:2px solid #16a34a">
-<h3>💰 How you go make money (Broke to Boss):</h3>
-<p class="small" style="color:#166534;margin-top:6px">1. Student click buy<br>2. E transfer money to your Opay<br>3. You buy data for ₦100 less for your phone<br>4. You keep profit! No capital needed!</p>
-<p class="small" style="margin-top:8px"><b>Your Opay:</b> 08105986759 - Kareem Sheriff<br><b>Profit per 1GB:</b> ₦100-₦150</p>
-</div>
-<div id="dataPlans"></div>
-<div class="card"><h3>📱 Manual Data - Zero Capital!</h3><p class="small">You no need API. Use your phone: Dial *461# for MTN or use your data app. Buy cheap, sell with profit!</p></div>
-</div>
-
 <div id="tab-sell" class="tab">
-<h2>💰 Sell - With Fee!</h2>
+<h2>💰 Sell</h2>
 <div class="card">
 <label>What are you selling?</label>
 <select id="sellType" onchange="updateSellForm()">
 <option value="product">📦 General - FREE</option>
-<option value="food">🍚 Food - FREE</option>
-<option value="fashion">👕 Fashion - FREE</option>
-<option value="plumbing">🚿 Plumbing - ₦100 fee (You collect!)</option>
+<option value="plumbing">🚿 Plumbing - ₦100 fee</option>
 <option value="electrical">🔌 Electrical - ₦100 fee</option>
 <option value="building">🏗️ Building - ₦100 fee</option>
 <option value="cake">🎂 Cake - FREE</option>
 <option value="event">🎉 Event - FREE</option>
 </select>
-<div id="sellProductFields"><label>Name</label><input id="sellName" placeholder="e.g. Toilet repair, Pipe fixing"><label>Price ₦</label><input id="sellPrice" type="number"><label>Desc</label><textarea id="sellDesc" placeholder="I fix toilet, pipe leak, borehole..."></textarea><label>Category</label><select id="sellCat"><option>General</option><option>Plumbing</option><option>Electrical</option><option>Building</option><option>Food</option><option>Fashion</option><option>Cake</option><option>Event Planner</option><option>Others</option></select></div>
-<div id="sellCakeFields" class="hidden"><label>🎂 Cake Type</label><select id="cakeType"><option>Birthday</option><option>Wedding</option></select><label>Price</label><input id="cakePrice" type="number"><label>Details</label><textarea id="cakeDesc"></textarea></div>
-<div id="sellEventFields" class="hidden"><label>🎉 Event Type</label><select id="eventType"><option>Wedding</option><option>Birthday</option></select><label>Price</label><input id="eventPrice" type="number"><label>Services</label><textarea id="eventDesc"></textarea></div>
-<div id="plumbingFeeBox" class="hidden"><div style="background:#fffbeb;border:2px solid #f59e0b;padding:10px;border-radius:10px;margin-top:10px"><p class="small" style="color:#92400e;font-weight:700">🚿 Plumbing/Electrical/Building na ₦100 to post!<br>Transfer to Opay: 08105986759<br>Or pay from your wallet balance!</p><p class="small" style="margin-top:4px">Your wallet: <span id="sellWalletBal">₦0</span></p></div></div>
-<label>📍 Live Location?</label><select id="sellAddLocation"><option value="yes">Yes - Show on map!</option><option value="no">No</option></select>
-<button class="btn btn-primary" onclick="addProduct()" id="sellBtn">Post Now</button>
+<div id="sellProductFields"><label>Service / Product Name</label><input id="sellName" placeholder="e.g Toilet repair, Pipe fixing"><label>Price ₦</label><input id="sellPrice" type="number"><label>Description</label><textarea id="sellDesc" placeholder="Describe your work"></textarea><label>Category</label><select id="sellCat"><option>General</option><option>Plumbing</option><option>Electrical</option><option>Building</option><option>Food</option><option>Cake</option><option>Event Planner</option></select></div>
+<div id="sellCakeFields" class="hidden"><label>🎂 Cake Price</label><input id="cakePrice" type="number"><label>Details</label><textarea id="cakeDesc"></textarea></div>
+<div id="sellEventFields" class="hidden"><label>🎉 Event Price</label><input id="eventPrice" type="number"><label>Services</label><textarea id="eventDesc"></textarea></div>
+<div id="plumbingFeeBox" class="hidden"><div style="background:#fffbeb;border:2px solid #f59e0b;padding:10px;border-radius:10px;margin-top:10px"><p class="small" style="color:#92400e;font-weight:700">🚿 Plumbing / Electrical / Building na ₦100 to post!<br>Moniepoint: 8105986759 - kareem sheriff</p><p class="small">Wallet: <span id="sellWalletBal">₦0</span></p></div></div>
+<button class="btn btn-primary" onclick="addProduct()">Post Now</button>
 </div>
 <h3>My Posts</h3><div id="myProducts"></div>
 </div>
 
-<div id="tab-map" class="tab"><h2>📍 MAP - Plumbing dey here!</h2><div id="mapFull"></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto" onclick="showOnMap('all')">All</button><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#06b6d4;color:#fff" onclick="showOnMap('plumbing')">🚿 Plumbing</button><button class="btn btn-green" style="margin:0;padding:8px;width:auto" onclick="showOnMap('live')">Live</button></div><div id="mapList" style="margin-top:12px"></div></div>
+<div id="tab-map" class="tab"><h2>📍 MAP - Akungba</h2><div id="mapFull"></div><div id="mapList" style="margin-top:12px"></div></div>
 <div id="tab-chat" class="tab"><h2>💬 Chat</h2><div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
-<div id="tab-wallet" class="tab"><h2>👛 Wallet + Data Money</h2><div class="card" style="text-align:center"><p class="small">Balance</p><h1 id="walletBal">₦0</h1><p class="small" style="color:#16a34a;font-weight:700">Profit from Data + Plumbing fee go enter here!</p><button class="btn btn-green" onclick="fundWallet()">+ Fund Wallet ₦1000 (Demo)</button><button class="btn btn-whatsapp" onclick="showTab('data')">💰 Go Sell Data - Make Money!</button></div><div id="ownerWalletExtra" class="hidden"><div class="card" style="background:#fffbeb;border:1px solid #fbbf24"><h3>🔐 Your Earnings Today</h3><p>Data Sales: <span id="dataSales">0</span> | Plumbing Posts: <span id="plumbCount">0</span><br>Referrals: <span id="refCount">0</span> | Bonus: <span id="refBonus">₦0</span></p></div></div></div>
-<div id="tab-account" class="tab"><h2>Account</h2><div class="card" id="accountInfo"></div><div class="card"><h3>💰 How to Make Money (Broke Version)</h3><p class="small">1. Share your AKC link for people to sign up - You get ₦100 per referral<br>2. Sell data - Student transfer to you, you buy cheap, keep profit<br>3. Plumber wan post? Collect ₦100 manual<br>4. No need API or capital!</p></div><div id="bothLinksBox" class="hidden"><div class="card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b"><h3>🔗 YOUR LINKS - Share to Make Money!</h3><div class="link-box"><label>🎓 STUDENT LINK - Share!</label><div style="display:flex;gap:8px"><input id="studentPublicLink" readonly style="font-size:11px"><button class="btn btn-primary" style="margin:0;width:80px" onclick="copyStudentLink()">Copy</button></div></div><div class="link-box"><label>👥 REFERRAL LINK - ₦100 per person!</label><div style="display:flex;gap:8px"><input id="myRefLink" readonly style="font-size:11px"><button class="btn btn-green" style="margin:0;width:80px" onclick="copyRefLink()">Copy</button></div></div></div></div></div>
+<div id="tab-wallet" class="tab"><h2>👛 Wallet</h2><div class="card" style="text-align:center"><p class="small">Balance</p><h1 id="walletBal">₦0</h1><p class="small" style="color:#16a34a;font-weight:700">Moniepoint: 8105986759 - kareem sheriff</p><button class="btn btn-green" onclick="fundWallet()">+ Fund Wallet ₦1000 (Demo)</button></div></div>
+<div id="tab-account" class="tab"><h2>👤 Account</h2><div class="card" id="accountInfo"></div></div>
 
 <div class="bottom-nav">
 <button class="active" onclick="showTab('buy')" id="nav-buy">🛒<br>Buy</button>
-<button onclick="showTab('data')" id="nav-data" style="background:#dcfce7">💰<br>Data</button>
 <button onclick="showTab('sell')" id="nav-sell">💰<br>Sell</button>
 <button onclick="showTab('map')" id="nav-map">📍<br>Map</button>
 <button onclick="showTab('chat')" id="nav-chat">💬<br>Chat</button>
@@ -171,11 +136,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 
 <script>
-let currentUser=null,generatedCode="",isOwnerMode=false,refFromUrl=null,buyFilter='all',mapFull=null,currentLat=null,currentLng=null;
+let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all';
 const OWNER_SECRET="893000";
-const OWNER_PHONE="08105986759";
-const OWNER_OPAY="08105986759 - Kareem Sheriff";
-const OWNER_WA=`https://wa.me/2348105986759`;
+const OWNER_OPAY="Moniepoint: 8105986759 - kareem sheriff";
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function normalizePhone(p){let d=(p||'').replace(/\D/g,'');if(d.length>11)d=d.slice(-11);if(d.length===10)d='0'+d;return d;}
 function getUsers(){return JSON.parse(localStorage.getItem('akc_users')||'[]')}
@@ -184,7 +147,7 @@ function getProducts(){return JSON.parse(localStorage.getItem('akc_products')||'
 function saveProducts(p){localStorage.setItem('akc_products',JSON.stringify(p))}
 function getSchoolMsgs(){return JSON.parse(localStorage.getItem('akc_school_msgs')||'[]')}
 function saveSchoolMsgs(m){localStorage.setItem('akc_school_msgs',JSON.stringify(m))}
-(function checkUrl(){const params=new URLSearchParams(window.location.search);if(params.get('owner')===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}const ref=params.get('ref');if(ref){refFromUrl=normalizePhone(ref);localStorage.setItem('akc_pending_ref',refFromUrl);}})();
+(function checkUrl(){const params=new URLSearchParams(window.location.search);if(params.get('owner')===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}})();
 if(localStorage.getItem('akc_owner_unlocked')==='1')isOwnerMode=true;
 function generateCode(){generatedCode=Math.floor(1000+Math.random()*9000).toString();document.getElementById('codeDisplay').textContent="Your code: "+generatedCode;}
 function showSignup(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('signupBox').classList.remove('hidden');}
@@ -192,92 +155,48 @@ function showLogin(){document.getElementById('signupBox').classList.add('hidden'
 function doSignup(){
   const name=document.getElementById('suName').value.trim(),phoneRaw=document.getElementById('suPhone').value.trim(),gender=document.getElementById('suGender').value,pass=document.getElementById('suPass').value.trim(),loc=document.getElementById('suLocation').value,skill=document.getElementById('suSkill').value,codeInput=document.getElementById('suCodeInput').value.trim();
   if(!name||!phoneRaw||!pass){alert('Fill name phone pass');return}
-  if(!generatedCode){alert('Generate code');return}
+  if(!generatedCode){alert('Click Generate');return}
   if(codeInput!==generatedCode){alert('Code no match');return}
   const phone=normalizePhone(phoneRaw);let users=getUsers();
   if(users.find(u=>normalizePhone(u.phone)===phone)){alert('Phone don sign up!');showLogin();return;}
   const isOwnerSignup=isOwnerMode||phoneRaw.includes(OWNER_SECRET);
-  const ref=localStorage.getItem('akc_pending_ref')||'';let referredBy=null;if(ref){const ru=users.find(u=>normalizePhone(u.phone)===normalizePhone(ref));if(ru)referredBy=ru.phone;}
-  const user={id:uid(),name,phone,gender,password:pass,location:loc,skill:skill||'general',userType:'Student',isOwner:isOwnerSignup,referredBy,referrals:[],refBonus:0,wallet:0,liveLocation:null,lastActive:Date.now()};
-  users.push(user);
-  if(referredBy){const idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(referredBy));if(idx>=0){users[idx].referrals.push(phone);users[idx].refBonus+=100;users[idx].wallet+=100;}}
-  saveUsers(users);localStorage.removeItem('akc_pending_ref');alert('Signed up!');showLogin();document.getElementById('loginPhone').value=phone;
+  const user={id:uid(),name,phone,gender,password:pass,location:loc,skill:skill||'general',isOwner:isOwnerSignup,wallet:0,lastActive:Date.now()};
+  users.push(user);saveUsers(users);alert('Signed up!');showLogin();document.getElementById('loginPhone').value=phone;
 }
 function doLogin(){
   const phoneRaw=document.getElementById('loginPhone').value.trim(),pass=document.getElementById('loginPass').value.trim(),ownerPin=document.getElementById('ownerCodeInput').value.trim();
-  if(ownerPin){if(ownerPin===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');document.getElementById('ownerMsg').textContent='✅ Owner pin correct!';}else{alert('Wrong pin!');return;}}
-  const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);if(!u){alert('Wrong phone/pass - Sign up first!');return}
-  currentUser=u;if(isOwnerMode){currentUser.isOwner=true}if(currentUser.liveLocation){currentLat=currentUser.liveLocation.lat;currentLng=currentUser.liveLocation.lng;}localStorage.setItem('akc_current',JSON.stringify(currentUser));enterApp();
+  if(ownerPin){if(ownerPin===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}else{alert('Wrong pin!');return;}}
+  const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);if(!u){alert('Wrong phone/pass');return}
+  currentUser=u;if(isOwnerMode)currentUser.isOwner=true;localStorage.setItem('akc_current',JSON.stringify(currentUser));enterApp();
 }
-function enterApp(){
-  document.getElementById('authPage').classList.add('hidden');document.getElementById('mainApp').classList.remove('hidden');
-  document.getElementById('topUser').textContent=currentUser.name;
-  const badge=document.getElementById('topBadge');
-  const baseUrl=window.location.origin+window.location.pathname;
-  badge.textContent=currentUser.isOwner?'OWNER - DATA MONEY':'AKC';
-  if(currentUser.isOwner||isOwnerMode){document.getElementById('bothLinksBox').classList.remove('hidden');document.getElementById('ownerWalletExtra').classList.remove('hidden');document.getElementById('studentPublicLink').value=baseUrl;document.getElementById('myRefLink').value=baseUrl+'?ref='+currentUser.phone;document.getElementById('refCount').textContent=(currentUser.referrals||[]).length;document.getElementById('refBonus').textContent='₦'+(currentUser.refBonus||0);}
-  renderAll();renderDataPlans();
-}
+function enterApp(){document.getElementById('authPage').classList.add('hidden');document.getElementById('mainApp').classList.remove('hidden');document.getElementById('topUser').textContent=currentUser.name;document.getElementById('topBadge').textContent=currentUser.isOwner?'OWNER':'AKC';renderAll();}
 function doLogout(){localStorage.removeItem('akc_current');location.reload();}
-function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));const nav=document.getElementById('nav-'+name);if(nav)nav.classList.add('active');if(name==='buy')renderBuy();if(name==='sell')renderMyProducts();if(name==='map')initMap();if(name==='chat')renderSchoolMsgs();if(name==='data')renderDataPlans();if(name==='wallet')document.getElementById('walletBal').textContent='₦'+(currentUser.wallet||0);}
+function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+name).classList.add('active');if(name==='buy')renderBuy();if(name==='sell')renderMyProducts();if(name==='map')initMap();if(name==='chat')renderSchoolMsgs();if(name==='wallet'){document.getElementById('walletBal').textContent='₦'+(currentUser.wallet||0);document.getElementById('accountInfo').innerHTML=`<p><b>${currentUser.name}</b><br>${currentUser.phone}<br>${currentUser.location}<br>${currentUser.skill}</p><p class="small" style="margin-top:8px">${OWNER_OPAY}</p>`;}}
 function renderAll(){renderBuy();renderMyProducts();renderSchoolMsgs();}
 function setBuyFilter(f){buyFilter=f;document.querySelectorAll('#tab-buy .chip').forEach(c=>c.classList.remove('active'));const el=document.getElementById('filter'+f.charAt(0).toUpperCase()+f.slice(1));if(el)el.classList.add('active');if(f==='all')document.getElementById('filterAll').classList.add('active');renderBuy();}
 function updateSellForm(){const type=document.getElementById('sellType').value;document.getElementById('sellProductFields').classList.toggle('hidden',type!=='product');document.getElementById('sellCakeFields').classList.toggle('hidden',type!=='cake');document.getElementById('sellEventFields').classList.toggle('hidden',type!=='event');const feeBox=document.getElementById('plumbingFeeBox');if(['plumbing','electrical','building'].includes(type)){feeBox.classList.remove('hidden');document.getElementById('sellWalletBal').textContent='₦'+(currentUser.wallet||0);}else feeBox.classList.add('hidden');}
-function renderBuy(){const list=document.getElementById('buyList');const q=(document.getElementById('searchBuy')?.value||'').toLowerCase();let products=getProducts();if(buyFilter!=='all'){products=products.filter(p=>{if(buyFilter==='plumbing')return p.category==='Plumbing'||p.type==='plumbing';if(buyFilter==='cake')return p.category==='Cake';return true});}if(q)products=products.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));products=products.reverse();if(products.length===0){list.innerHTML='<p class="small">No '+buyFilter+' yet - Be first to post plumbing!</p>';return}list.innerHTML=products.map(p=>`<div class="card ${p.category==='Plumbing'?'card-plumbing':''}"><b>${p.category==='Plumbing'?'🚿 ':''}${p.name} - ₦${p.price}</b><p class="small">${p.desc}</p><span class="badge">${p.sellerName}</span></div>`).join('');}
+function renderBuy(){const list=document.getElementById('buyList');const q=(document.getElementById('searchBuy')?.value||'').toLowerCase();let products=getProducts();if(buyFilter!=='all'){products=products.filter(p=>{if(buyFilter==='plumbing')return p.category==='Plumbing';if(buyFilter==='food')return p.category==='Food';if(buyFilter==='cake')return p.category==='Cake';return true});}if(q)products=products.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));products=products.reverse();if(products.length===0){list.innerHTML='<p class="small">No posts yet for '+buyFilter+'</p>';return}list.innerHTML=products.map(p=>`<div class="card ${p.category==='Plumbing'?'card-plumbing':''}"><b>${p.category==='Plumbing'?'🚿 ':''}${p.name} - ₦${p.price}</b><p class="small">${p.desc}</p><span class="badge">${p.sellerName} - ${p.category}</span></div>`).join('');}
 function addProduct(){
-  const type=document.getElementById('sellType').value,addLoc=document.getElementById('sellAddLocation').value;
+  const type=document.getElementById('sellType').value;
   let p={id:uid(),sellerPhone:currentUser.phone,sellerName:currentUser.name,createdAt:new Date().toISOString()};
-  if(addLoc==='yes'&&currentLat&&currentLng)p.liveLocation={lat:currentLat,lng:currentLng};
   if(['plumbing','electrical','building'].includes(type)){
-    if(!currentUser.isOwner && (currentUser.wallet||0) < 100){
-      if(!confirm('🚿 Plumbing posting na ₦100! You no get enough wallet. Transfer ₦100 to Opay: 08105986759 then click OK? Or fund wallet first?'))return;
-    }
-    if((currentUser.wallet||0) >= 100 && !currentUser.isOwner){
-      currentUser.wallet-=100;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].wallet=currentUser.wallet;saveUsers(users);}localStorage.setItem('akc_current',JSON.stringify(currentUser));
-    }
+    if(!currentUser.isOwner && (currentUser.wallet||0) < 100){if(!confirm('🚿 Plumbing na ₦100! Transfer to Moniepoint: 8105986759 - kareem sheriff then click OK?'))return;}
+    if((currentUser.wallet||0) >= 100 && !currentUser.isOwner){currentUser.wallet-=100;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].wallet=currentUser.wallet;saveUsers(users);}localStorage.setItem('akc_current',JSON.stringify(currentUser));}
     const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;
-    if(!name||!price){alert('Name & price needed');return}
-    p.type='plumbing';p.category='Plumbing';p.name=name;p.price=price;p.desc=desc||cat;
-  }else if(type==='cake'){const price=document.getElementById('cakePrice').value,desc=document.getElementById('cakeDesc').value;if(!price)return;p.type='cake';p.category='Cake';p.name='Cake';p.price=price;p.desc=desc;}
-  else if(type==='event'){const price=document.getElementById('eventPrice').value,desc=document.getElementById('eventDesc').value;if(!price)return;p.type='event';p.category='Event Planner';p.name='Event';p.price=price;p.desc=desc;}
-  else{const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;if(!name||!price){alert('Need name & price');return}p.type='product';p.category=cat;p.name=name;p.price=price;p.desc=desc;}
-  const arr=getProducts();arr.push(p);saveProducts(arr);alert('Posted! Plumbing fee collected if needed - Na your money!');renderBuy();renderMyProducts();
+    if(!name||!price){alert('Need name & price');return}
+    p.category='Plumbing';if(type==='electrical')p.category='Electrical';if(type==='building')p.category='Building';p.name=name;p.price=price;p.desc=desc||cat;
+  }else if(type==='cake'){const price=document.getElementById('cakePrice').value,desc=document.getElementById('cakeDesc').value;if(!price){alert('Add price');return}p.category='Cake';p.name='Cake';p.price=price;p.desc=desc;}
+  else if(type==='event'){const price=document.getElementById('eventPrice').value,desc=document.getElementById('eventDesc').value;if(!price){alert('Add price');return}p.category='Event Planner';p.name='Event Service';p.price=price;p.desc=desc;}
+  else{const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;if(!name||!price){alert('Need name & price');return}p.category=cat;p.name=name;p.price=price;p.desc=desc;}
+  const arr=getProducts();arr.push(p);saveProducts(arr);alert('Posted successfully!');renderBuy();renderMyProducts();
 }
-function renderMyProducts(){const list=document.getElementById('myProducts');const my=getProducts().filter(p=>normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone)).reverse();list.innerHTML=my.map(p=>`<div class="card"><b>${p.name} - ₦${p.price}</b><p class="small">${p.desc}</p><button class="btn" style="background:#fee2e2;color:#991b1b;margin-top:8px" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join('')||'<p class="small">You never post plumbing yet - Post now make money!</p>';}
-function deleteProduct(id){saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();}
-function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>`<div style="margin:6px 0"><b style="font-size:12px">${m.senderName}</b><div style="background:#f3f4f6;padding:8px;border-radius:12px">${m.text}</div></div>`).join('')||'<p class="small">No messages</p>';}
-function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();}
-function renderDataPlans(){
-  const plans=[
-    {net:'MTN',size:'500MB',price:300,cost:200,profit:100},
-    {net:'MTN',size:'1GB',price:450,cost:300,profit:150},
-    {net:'MTN',size:'2GB',price:850,cost:600,profit:250},
-    {net:'Glo',size:'1GB',price:400,cost:250,profit:150},
-    {net:'Glo',size:'2.5GB',price:900,cost:650,profit:250},
-    {net:'Airtel',size:'1GB',price:450,cost:300,profit:150},
-  ];
-  const container=document.getElementById('dataPlans');
-  container.innerHTML=plans.map(pl=>`
-    <div class="data-plan">
-      <div><b>${pl.net} ${pl.size}</b><br><span class="small">You buy ${pl.cost} → Sell ${pl.price}</span><br><span class="badge badge-profit">Profit ₦${pl.profit}</span></div>
-      <button class="btn btn-whatsapp" style="width:auto;margin:0;padding:10px 14px" onclick="buyData('${pl.net}','${pl.size}','${pl.price}')">💰 Sell</button>
-    </div>
-  `).join('');
-}
-function buyData(net,size,price){
-  const msg=`Hello Sheriff, I want to buy ${net} ${size} for ₦${price}. I have transferred to your Opay 08105986759. My number is ${currentUser.phone}. Please send data. From AKC App.`;
-  const waLink=`https://wa.me/2348105986759?text=${encodeURIComponent(msg)}`;
-  if(confirm(`💰 DATA SALE!\n\n${net} ${size} = ₦${price}\nProfit: ₦${price-300}\n\nStudent will transfer ₦${price} to your Opay: 08105986759\n\nThen you buy data for cheaper for your phone and keep profit!\n\nClick OK to open WhatsApp with buyer message?`)){
-    window.open(waLink,'_blank');
-    alert(`✅ Now check your Opay for ₦${price}!\nIf money enter, buy ${net} ${size} for student number and keep profit!\n\nBroke to Boss!`);
-  }
-}
-function fundWallet(){currentUser.wallet=(currentUser.wallet||0)+1000;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].wallet=currentUser.wallet;saveUsers(users)}document.getElementById('walletBal').textContent='₦'+currentUser.wallet;localStorage.setItem('akc_current',JSON.stringify(currentUser));}
-function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){window.mapFull.invalidateSize();return;}window.mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.mapFull);showOnMap('all');},500);}
-function showOnMap(filter){setTimeout(()=>{if(!window.mapFull)return;window.mapFull.eachLayer(l=>{if(l instanceof L.Marker)window.mapFull.removeLayer(l)});let count=0;getProducts().forEach(p=>{if(!p.liveLocation)return;if(filter==='plumbing'&&p.category!=='Plumbing')return;L.marker([p.liveLocation.lat,p.liveLocation.lng]).addTo(window.mapFull).bindPopup(`${p.name} - ${p.sellerName}`);count++;});if(count===0)L.marker([7.4813,5.7415]).addTo(window.mapFull).bindPopup('Akungba - AAUA').openPopup();},600);}
-function copyStudentLink(){const input=document.getElementById('studentPublicLink');input.select();document.execCommand('copy');alert('✅ Link copied! Share am for WhatsApp status to make referral money!');}
-function copyRefLink(){const input=document.getElementById('myRefLink');input.select();document.execCommand('copy');alert('✅ Referral link copied! ₦100 per person!');}
-(function(){const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;enterApp();renderDataPlans();}}catch(e){}}})();
+function renderMyProducts(){const list=document.getElementById('myProducts');const my=getProducts().filter(p=>normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone)).reverse();list.innerHTML=my.map(p=>`<div class="card"><b>${p.name} - ₦${p.price}</b><p class="small">${p.desc} - ${p.category}</p><button class="btn" style="background:#fee2e2;color:#991b1b;margin-top:8px" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join('')||'<p class="small">You never post anything</p>';}
+function deleteProduct(id){if(!confirm('Delete?'))return;saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();}
+function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>`<div style="margin:6px 0"><b style="font-size:12px">${m.senderName}</b><div style="background:#f3f4f6;padding:8px;border-radius:12px;margin-top:2px">${m.text}</div></div>`).join('')||'<p class="small">No messages yet - Start chat!</p>';}
+function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name,createdAt:Date.now()});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();}
+function fundWallet(){currentUser.wallet=(currentUser.wallet||0)+1000;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].wallet=currentUser.wallet;saveUsers(users)}document.getElementById('walletBal').textContent='₦'+currentUser.wallet;localStorage.setItem('akc_current',JSON.stringify(currentUser));alert('Wallet funded ₦1000 demo');}
+function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){window.mapFull.invalidateSize();return;}window.mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.mapFull);L.marker([7.4813,5.7415]).addTo(window.mapFull).bindPopup('Akungba - AAUA');},600);}
+(function(){const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;enterApp();}}catch(e){}}})();
 </script>
 </body>
 </html>
