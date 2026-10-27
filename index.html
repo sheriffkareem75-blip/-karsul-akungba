@@ -3,128 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>KAC - KARSUL AKUNGBA</title>
+<title>KAC - KARSUL AKUNGBA FINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#f5f5f7;color:#111;padding-bottom:90px}
 .top{position:sticky;top:0;background:#111;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;z-index:10}
-.top b{font-size:16px}
-.top small{font-size:11px;opacity:.9}
-.badge{padding:4px 8px;border-radius:20px;font-size:10px;font-weight:700}
-.bAdmin{background:gold;color:#111}
-.bLive{background:#00c853;color:#fff}
+.badge{padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer}
+.bAdmin{background:gold;color:#111}.bLive{background:#25D366;color:#fff}
 .card{background:#fff;border-radius:14px;padding:12px;margin:10px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.row{display:flex;gap:8px}
 .inp{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:14px}
-.btn{width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;font-size:14px;cursor:pointer}
-.btnGold{background:linear-gradient(90deg,#ffb300,#ff8f00);color:#111}
-.small{font-size:11px;color:#666}
-.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:20}
-.tab{flex:1;padding:10px 2px;text-align:center;font-size:11px;cursor:pointer;color:#666}
-.tab.act{color:#111;font-weight:800;border-top:2px solid #111}
-.hide{display:none}
-.avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;background:#ddd;border:1px solid #eee}
+.btn{width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;cursor:pointer}
+.btnGold{background:linear-gradient(90deg,#ffb300,#ff8f00);color:#111}.btnGreen{background:#075E54}
+.small{font-size:11px;color:#666}.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:20}
+.tab{flex:1;padding:10px 2px;text-align:center;font-size:11px;cursor:pointer;color:#666}.tab.act{color:#111;font-weight:800;border-top:2px solid #111}
+.hide{display:none}.avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;background:#ddd;border:1px solid #eee}
 .topAvatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #fff}
-.chatBox{height:42vh;overflow-y:auto;border:1px solid #eee;border-radius:10px;padding:8px;background:#fafafa}
-.msg{display:flex;gap:6px;margin:6px 0;align-items:flex-start}
-.msg .bubble{background:#fff;padding:8px 10px;border-radius:12px;max-width:78%;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.msg.me{flex-direction:row-reverse}
-.msg.me .bubble{background:#111;color:#fff}
-.liveDot{width:8px;height:8px;background:#00c853;border-radius:50%;display:inline-block;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-video{width:100%;border-radius:12px;background:#000}
+.chatBox{height:42vh;overflow-y:auto;border:1px solid #eee;border-radius:10px;padding:8px}
+.msg{display:flex;gap:6px;margin:7px 0;align-items:flex-start}.msg .bubble{background:#fff;padding:8px 10px;border-radius:12px;max-width:76%;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.msg.me{flex-direction:row-reverse}.msg.me .bubble{background:#DCF8C6;color:#111}
+.liveDot{width:8px;height:8px;background:#25D366;border-radius:50%;display:inline-block;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}} video{width:100%;border-radius:12px;background:#000}
 </style>
 </head>
 <body>
-
 <div class="top">
-<div style="display:flex;align-items:center;gap:8px">
-<img id="topAvatar" class="topAvatar hide" src="">
-<div><b>KAC</b><br><small id="topName">KARSUL AKUNGBA</small></div>
-</div>
+<div style="display:flex;align-items:center;gap:8px"><img id="topAvatar" class="topAvatar hide" src=""><div><b>KAC</b><br><small id="topName">KARSUL AKUNGBA</small></div></div>
 <div id="topBadge"></div>
 </div>
 
-<!-- LOGIN -->
-<div id="loginPage" class="card" style="margin-top:20px">
-<h3 style="text-align:center">KAC Login - Facial Verification</h3>
-<p class="small" style="text-align:center;margin:6px 0">Your face = Your Avatar 👤</p>
+<div id="loginPage" class="card" style="margin-top:16px">
+<h3 style="text-align:center">KAC Login - Facial Avatar</h3>
+<p class="small" style="text-align:center">Your face = Your Avatar 👤 | Wallet First System</p>
 <input id="lName" class="inp" placeholder="Full Name">
-<input id="lPhone" class="inp" placeholder="Phone e.g 081...">
-<select id="lDept" class="inp">
-<option value="">Select Dept - All Faculties</option>
-<option>Accounting</option><option>Business Admin</option><option>Banking & Finance</option>
-<option>Economics</option><option>Political Science</option><option>Mass Comm</option>
-<option>Computer Science</option><option>Geology</option><option>Microbiology</option><option>Chemistry</option><option>Physics</option><option>Biochemistry</option>
-<option>English</option><option>History</option><option>Yoruba</option><option>Philosophy</option>
-<option>Law</option><option>Criminology</option>
-<option>Education</option><option>Guidance & Counselling</option>
+<input id="lPhone" class="inp" placeholder="Phone 081...">
+<input id="deptSearch" class="inp" placeholder="🔍 Search Dept/Faculty... e.g Computer" oninput="filterDept()">
+<select id="lDept" class="inp" size="6" style="height:150px">
+<option value="">Select Dept - A-Z Alphabetical</option>
+<option>Accounting</option><option>Banking & Finance</option><option>Biochemistry</option><option>Business Administration</option><option>Chemistry</option><option>Computer Science</option><option>Criminology</option><option>Early Childhood Education</option><option>Economics</option><option>Education - Biology</option><option>Education - Chemistry</option><option>Education - English</option><option>Education Management</option><option>English & Literary Studies</option><option>Entrepreneurship</option><option>Geology</option><option>Guidance & Counselling</option><option>History & International Studies</option><option>Industrial Chemistry</option><option>Law</option><option>Linguistics</option><option>Mass Communication</option><option>Mathematics</option><option>Microbiology</option><option>Philosophy</option><option>Physics</option><option>Political Science</option><option>Public Administration</option><option>Yoruba</option><option>Zoology</option>
 </select>
 <input id="lLoc" class="inp" placeholder="Location e.g Akungba, Akoko">
-
-<video id="vid" autoplay playsinline class="hide"></video>
-<canvas id="can" class="hide"></canvas>
+<video id="vid" autoplay playsinline class="hide"></video><canvas id="can" class="hide"></canvas>
 <img id="facePreview" class="hide" style="width:100px;height:100px;border-radius:50%;margin:10px auto;display:block;object-fit:cover;border:3px solid #111">
-
-<button id="startFace" class="btn" style="background:#222;margin-top:8px" onclick="startFace()">📸 Start Facial Scan</button>
-<button id="capFace" class="btn hide" style="background:#00c853;margin-top:8px" onclick="capFace()">✅ Capture My Avatar</button>
-
-<!-- SECRET ADMIN FIELD - HIDDEN -->
+<button id="startFace" class="btn" style="background:#222" onclick="startFace()">📸 Start Facial Scan</button>
+<button id="capFace" class="btn hide" style="background:#25D366;margin-top:6px" onclick="capFace()">✅ Capture My Avatar</button>
 <input id="adminCode" type="password" placeholder="" style="display:none">
-<div id="secretTrigger" style="text-align:center;margin:10px 0;font-size:10px;color:#888;cursor:pointer;user-select:none;padding:6px;border:1px dashed #ddd;border-radius:20px" onclick="this._c=(this._c||0)+1; if(this._c>=5){document.getElementById('adminCode').style.display='block';document.getElementById('adminCode').placeholder='Enter Access'; this.innerText='🔓 Access unlocked'; this.style.color='#111'; this.style.borderColor='#111'}">KAC Secure v1.0 - Tap 5x for admin</div>
-
-<button class="btn" onclick="doLogin()" style="margin-top:8px">ENTER KAC →</button>
+<div id="secretTrigger" style="text-align:center;margin:10px 0;font-size:10px;color:#888;cursor:pointer;border:1px dashed #ddd;border-radius:20px;padding:6px" onclick="this._c=(this._c||0)+1; if(this._c>=5){document.getElementById('adminCode').style.display='block';document.getElementById('adminCode').placeholder='Enter Access'; this.innerText='🔓 Access unlocked'; this.style.color='#111'}">KAC Secure v1.0 - Tap 5x for admin</div>
+<button class="btn" onclick="doLogin()" style="margin-top:6px">ENTER KAC →</button>
 <p id="lErr" class="small" style="color:red;text-align:center;margin-top:6px"></p>
 </div>
 
-<!-- MAIN APP -->
 <div id="app" class="hide">
-
-<!-- BUY -->
 <div id="pBuy" class="page">
-<div class="card">
-<div class="row">
-<input id="sQ" class="inp" placeholder="Search items..." oninput="renderBuy()">
-<select id="sDept" class="inp" style="max-width:130px" onchange="renderBuy()"><option value="">All Depts</option><option>Accounting</option><option>Computer Science</option></select>
-</div>
-</div>
-<div id="adTop"></div>
-<div id="buyList"></div>
+<div class="card"><div class="row"><input id="sQ" class="inp" placeholder="Search items..." oninput="renderBuy()"><select id="sDept" class="inp" style="max-width:130px" onchange="renderBuy()"><option value="">All A-Z</option><option>Accounting</option><option>Biochemistry</option><option>Business Admin</option><option>Chemistry</option><option>Computer Science</option><option>Economics</option><option>Education</option><option>English</option><option>Geology</option><option>Law</option><option>Mass Comm</option><option>Microbiology</option><option>Yoruba</option></select></div></div>
+<div id="adTop"></div><div id="buyList"></div>
 </div>
 
-<!-- SELL -->
-<div id="pSell" class="page hide">
-<div class="card">
-<h4>Post Item to Sell</h4>
-<input id="sellTitle" class="inp" placeholder="Item title e.g iPhone 11">
-<input id="sellPrice" class="inp" type="number" placeholder="Price ₦">
-<textarea id="sellDesc" class="inp" placeholder="Description + location"></textarea>
-<button class="btn" onclick="postSell()">Post Sell - Earn ₦100 Rank</button>
-</div>
-</div>
+<div id="pSell" class="page hide"><div class="card"><h4>Post Item to Sell - Wallet First</h4><input id="sellTitle" class="inp" placeholder="Item title"><input id="sellPrice" class="inp" type="number" placeholder="Price ₦"><textarea id="sellDesc" class="inp" placeholder="Description + location"></textarea><button class="btn" onclick="postSell()">Post Sell - Earn ₦100 Rank</button></div></div>
 
-<!-- CHAT - LIVE CHAT + AVATAR -->
 <div id="pChat" class="page hide">
-<div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center">
-<b>Live Chat <span class="liveDot"></span> <small id="liveInfo">Connecting...</small></b>
-<select id="chatDept" class="inp" style="width:120px;padding:6px" onchange="renderChat()"><option value="">General</option><option>Computer Science</option></select>
-</div>
-<div id="chatBox" class="chatBox"></div>
-<div class="row" style="margin-top:8px">
-<input id="chatInp" class="inp" placeholder="Type message... your avatar go show">
-<button class="btn" style="width:80px" onclick="sendChat()">Send</button>
-</div>
+<div class="card" style="padding:0;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#075E54;color:#fff"><b>💬 Live Chat <span class="liveDot"></span> <small id="liveInfo">Live</small></b><select id="chatDept" class="inp" style="width:110px;padding:4px;color:#111" onchange="renderChat()"><option value="">General</option><option>Accounting</option><option>Computer Science</option><option>Law</option><option>Mass Comm</option><option>Education</option><option>Yoruba</option></select></div>
+<div id="chatBox" class="chatBox" style="background:#e5ddd5;background-image:url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:360px;height:44vh"></div>
+<div id="emojiPanel" class="hide" style="padding:8px;background:#fff;border-top:1px solid #eee;max-height:130px;overflow-y:auto"><div style="display:flex;gap:6px;flex-wrap:wrap;font-size:22px"><span onclick="addEmoji('😂')">😂</span><span onclick="addEmoji('😍')">😍</span><span onclick="addEmoji('❤️')">❤️</span><span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('😭')">😭</span><span onclick="addEmoji('🙏')">🙏</span><span onclick="addEmoji('😊')">😊</span><span onclick="addEmoji('👍')">👍</span><span onclick="addEmoji('💀')">💀</span><span onclick="addEmoji('😎')">😎</span><span onclick="addEmoji('🥺')">🥺</span><span onclick="addEmoji('✨')">✨</span><span onclick="addEmoji('💯')">💯</span><span onclick="addEmoji('🎉')">🎉</span></div><b style="font-size:11px;margin-top:8px;display:block">Stickers:</b><div style="display:flex;gap:8px;flex-wrap:wrap;font-size:26px;margin-top:4px"><span onclick="addEmoji('[STICKER:😂 BIG LAUGH]')" style="background:#fff;padding:4px 8px;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.1)">😂</span><span onclick="addEmoji('[STICKER:❤️ LOVE]')" style="background:#fff;padding:4px 8px;border-radius:10px">❤️</span><span onclick="addEmoji('[STICKER:🔥 FIRE]')" style="background:#fff;padding:4px 8px;border-radius:10px">🔥</span><span onclick="addEmoji('[STICKER:👑 KING]')" style="background:#fff;padding:4px 8px;border-radius:10px">👑</span><span onclick="addEmoji('[STICKER:💯 100]')" style="background:#fff;padding:4px 8px;border-radius:10px">💯</span><span onclick="addEmoji('[STICKER:🎓 AAUA]')" style="background:#fff;padding:4px 8px;border-radius:10px">🎓</span></div></div>
+<div class="row" style="padding:8px;background:#f0f0f0;align-items:center"><button style="padding:10px;border:0;background:transparent;font-size:20px" onclick="toggleEmoji()">😊</button><input id="chatInp" class="inp" placeholder="Type message... avatar go show" style="border-radius:20px;margin:0 6px" onkeypress="if(event.key==='Enter')sendChat()"><button class="btn" style="width:56px;border-radius:50%;background:#075E54" onclick="sendChat()">➤</button></div>
 </div>
 </div>
 
-<!-- ADVERT -->
-<div id="pAdvert" class="page hide">
-<div class="card" id="advertAdminBox">
-<h4>Adverts</h4>
-<div id="adminAdForm" class="hide">
-<input id="adTitle" class="inp" placeholder="Advert Title">
-<textarea id="adBody" class="inp" placeholder="Advert Details"></textarea>
-<button class="btn btnGold" onclick="postAd()">👑 Post Advert (Admin)</button>
+<div id="pAdvert" class="page hide"><div class="card" id="advertAdminBox"><h4>Adverts</h4><div id="adminAdForm" class="hide"><input id="adTitle" class="inp" placeholder="Advert Title"><textarea id="adBody" class="inp" placeholder="Advert Details"></textarea><button class="btn btnGold" onclick="postAd()">👑 Post Advert (Admin)</button></div><p class="small" id="adNotAdmin">Only admin can post - Secret code 893000</p></div><div id="advertList"></div></div>
+
+<div id="pWallet" class="page hide"><div class="card"><h4>Wallet - Min ₦200 - All payments enter wallet first</h4><p class="small">Balance: <b id="wBal">₦0</b> | Live: <span id="wLive"></span></p><input id="wAmt" class="inp" type="number" placeholder="Amount min 200"><input id="wAcc" class="inp" placeholder="Account No + Bank"><button class="btn" onclick="reqWithdraw()">Request Withdraw from Wallet</button><p class="small" style="margin-top:8px">Fee ₦50 - Money must enter wallet first via sales</p><div id="wHist" style="margin-top:10px"></div><div id="adminWalletBox" class="hide" style="margin-top:14px;border-top:2px solid gold;padding-top:10px"><h4>👑 Super Wallet - ALL Money</h4><p class="small">Total: <b id="adminTotal">₦0</b> | Count: <b id="totalRequests">0</b> | Profit: <b id="adminProfit">₦0</b></p><div id="adminWList"></div><button class="btn btnGold" onclick="adminWithdrawAll()">👑 ADMIN WITHDRAW ALL</button></div></div></div>
+
+<div id="pSet" class="page hide"><div class="card"><div style="text-align:center"><img id="setFaceImg" src="" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #111;background:#ddd"><h4 id="setName" style="margin-top:8px"></h4><p class="small" id="setDept"></p><p class="small" id="setLoc"></p><p class="small">Rank: <b id="setRank">0</b> - ₦100/post</p></div><div style="margin-top:12px"><b>🏆 Top 5 Ranking A-Z</b><div id="topRankList"></div></div><button class="btn" style="margin-top:14px;background:#c00" onclick="doLogout()">Logout</button></div></div>
 </div>
-<p class="small" id="ad
+
+<div class="tabs"><div class="tab act" onclick="openTab('Buy')">Buy</div><div class="tab" onclick="openTab('Sell')">Sell</div><div class="tab" onclick="openTab('Chat')">Chat</div><div class="tab" onclick="openTab('Advert')">Advert</div><div class="tab" onclick="openTab('Wallet')">Wallet</div><div class="tab" onclick="openTab('Set')">Set</div></div>
+
+<script>
+let curUser=null, users=JSON.parse(localStorage.getItem('kacUsers')||'[]'), items=JSON.parse(localStorage.getItem('kacItems')||'[]'), chats=JSON.parse(localStorage.getItem('kacChats')||'[]'), adverts=JSON.parse(localStorage.getItem('kacAdverts')||'[]'), withdraws=JSON.parse(localStorage.getItem('kacWithdraws')||'[]'), faceData=null, stream=null;
+const adminCodeSecret='893000';
+function save(){localStorage.setItem('kacUsers',JSON.stringify(users));localStorage.setItem('kacItems',JSON.stringify(items));localStorage.setItem('kacChats',JSON.stringify(chats));localStorage.setItem('kacAdverts',JSON.stringify(adverts));localStorage.setItem('kacWithdraws',JSON.stringify(withdraws)); if(curUser) localStorage.setItem('kacCur',JSON.stringify(curUser))}
+function filterDept(){let q=document.getElementById('deptSearch').value.toLowerCase(), opts=document.getElementById('lDept').options; for(let i=0;i<opts.length;i++){let txt=opts[i].text.toLowerCase(); opts[i].style.display= txt.includes(q)||i===0?'block':'none'}}
+function startFace(){navigator.mediaDevices.getUserMedia({video:true}).then(s=>{stream=s;document.getElementById('vid').srcObject=s;document.getElementById('vid').classList.remove('hide');document.getElementById('capFace').classList.remove('hide');document.getElementById('startFace').classList.add('hide')}).catch(()=>alert('Allow camera'))}
+function capFace(){let v=document.getElementById('vid'), c=document.getElementById('can'); c.width=v.videoWidth; c.height=v.videoHeight; c.getContext('2d').drawImage(v,0,0); faceData=c.toDataURL('image/png'); document.getElementById('facePreview').src=faceData; document.getElementById('facePreview').classList.remove('hide'); if(stream) stream.getTracks().forEach(t=>t.stop()); document.getElementById('vid').classList.add('hide'); document.getElementById('capFace').classList.add('hide'); document.getElementById('startFace').innerText='✅ Avatar Captured'; document.getElementById('startFace').classList.remove('hide')}
+function doLogin(){let n=document.getElementById('lName').value.trim(), ph=document.getElementById('lPhone').value.trim(), d=document.getElementById('lDept').value, loc=document.getElementById('lLoc').value.trim(), code=document.getElementById('adminCode').value.trim(); if(!n||!ph||!d||!loc){document.getElementById('lErr').innerText='Fill all + select dept';return} if(!faceData){document.getElementById('lErr').innerText='Do Facial Scan - Avatar required';return} let isAd=code===adminCodeSecret; curUser={id:ph,name:n,phone:ph,dept:d,loc:loc,isAdmin:isAd,face:faceData,rank:0,bal:0,liveCoord:loc+' • '+new Date().toLocaleTimeString(),live:true}; let ex=users.find(u=>u.phone===ph); if(ex){curUser.rank=ex.rank||0; curUser.bal=ex.bal||0; if(isAd) curUser.isAdmin=true; Object.assign(ex,curUser)} else users.push(curUser); save(); document.getElementById('loginPage').classList.add('hide'); document.getElementById('app').classList.remove('hide'); initApp()}
+function initApp(){let c=JSON.parse(localStorage.getItem('kacCur')||'null'); if(c) curUser=c; if(!curUser) return; document.getElementById('topName').innerText=curUser.name; document.getElementById('topAvatar').src=curUser.face; document.getElementById('topAvatar').classList.remove('hide'); document.getElementById('setFaceImg').src=curUser.face; document.getElementById('setName').innerText=curUser.name; document.getElementById('setDept').innerText=curUser.dept; document.getElementById('setLoc').innerText=curUser.loc+' • '+curUser.liveCoord; document.getElementById('setRank').innerText=curUser.rank; let badge=document.getElementById('topBadge'); if(curUser.isAdmin){badge.innerHTML='<span class="badge bAdmin" onclick="window.open(\'https://wa.me/2348100000000\')">👑 ADMIN</span>'; document.getElementById('adminAdForm').classList.remove('hide'); document.getElementById('adNotAdmin').classList.add('hide'); document.getElementById('adminWalletBox').classList.remove('hide')} else badge.innerHTML='<span class="badge bLive"><span class="liveDot"></span> LIVE</span>'; getLive(); renderBuy(); renderChat(); renderAdverts(); renderWallet(); renderRank(); openTab('Buy')}
+function getLive(){let info=document.getElementById('liveInfo'); if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>{let txt=p.coords.latitude.toFixed(2)+','+p.coords.longitude.toFixed(2); if(info) info.innerText=txt+' • Live'; let w=document.getElementById('wLive'); if(w) w.innerText=txt},()=>{if(info) info.innerText=curUser.loc+' • Live'})}else if(info) info.innerText=curUser.loc+' • Live'}
+function openTab(n){document.querySelectorAll('.page').forEach(p=>p.classList.add('hide')); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act')); let map={Buy:'pBuy',Sell:'pSell',Chat:'pChat',Advert:'pAdvert',Wallet:'pWallet',Set:'pSet'}; document.getElementById(map[n]).classList.remove('hide'); let tabs=document.querySelectorAll('.tab'); let idx={Buy:0,Sell:1,Chat:2,Advert:3,Wallet:4,Set:5}[n]; if(tabs[idx]) tabs[idx].classList.add('act'); if(n==='Chat') renderChat(); if(n==='Wallet') renderWallet()}
+function postSell(){let t=document.getElementById('sellTitle').value.trim(), p=document.getElementById('sellPrice').value, d=document.getElementById('sellDesc').value.trim(); if(!t||!p){alert('Fill title & price');return} items.unshift({id:Date.now(),title:t,price:p,desc:d,owner:curUser.name,dept:curUser.dept,face:curUser.face,phone:curUser.phone,time:new Date().toLocaleString()}); curUser.rank=(curUser.rank||0)+100; let ex=users.find(u=>u.phone===curUser.phone); if(ex) ex.rank=curUser.rank; save(); renderBuy(); renderRank(); alert('Posted! +₦100 rank - Buyers go pay to your wallet first'); openTab('Buy')}
+function renderBuy(){let q=document.getElementById('sQ').value.toLowerCase(), f=document.getElementById('sDept').value, list=document.getElementById('buyList'); list.innerHTML=''; let filtered=items.filter(it=>(!q||it.title.toLowerCase().includes(q)) && (!f||it.dept===f)); filtered.forEach(it=>{let div=document.createElement('div'); div.className='card'; div.innerHTML=`<div style="display:flex;gap:8px;align-items:center"><img class="avatar" src="${it.face||''}"><b>${it.title}</b><small style="margin-left:auto">₦${it.price}</small></div><p class="small" style="margin:6px 0">${it.desc||''}</p><p class="small">${it.owner} • ${it.dept} • ${it.time}</p><div class="row"><button class="btn" style="padding:8px;flex:1;background:#25D366" onclick="payToWallet(${it.id})">💳 Pay to Seller Wallet - ₦${it.price}</button><button class="btn" style="width:70px;padding:8px" onclick="window.open('https://wa.me/234${it.phone?.slice(1)}')">Chat</button></div>`; list.appendChild(div)})}
+function payToWallet(itemId){let it=items.find(i=>i.id===itemId); if(!it) return; if(it.phone===curUser.phone){alert('Na your own item');return} if(!confirm(`Pay ₦${it.price} to ${it.owner}'s Wallet? All payments enter wallet first!`)) return; let seller=users.find(u=>u.phone===it.phone); if(seller){seller.bal=(seller.bal||0)+parseInt(it.price)} else users.push({phone:it.phone,name:it.owner,bal:parseInt(it.price),rank:0,face:it.face,dept:it.dept}); if(curUser.phone===it.phone) curUser.bal+=parseInt(it.price); withdraws.unshift({id:Date.now(),name:`PAYMENT: ${curUser.name} → ${it.owner}`,phone:it.phone,amount:parseInt(it.price),account:`Sale: ${it.title}`,status:'Paid to Wallet',time:new Date().toLocaleString(),face:it.face,buyer:curUser.phone}); save(); renderWallet(); alert(`✅ ₦${it.price} don enter ${it.owner} Wallet! E must reach ₦200 before withdraw`)}
+function toggleEmoji(){document.getElementById('emojiPanel').classList.toggle('hide')} function addEmoji(e){let inp=document.getElementById('chatInp'); inp.value+=e; inp.focus()}
+function sendChat(){let inp=document.getElementById('chatInp'), txt=inp.value.trim(); if(!txt) return; chats.push({id:Date.now(),text:txt,name:curUser.name,dept:document.getElementById('chatDept').value||'General',face:curUser.face,phone:curUser.phone,time:new Date().toLocaleTimeString(),live:curUser.liveCoord}); save(); inp.value=''; document.getElementById('emojiPanel').classList.add('hide'); renderChat()}
+function renderChat(){let box=document.getElementById('chatBox'), dept=document.getElementById('chatDept').value; box.innerHTML=''; let fil=chats.filter(c=>!dept||c.dept===dept||c.dept==='General'); if(dept==='') fil=chats; fil.slice(-60).forEach(c=>{let isMe=c.phone===curUser.phone; let isSticker=c.text.includes('[STICKER:'); let display=c.text; if(isSticker) display=`<span style="font-size:32px;background:#fff;padding:6px 12px;border-radius:14px;display:inline-block;box-shadow:0 1px 3px rgba(0,0,0,.15)">${c.text.replace('[STICKER:','').replace(']','')}</span>`; let d=document.createElement('div'); d.className='msg '+(isMe?'me':''); d.innerHTML=`<img class="avatar" src="${c.face||''}"><div class="bubble" style="${isSticker?'background:transparent;box-shadow:none;padding:2px':''}"><small style="font-weight:700">${c.name} ${c.live?'<span style="color:#25D366">• LIVE</span>':''}</small><br>${display}<br><small style="opacity:.6">${c.time} • ${c.dept}</small></div>`; box.appendChild(d)}); box.scrollTop=box.scrollHeight}
+function postAd(){if(!curUser.isAdmin){alert('Admin only - secret 893000');return} let t=document.getElementById('adTitle').value.trim(), b=document.getElementById('adBody').value.trim(); if(!t) return; adverts.unshift({id:Date.now(),title:t,body:b,owner:curUser.name,time:new Date().toLocaleString()}); save(); renderAdverts(); alert('Advert posted')}
+function renderAdverts(){let list=document.getElementById('advertList'), top=document.getElementById('adTop'); if(!list) return; list.innerHTML=''; if(top) top.innerHTML=''; adverts.forEach(ad=>{let div=document.createElement('div'); div.className='card'; div.style.borderLeft='4px solid gold'; div.innerHTML=`<b>📢 ${ad.title}</b><p class="small" style="margin:6px 0">${ad.body}</p><small>${ad.owner} • ${ad.time}</small>`; list.appendChild(div); if(top && list.children.length===1){let clone=div.cloneNode(true); top.appendChild(clone)}})}
+function reqWithdraw(){let amt=parseInt(document.getElementById('wAmt').value), acc=document.getElementById('wAcc').value.trim(); if(!amt||amt<200){alert('Min ₦200 - All payments must enter wallet first');return} if(!acc){alert('Enter account');return} if((curUser.bal||0)<amt){alert('Insufficient wallet. Sell/pay first. Bal: ₦'+(curUser.bal||0));return} curUser.bal-=amt; let ex=users.find(u=>u.phone===curUser.phone); if(ex) ex.bal=curUser.bal; withdraws.unshift({id:Date.now(),name:curUser.name,phone:curUser.phone,amount:amt,account:acc,status:'Pending Withdraw',time:new Date().toLocaleString(),face:curUser.face}); save(); renderWallet(); alert('✅ Withdraw from wallet - ₦'+amt+' deducted - Fee ₦50')}
+function renderWallet(){document.getElementById('wBal').innerText='₦'+(curUser.bal||0); let hist=document.getElementById('wHist'); hist.innerHTML='<b>Wallet History (All payments enter wallet first)</b>'; withdraws.filter(w=>w.phone===curUser.phone||w.buyer===curUser.phone||w.name.includes(curUser.name)).forEach(w=>{let d=document.createElement('div'); d.className='small'; d.style.padding='6px'; d.style.borderBottom='1px solid #eee'; d.innerText=`₦${w.amount} - ${w.status} - ${w.time} - ${w.account}`; hist.appendChild(d)}); if(curUser.isAdmin){let total=withdraws.filter(w=>w.status!=='Paid to Wallet').reduce((s,w)=>s+w.amount,0); let paidToWallet=withdraws.filter(w=>w.status==='Paid to Wallet').reduce((s,w)=>s+w.amount,0); document.getElementById('adminTotal').innerText='₦'+(total+paidToWallet); document.getElementById('totalRequests').innerText=withdraws.length; document.getElementById('adminProfit').innerText='₦'+(withdraws.length*50); let aList=document.getElementById('adminWList'); aList.innerHTML=''; withdraws.forEach(w=>{let d=document.createElement('div'); d.className='card'; d.innerHTML=`<div style="display:flex;gap:6px;align-items:center"><img class="avatar" src="${w.face||''}"><b>${w.name}</b><small style="margin-left:auto">₦${w.amount}</small></div><p class="small">${w.account} • ${w.time} • ${w.status}</p>`; aList.appendChild(d)})}}
+function adminWithdrawAll(){if(!curUser.isAdmin)return; let total=withdraws.reduce((s,w)=>s+w.amount,0); alert('👑 Admin Withdraw ALL ₦'+total+' - Profit ₦'+(withdraws.length*50))}
+function renderRank(){let list=document.getElementById('topRankList'); list.innerHTML=''; let sorted=[...users].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,5); sorted.forEach((u,i)=>{let d=document.createElement('div'); d.className='card'; d.style.display='flex'; d.style.alignItems='center'; d.style.gap='8px'; d.innerHTML=`<span style="font-weight:800">${i+1}</span><img class="avatar" src="${u.face||''}"><span>${u.name}</span><small style="margin-left:auto">Score ${u.rank||0}</small>`; list.appendChild(d)})}
+function doLogout(){localStorage.removeItem('kacCur'); curUser=null; location.reload()}
+(function(){let c=localStorage.getItem('kacCur'); if(c){curUser=JSON.parse(c); document.getElementById('loginPage').classList.add('hide'); document.getElementById('app').classList.remove('hide'); initApp()}})()
+</script>
+</body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </html>
