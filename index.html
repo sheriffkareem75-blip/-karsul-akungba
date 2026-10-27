@@ -1,1 +1,56 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>KARSUL AKUNGBA - Seller Marketplace</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui;background:#fffaf0;color:#222}header{background:#111;color:#ffcc00;padding:15px;text-align:center;position:sticky;top:0;z-index:10}header h1{font-size:1.4rem}header p{font-size:.8rem;color:#ccc}.container{max-width:1100px;margin:auto;padding:15px}.btn{padding:10px 18px;border:none;border-radius:8px;cursor:pointer;font-weight:600}.btn-yellow{background:#ffcc00;color:#111}.btn-dark{background:#111;color:#ffcc00}.btn-outline{border:2px solid #111;background:transparent}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;margin-top:15px}.card{border:1px solid #eee;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}.card img{width:100%;height:160px;object-fit:cover}.card-body{padding:10px}.price{color:#d48800;font-weight:800}.seller-tag{font-size:.7rem;color:#666;background:#fff3cd;padding:2px 6px;border-radius:4px}.top-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:15px}.modal.active{display:flex}.modal-box{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow:auto}input,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;margin:8px 0;font-size:1rem}.tab{display:none}.tab.active{display:block}.badge{padding:3px 8px;border-radius:20px;font-size:.7rem;background:#111;color
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KARSUL AKUNGBA CONNECT</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0a0a0a;color:#fff;min-height:100vh}
+#loginScreen{position:fixed;inset:0;background:linear-gradient(135deg,#000,#1a1a1a);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-box{background:#111;border:1px solid #333;padding:30px;border-radius:16px;width:100%;max-width:380px;text-align:center}
+.login-box h1{color:#FFD700;font-size:28px;margin-bottom:8px}
+.login-box input,.login-box select{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #333;background:#222;color:#fff}
+.login-box button{width:100%;padding:14px;background:#FFD700;color:#000;border:none;border-radius:8px;font-weight:bold;margin-top:12px}
+.header{background:#111;border-bottom:1px solid #222;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:bold;color:#FFD700}
+.nav{display:flex;gap:6px;padding:10px;overflow-x:auto;background:#0f0f0f}
+.nav button{padding:8px 16px;border-radius:20px;border:1px solid #333;background:#1a1a1a;color:#fff}
+.nav button.active{background:#FFD700;color:#000}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:12px}
+.card{background:#161616;border:1px solid #222;border-radius:12px;overflow:hidden}
+.card img{width:100%;height:140px;object-fit:cover}
+.card-body{padding:10px}
+.price{color:#FFD700;font-weight:bold;font-size:13px}
+.chat-btn{width:100%;margin-top:8px;padding:8px;background:#25D366;color:#fff;border:none;border-radius:6px;font-weight:bold}
+#liveChatBtn{position:fixed;bottom:20px;right:20px;background:#FF0000;color:#fff;padding:14px 18px;border-radius:30px;border:none;font-weight:bold;z-index:200}
+</style>
+</head>
+<body>
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>KAC</h1>
+    <h2>KARSUL AKUNGBA CONNECT</h2>
+    <p>Login to Buy, Sell & Chat</p>
+    <input id="name" placeholder="Your Name">
+    <input id="phone" placeholder="Phone / WhatsApp Number">
+    <select id="location"><option value="">Select Location</option><option>Ibaka</option><option>Supare</option><option>AAUA</option><option>Akungba</option><option>Ilepa</option></select>
+    <button onclick="login()">ENTER KAC</button>
+  </div>
+</div>
+<div class="header"><div class="logo">KAC • KARSUL AKUNGBA</div><div id="userDisplay" style="font-size:12px;color:#aaa"></div></div>
+<div class="nav"><button class="active" onclick="filterCat('all',this)">ALL</button><button onclick="filterCat('tailoring',this)">Tailoring</button><button onclick="filterCat('barbing',this)">Barbing</button><button onclick="filterCat('plumbing',this)">Plumbing</button><button onclick="filterCat('repair',this)">Phone Repair</button><button onclick="logout()" style="margin-left:auto;color:#ff5555">Logout</button></div>
+<div class="grid" id="productGrid"></div>
+<button id="liveChatBtn" onclick="alert('LIVE CHAT - All Karsul users online')">🔴 LIVE CHAT</button>
+<script>
+const products=[{id:1,cat:'tailoring',title:'Senator Wear',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400',seller:'Bola Tailor',loc:'Ibaka'},{id:2,cat:'barbing',title:'Clean Fade + Beard',img:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400',seller:'Kola Cuts',loc:'AAUA'},{id:3,cat:'plumbing',title:'Pipe Repair',img:'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400',seller:'Oga Plumbing',loc:'Akungba'},{id:4,cat:'repair',title:'Phone Screen Repair',img:'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400',seller:'Tech Bro',loc:'Supare'}];
+function checkLogin(){const u=localStorage.getItem('kac_user');if(!u){document.getElementById('loginScreen').style.display='flex';}else{document.getElementById('loginScreen').style.display='none';const user=JSON.parse(u);document.getElementById('userDisplay').innerHTML='Hi, '+user.name+' - '+user.location;}}
+function login(){const name=document.getElementById('name').value.trim();const phone=document.getElementById('phone').value.trim();const loc=document.getElementById('location').value;if(!name||!phone||!loc){alert('Fill all fields');return;}localStorage.setItem('kac_user',JSON.stringify({name,phone,location:loc}));checkLogin();render();}
+function logout(){localStorage.removeItem('kac_user');location.reload();}
+function render(filter='all'){const grid=document.getElementById('productGrid');grid.innerHTML='';const list=filter==='all'?products:products.filter(p=>p.cat===filter);list.forEach(p=>{grid.innerHTML+='<div class="card"><img src="'+p.img+'"><div class="card-body"><h3>'+p.title+'</h3><div style="font-size:11px;color:#888">'+p.seller+' • '+p.loc+'</div><div class="price">Chat for price</div><button class="chat-btn" onclick="chatSeller(\''+p.seller+'\')">Chat Seller</button></div></div>';});}
+function filterCat(cat,btn){document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render(cat);}
+function chatSeller(name){const u=localStorage.getItem('kac_user');if(!u){alert('Please login first');document.getElementById('loginScreen').style.display='flex';return;}window.open('https://wa.me/234000000000?text=Hi '+name+' from KARSUL','_blank');}
+checkLogin();render();
+</script>
+</body>
+</html>
