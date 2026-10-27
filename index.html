@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AKC V35.3 - Full</title>
+<title>AKC V35.4 - MAP FIXED</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -36,7 +36,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 .small{font-size:12px;color:#94a3b8}
 .chip{display:inline-block;padding:6px 12px;border-radius:20px;background:var(--card);margin:3px;font-size:12px;border:1px solid var(--border);cursor:pointer;color:var(--text)}
 .chip.active{background:#1e40af;color:#fff}
-#mapFull{height:60vh;border-radius:14px;border:2px solid var(--border);margin:12px 0}
+#mapFull{height:65vh;border-radius:14px;border:3px solid #1e40af;margin:12px 0;background:#e0f2fe}
 .forgot-box{background:#eff6ff;border:2px solid #3b82f6;padding:15px;border-radius:12px;margin-top:15px;color:#111}
 .user-row{display:flex;align-items:center;gap:10px;padding:10px;background:var(--card);border-radius:12px;margin:6px 0;border:1px solid var(--border)}
 .user-avatar{width:45px;height:45px;background:#1e40af;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;flex-shrink:0}
@@ -67,8 +67,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <body>
 <div id="authPage" class="auth-wrap">
 <div class="auth-card">
-<h1 style="text-align:center">AKC V35.3 FULL</h1>
-<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">500 + Referral + Theme + Video - ALL FEATURES</p>
+<h1 style="text-align:center">AKC V35.4</h1>
+<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">MAP FIXED + 500 + Video</p>
 <div id="loginBox">
 <label>Phone</label><input id="loginPhone" placeholder="081...">
 <label>Password</label><input id="loginPass" type="password">
@@ -88,10 +88,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <div id="forgotBox" class="hidden"><div class="forgot-box"><h3>Forgot</h3><label>Phone</label><input id="forgotPhone"><label>Gmail (Optional)</label><input id="forgotGmail"><label>New Password</label><input id="forgotNewPass" type="password"><button class="btn btn-primary" onclick="doResetPassword()">Reset</button><button class="btn btn-secondary" onclick="showLogin()">Back</button><p id="forgotMsg" class="small"></p></div></div>
 </div>
 </div>
-
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V35.3</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V35.4</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
 <div><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px;margin-left:6px">Logout</button></div>
 </div>
 
@@ -116,7 +115,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 </div>
 </div>
 
-<div id="tab-map" class="tab"><h2>MAP</h2><div id="mapFull"></div></div>
+<div id="tab-map" class="tab"><h2>Akungba MAP - V35.4 FIXED</h2><p class="small">If blank, tap Buy then Map again, or reload page</p><div id="mapFull"></div><button class="btn btn-primary" style="margin-top:10px" onclick="initMap()">🔄 Reload Map</button></div>
 
 <div id="tab-chat" class="tab">
 <h2>Chats</h2>
@@ -124,14 +123,12 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <div id="generalChatBox"><div id="schoolMessages" style="max-height:300px;overflow:auto;background:var(--card);padding:10px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message everyone..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
 <div id="privateChatBox" class="hidden"><div id="privateUserChips" class="private-user-list"></div><div id="privateMessages" class="private-chat-box" style="min-height:250px">Select person</div><div style="display:flex;gap:8px;margin-top:8px"><input id="privateInput" placeholder="Type message..."><button class="btn btn-primary" style="width:80px;margin:0;background:#10b981" onclick="sendPrivateMsg()">Send</button></div><div style="margin-top:8px;background:var(--bg);padding:8px;border-radius:8px;border:1px solid var(--border)"><label class="small">Send Video/Picture</label><input id="privateMediaFile" type="file" accept="image/*,video/*" onchange="sendPrivateMedia(event)"></div></div>
 </div>
+
 <div id="tab-account" class="tab">
 <h2>My Profile</h2>
 <div class="card" style="text-align:center;padding:20px"><img id="myPicBig" class="pic-big" src="" /><h2 id="profileNameDisplay" style="margin:8px 0 2px">Your Name</h2><p class="small" id="profileSkillDisplay" style="color:#1e40af;font-weight:600"></p><div id="myRatingDisplay" class="rating-box" style="margin:10px auto"></div><div style="background:var(--bg);border:2px dashed #1e40af;border-radius:12px;padding:15px;margin:15px 0"><label style="font-weight:700;color:#1e40af;margin:0 0 8px">Add Profile Pic</label><input id="changePicFile" type="file" accept="image/*" onchange="changeMyPic(event)"></div><div id="accountInfo" style="text-align:left;background:var(--bg);padding:12px;border-radius:10px"></div></div>
-
 <div class="theme-box"><div><h3>Theme Mode</h3><p class="small">Dark or Light</p></div><button id="themeBtn" class="btn btn-primary" style="width:120px;margin:0" onclick="toggleTheme()">Dark Mode</button></div>
-
 <div class="referral-box"><h3>Your Referral Code</h3><p class="small" style="color:#dbeafe">Invite friends & earn N50!</p><div id="myReferralCode" class="referral-code">LOADING...</div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn-copy" style="background:#fff;color:#1e40af;flex:1" onclick="copyReferral()">Copy Code</button><button class="btn-copy" style="background:#fbbf24;color:#000;flex:1" onclick="copyReferralLink()">Copy Link</button></div><p class="small" style="margin-top:10px;color:#fef3c7">Referred: <b id="referralCount">0</b> people</p><div id="referralList" style="text-align:left;background:#fff;color:#111;border-radius:8px;padding:8px;margin-top:8px;max-height:150px;overflow-y:auto"></div></div>
-
 <div class="bank-copy-box"><h3 style="text-align:center;color:#1e40af;margin-bottom:12px">Payment N500</h3><div class="bank-line"><span>bank: <b>moniepoint</b></span><button class="btn-copy" onclick="copyText('moniepoint')">Copy</button></div><div class="bank-line"><span>Acc no: <b style="font-size:18px;color:#1e40af">8105986759</b></span><button class="btn-copy" onclick="copyText('8105986759')">Copy</button></div><div class="bank-line"><span>Bank name: <b>kareem sheriff</b></span><button class="btn-copy" onclick="copyText('kareem sheriff')">Copy</button></div><p style="text-align:center;font-weight:800;color:#991b1b;margin-top:8px">N500 per advert</p></div>
 <div id="ownerPanel" class="hidden"><h2 style="margin-top:15px;color:#92400e">OWNER PANEL</h2><button class="btn btn-red" style="margin-top:10px" onclick="fixAllOwnersNow()">Fix OWNER</button></div>
 <h2 style="margin-top:15px">All Registered (<span id="accountUserCount">0</span>)</h2><div class="card"><div id="fullUserList" style="max-height:400px;overflow-y:auto"></div></div>
@@ -139,7 +136,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 
 <div class="bottom-nav"><button class="active" onclick="showTab('buy')" id="nav-buy">Buy</button><button onclick="showTab('sell')" id="nav-sell">Sell</button><button onclick="showTab('map')" id="nav-map">Map</button><button onclick="showTab('chat')" id="nav-chat">Chat</button><button onclick="showTab('account')" id="nav-account">Account</button></div>
 </div>
-
 <script>
 let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all',tempPicBase64="",ownerMediaBase64="",ownerMediaType="",stuMediaBase64="",stuMediaType="",activePrivateChat=null;
 const OWNER_SECRET="893000";const OWNER_MAIN_PHONE="08105986759";
@@ -167,7 +163,7 @@ function previewPic(e){const file=e.target.files[0];if(!file)return;const r=new 
 function previewOwnerMedia(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=function(ev){ownerMediaBase64=ev.target.result;ownerMediaType=file.type.startsWith('video')?'video':'image';const img=document.getElementById('ownerMediaPreviewImg');const vid=document.getElementById('ownerMediaPreviewVid');if(ownerMediaType==='video'){img.classList.add('hidden');vid.src=ownerMediaBase64;vid.classList.remove('hidden');}else{vid.classList.add('hidden');img.src=ownerMediaBase64;img.classList.remove('hidden');}};r.readAsDataURL(file);}
 function previewStuMedia(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=function(ev){stuMediaBase64=ev.target.result;stuMediaType=file.type.startsWith('video')?'video':'image';const img=document.getElementById('stuMediaPreviewImg');const vid=document.getElementById('stuMediaPreviewVid');if(stuMediaType==='video'){img.classList.add('hidden');vid.src=stuMediaBase64;vid.classList.remove('hidden');}else{vid.classList.add('hidden');img.src=stuMediaBase64;img.classList.remove('hidden');}};r.readAsDataURL(file);}
 function changeMyPic(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=function(ev){const b64=ev.target.result;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].avatar=b64;saveUsers(users);currentUser.avatar=b64;localStorage.setItem('akc_current',JSON.stringify(currentUser));document.getElementById('myPicBig').src=b64;updateTopAvatar();renderUsers();alert('Pic added!');}};r.readAsDataURL(file);}
-  function updateTopAvatar(){const el=document.getElementById('topAvatar');const big=document.getElementById('myPicBig');const nameDisp=document.getElementById('profileNameDisplay');const skillDisp=document.getElementById('profileSkillDisplay');if(currentUser){if(currentUser.avatar){el.innerHTML='<img src="'+currentUser.avatar+'">';if(big)big.src=currentUser.avatar;}else{el.textContent=(currentUser.name||'U')[0].toUpperCase();}if(nameDisp)nameDisp.textContent=currentUser.name;if(skillDisp){let s=currentUser.skill||'general';if(s==='general'||!s)s='Just Student';skillDisp.textContent=s+' - '+(currentUser.location||'');}const r=getSellerRating(currentUser.phone);const re=document.getElementById('myRatingDisplay');if(re){if(r.count===0)re.innerHTML='No ratings yet';else re.innerHTML=r.avg+' ⭐ ('+r.count+')';}renderReferralBox();}}
+function updateTopAvatar(){const el=document.getElementById('topAvatar');const big=document.getElementById('myPicBig');const nameDisp=document.getElementById('profileNameDisplay');const skillDisp=document.getElementById('profileSkillDisplay');if(currentUser){if(currentUser.avatar){el.innerHTML='<img src="'+currentUser.avatar+'">';if(big)big.src=currentUser.avatar;}else{el.textContent=(currentUser.name||'U')[0].toUpperCase();}if(nameDisp)nameDisp.textContent=currentUser.name;if(skillDisp){let s=currentUser.skill||'general';if(s==='general'||!s)s='Just Student';skillDisp.textContent=s+' - '+(currentUser.location||'');}const r=getSellerRating(currentUser.phone);const re=document.getElementById('myRatingDisplay');if(re){if(r.count===0)re.innerHTML='No ratings yet';else re.innerHTML=r.avg+' ⭐ ('+r.count+')';}renderReferralBox();}}
 function renderReferralBox(){if(!currentUser)return;const code=currentUser.referralCode||generateReferralCode(currentUser.name,currentUser.phone);document.getElementById('myReferralCode').textContent=code;const all=getUsers();const refd=all.filter(u=>u.referredBy===code);document.getElementById('referralCount').textContent=refd.length;const le=document.getElementById('referralList');if(refd.length===0)le.innerHTML='<p class="small">No referrals yet</p>';else le.innerHTML=refd.map(u=>'<div style="padding:4px 0;border-bottom:1px solid #eee"><b>'+u.name+'</b> - '+u.phone+'</div>').join('');}
 function generateCode(){generatedCode=Math.floor(1000+Math.random()*9000).toString();document.getElementById('codeDisplay').textContent="Your code: "+generatedCode;}
 function showSignup(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('forgotBox').classList.add('hidden');document.getElementById('signupBox').classList.remove('hidden');const pr=localStorage.getItem('akc_pending_ref');if(pr){document.getElementById('suReferral').value=pr;}}
@@ -200,9 +196,8 @@ function renderPrivateUserChips(){const users=getUsers().filter(u=>normalizePhon
 function renderPrivateMsgs(){const box=document.getElementById('privateMessages');if(!activePrivateChat){box.innerHTML='<p class="small">Select person above</p>';return}const all=getPrivateMsgs();const relevant=all.filter(m=>(normalizePhone(m.from)===normalizePhone(currentUser.phone) && normalizePhone(m.to)===activePrivateChat) || (normalizePhone(m.to)===normalizePhone(currentUser.phone) && normalizePhone(m.from)===activePrivateChat));if(relevant.length===0){box.innerHTML='<p class="small">No messages yet</p>';return}box.innerHTML=relevant.map(m=>{const isMe=normalizePhone(m.from)===normalizePhone(currentUser.phone);let mediaHtml='';if(m.media){if(m.mediaType==='video')mediaHtml='<video src="'+m.media+'" style="width:100%;max-height:200px;border-radius:8px;margin-top:5px" controls></video>';else mediaHtml='<img src="'+m.media+'" style="width:100%;max-height:200px;border-radius:8px;margin-top:5px" />';}return '<div class="private-msg '+(isMe?'me':'them')+'"><b style="font-size:10px">'+(isMe?'You':m.fromName)+'</b><br>'+m.text+mediaHtml+'<br><span style="font-size:9px;opacity:0.7">'+m.time+'</span></div>';}).join('');box.scrollTop=box.scrollHeight;}
 function sendPrivateMsg(){const input=document.getElementById('privateInput');const text=input.value.trim();if(!text){alert('Type message');return}if(!activePrivateChat){alert('Select person first!');return}const users=getUsers();const target=users.find(u=>normalizePhone(u.phone)===activePrivateChat);const msgs=getPrivateMsgs();msgs.push({id:uid(),from:currentUser.phone,fromName:currentUser.name,to:activePrivateChat,toName:target?target.name:activePrivateChat,text,time:new Date().toLocaleString()});savePrivateMsgs(msgs);input.value='';renderPrivateMsgs();}
 function sendPrivateMedia(e){const file=e.target.files[0];if(!file)return;if(!activePrivateChat){alert('Select person first!');return}const r=new FileReader();r.onload=function(ev){const b64=ev.target.result;const type=file.type.startsWith('video')?'video':'image';const users=getUsers();const target=users.find(u=>normalizePhone(u.phone)===activePrivateChat);const msgs=getPrivateMsgs();msgs.push({id:uid(),from:currentUser.phone,fromName:currentUser.name,to:activePrivateChat,toName:target?target.name:activePrivateChat,text: type==='video'?'📹 Video':'🖼️ Picture',time:new Date().toLocaleString(),media:b64,mediaType:type});savePrivateMsgs(msgs);renderPrivateMsgs();document.getElementById('privateMediaFile').value='';};r.readAsDataURL(file);}
-function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){window.mapFull.invalidateSize();return;}window.mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.mapFull);},600);}
+function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){try{window.mapFull.remove();}catch(e){} window.mapFull=null;} el.innerHTML=''; window.mapFull=L.map('mapFull').setView([7.488,5.746],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(window.mapFull);setTimeout(()=>{if(window.mapFull)window.mapFull.invalidateSize();},300);L.marker([7.488,5.746]).addTo(window.mapFull).bindPopup('Akungba - AAUA');},300);}
 (function(){fixCorruptedOwners();applyTheme();const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(normalizePhone(currentUser.phone)===normalizePhone(OWNER_MAIN_PHONE) && localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;if(normalizePhone(currentUser.phone)!==normalizePhone(OWNER_MAIN_PHONE))currentUser.isOwner=false;enterApp();}}catch(e){}}renderPublicUsers();})();
 </script>
 </body>
 </html>
-function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){try{window.mapFull.remove();}catch(e){} window.mapFull=null;} el.innerHTML=''; window.mapFull=L.map('mapFull').setView([7.488,5.746],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(window.mapFull);setTimeout(()=>{if(window.mapFull)window.mapFull.invalidateSize();},300);},300);}
