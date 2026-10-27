@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AKC V34.7 - Private Chat</title>
+<title>AKC V34.8 - Final Fix</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -65,8 +65,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 
 <div id="authPage" class="auth-wrap">
 <div class="auth-card">
-<h1 style="text-align:center">AKC V34.7</h1>
-<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">Private Chat Added</p>
+<h1 style="text-align:center">AKC V34.8</h1>
+<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">Private Chat + Owner Fixed</p>
 <div id="loginBox">
 <label>Phone</label><input id="loginPhone" placeholder="081...">
 <label>Password</label><input id="loginPass" type="password">
@@ -87,13 +87,13 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V34.7</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V34.8</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
 <div><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px;margin-left:6px">Logout</button></div>
 </div>
 
 <div id="tab-buy" class="tab active">
 <h2>🛒 Market</h2>
-<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>👥 Registered - <span id="userCount">0</span> — Tap Chat to Private Message!</h3><div id="userListPreview" style="max-height:350px;overflow-y:auto;margin-top:8px"></div></div>
+<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>👥 Registered - <span id="userCount">0</span> — Tap 💬 Chat to message!</h3><div id="userListPreview" style="max-height:350px;overflow-y:auto;margin-top:8px"></div></div>
 <div style="display:flex;gap:4px;margin:10px 0;flex-wrap:wrap"><span class="chip active" id="filterAll" onclick="setBuyFilter('all')">All</span><span class="chip" id="filterPhone" onclick="setBuyFilter('phone')">📱 Phone Repair</span><span class="chip" id="filterGadget" onclick="setBuyFilter('gadget')">🎧 Gadgets</span><span class="chip" id="filterPlumbing" onclick="setBuyFilter('plumbing')">🚿 Plumbing</span></div>
 <input id="searchBuy" placeholder="Search product or person..." oninput="renderBuy()" style="margin:8px 0"><div id="buyList"></div>
 </div>
@@ -142,12 +142,10 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <button id="chatTabGeneral" class="btn btn-primary" style="flex:1;margin:0" onclick="switchChatTab('general')">General Chat</button>
 <button id="chatTabPrivate" class="btn btn-secondary" style="flex:1;margin:0" onclick="switchChatTab('private')">Private Chats</button>
 </div>
-
 <div id="generalChatBox">
 <div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div>
 <div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message everyone..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div>
 </div>
-
 <div id="privateChatBox" class="hidden">
 <div id="privateUserChips" class="private-user-list"></div>
 <div id="privateMessages" class="private-chat-box" style="min-height:250px">Select person to chat</div>
@@ -155,7 +153,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <input id="privateInput" placeholder="Type private message...">
 <button class="btn btn-primary" style="width:80px;margin:0;background:#10b981" onclick="sendPrivateMsg()">Send</button>
 </div>
-<p class="small" style="margin-top:8px">🔒 Private — Only you and them can see am (on this phone)</p>
+<p class="small" style="margin-top:8px">🔒 Private — Works even if person na "Just Student - No Business"</p>
 </div>
 </div>
 
@@ -182,6 +180,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <div id="ownerPanel" class="hidden">
 <h2 style="margin-top:15px;color:#92400e">👑 OWNER PANEL</h2>
 <div class="card" style="border:3px solid #f59e0b;background:#fffbeb"><h3>⏳ Pending Posts</h3><div id="pendingList" style="max-height:600px;overflow-y:auto;margin-top:10px"></div></div>
+<button class="btn btn-red" style="margin-top:10px" onclick="fixAllOwnersNow()">🛠️ Fix All OWNER Badges Now</button>
 </div>
 <h2 style="margin-top:15px">👥 All Registered (<span id="accountUserCount">0</span>)</h2>
 <div class="card"><div id="fullUserList" style="max-height:400px;overflow-y:auto"></div></div>
@@ -199,6 +198,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <script>
 let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all',tempPicBase64="",tempProofBase64="",activePrivateChat=null,chatMode='general';
 const OWNER_SECRET="893000";
+const OWNER_MAIN_PHONE="08105986759"; // CHANGE TO YOUR REAL LOGIN PHONE IF DIFFERENT
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function normalizePhone(p){let d=(p||'').replace(/\D/g,'');if(d.length>11)d=d.slice(-11);if(d.length===10)d='0'+d;return d;}
 function copyText(text){navigator.clipboard.writeText(text).then(()=>{alert('✅ Copied: '+text)}).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('✅ Copied: '+text);});}
@@ -218,6 +218,26 @@ function getSellerRating(phone){const ratings=getRatings().filter(r=>normalizePh
 function starHtml(avg){let s='';let full=Math.round(avg);for(let i=1;i<=5;i++){s+=i<=full?'⭐':'☆';}return s;}
 (function checkUrl(){const params=new URLSearchParams(window.location.search);if(params.get('owner')===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}})();
 if(localStorage.getItem('akc_owner_unlocked')==='1')isOwnerMode=true;
+function fixCorruptedOwners(){
+  let users=getUsers(); let changed=false;
+  users.forEach(u=>{
+    const p=normalizePhone(u.phone);
+    if(p!==normalizePhone(OWNER_MAIN_PHONE) && u.isOwner){u.isOwner=false; changed=true;}
+    if(p===normalizePhone(OWNER_MAIN_PHONE) && !u.isOwner){u.isOwner=true; changed=true;}
+  });
+  if(changed) saveUsers(users);
+}
+function fixAllOwnersNow(){
+  localStorage.removeItem('akc_owner_unlocked');
+  isOwnerMode=false;
+  fixCorruptedOwners();
+  alert('✅ Fixed! Only your number is OWNER now. Others no go see OWNER badge.');
+  renderUsers(); renderPending();
+  if(currentUser && normalizePhone(currentUser.phone)!==normalizePhone(OWNER_MAIN_PHONE)){
+    document.getElementById('ownerPanel').classList.add('hidden');
+    document.getElementById('topBadge').textContent='AKC';
+  }
+}
 function previewPic(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){tempPicBase64=e.target.result;document.getElementById('picPreview').src=tempPicBase64;document.getElementById('picPreview').classList.remove('hidden');};reader.readAsDataURL(file);}
 function previewProof(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){tempProofBase64=e.target.result;document.getElementById('proofPreview').src=tempProofBase64;document.getElementById('proofPreview').classList.remove('hidden');};reader.readAsDataURL(file);}
 function changeMyPic(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){const base64=e.target.result;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].avatar=base64;saveUsers(users);currentUser.avatar=base64;localStorage.setItem('akc_current',JSON.stringify(currentUser));document.getElementById('myPicBig').src=base64;updateTopAvatar();renderUsers();alert('✅ Pic added!');}};reader.readAsDataURL(file);}
@@ -226,13 +246,26 @@ function generateCode(){generatedCode=Math.floor(1000+Math.random()*9000).toStri
 function showSignup(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('forgotBox').classList.add('hidden');document.getElementById('signupBox').classList.remove('hidden');}
 function showLogin(){document.getElementById('signupBox').classList.add('hidden');document.getElementById('forgotBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');renderPublicUsers();}
 function showForgot(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('signupBox').classList.add('hidden');document.getElementById('forgotBox').classList.remove('hidden');}
-function doSignup(){const name=document.getElementById('suName').value.trim(),phoneRaw=document.getElementById('suPhone').value.trim(),gmail=document.getElementById('suGmail').value.trim().toLowerCase(),pass=document.getElementById('suPass').value.trim(),loc=document.getElementById('suLocation').value,skill=document.getElementById('suSkill').value,codeInput=document.getElementById('suCodeInput').value.trim();if(!name||!phoneRaw||!pass){alert('Fill name phone pass');return}if(!gmail||!gmail.includes('@')){alert('Add valid Gmail');return}if(!generatedCode){alert('Generate code');return}if(codeInput!==generatedCode){alert('Code no match');return}const phone=normalizePhone(phoneRaw);let users=getUsers();if(users.find(u=>normalizePhone(u.phone)===phone)){alert('Phone don sign up');showLogin();return;}const isOwnerSignup=isOwnerMode||phoneRaw.includes(OWNER_SECRET);const user={id:uid(),name,phone,gmail,password:pass,location:loc,skill:skill||'general',isOwner:isOwnerSignup,wallet:0,avatar:tempPicBase64||"",registeredAt:new Date().toLocaleDateString()};users.push(user);saveUsers(users);alert('✅ Signed up!');tempPicBase64="";showLogin();document.getElementById('loginPhone').value=phone;renderPublicUsers();}
-function doLogin(){const phoneRaw=document.getElementById('loginPhone').value.trim(),pass=document.getElementById('loginPass').value.trim();const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);if(!u){alert('Wrong phone/pass');return}currentUser=u;if(isOwnerMode)currentUser.isOwner=true;localStorage.setItem('akc_current',JSON.stringify(currentUser));enterApp();}
+function doSignup(){
+  const name=document.getElementById('suName').value.trim(),phoneRaw=document.getElementById('suPhone').value.trim(),gmail=document.getElementById('suGmail').value.trim().toLowerCase(),pass=document.getElementById('suPass').value.trim(),loc=document.getElementById('suLocation').value,skill=document.getElementById('suSkill').value,codeInput=document.getElementById('suCodeInput').value.trim();
+  if(!name||!phoneRaw||!pass){alert('Fill name phone pass');return}
+  if(!gmail||!gmail.includes('@')){alert('Add valid Gmail');return}
+  if(!generatedCode){alert('Generate code');return}
+  if(codeInput!==generatedCode){alert('Code no match');return}
+  const phone=normalizePhone(phoneRaw);
+  let users=getUsers();
+  if(users.find(u=>normalizePhone(u.phone)===phone)){alert('Phone don sign up');showLogin();return;}
+  // FIXED: ONLY OWNER_MAIN_PHONE CAN BE OWNER
+  const isOwnerSignup = normalizePhone(phoneRaw)===normalizePhone(OWNER_MAIN_PHONE) && isOwnerMode;
+  const user={id:uid(),name,phone,gmail,password:pass,location:loc,skill:skill||'general',isOwner:isOwnerSignup,wallet:0,avatar:tempPicBase64||"",registeredAt:new Date().toLocaleDateString()};
+  users.push(user);saveUsers(users);alert('✅ Signed up!');tempPicBase64="";showLogin();document.getElementById('loginPhone').value=phone;renderPublicUsers();
+}
+function doLogin(){const phoneRaw=document.getElementById('loginPhone').value.trim(),pass=document.getElementById('loginPass').value.trim();const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);if(!u){alert('Wrong phone/pass');return}currentUser=u;if(normalizePhone(currentUser.phone)===normalizePhone(OWNER_MAIN_PHONE) && isOwnerMode)currentUser.isOwner=true;localStorage.setItem('akc_current',JSON.stringify(currentUser));enterApp();}
 function doResetPassword(){const phoneRaw=document.getElementById('forgotPhone').value.trim(),gmail=document.getElementById('forgotGmail').value.trim().toLowerCase(),newPass=document.getElementById('forgotNewPass').value.trim();const msgEl=document.getElementById('forgotMsg');if(!phoneRaw||!gmail||!newPass){msgEl.textContent='Fill all';msgEl.style.color='red';return}const phone=normalizePhone(phoneRaw);let users=getUsers();const idx=users.findIndex(u=>normalizePhone(u.phone)===phone);if(idx<0){msgEl.textContent='Phone not found';msgEl.style.color='red';return}if((users[idx].gmail||'').toLowerCase()!==gmail){msgEl.textContent='Gmail no match';msgEl.style.color='red';return}users[idx].password=newPass;saveUsers(users);msgEl.textContent='✅ Reset done!';msgEl.style.color='green';setTimeout(()=>{showLogin();},1000);}
 function enterApp(){document.getElementById('authPage').classList.add('hidden');document.getElementById('mainApp').classList.remove('hidden');document.getElementById('topUser').textContent=currentUser.name;document.getElementById('topBadge').textContent=currentUser.isOwner?'OWNER':'AKC';updateTopAvatar();renderAll();if(currentUser.isOwner)document.getElementById('ownerPanel').classList.remove('hidden');}
 function doLogout(){localStorage.removeItem('akc_current');location.reload();}
 function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+name).classList.add('active');if(name==='buy'){renderBuy();renderUsers();}if(name==='sell')renderMyProducts();if(name==='map')initMap();if(name==='chat'){renderSchoolMsgs();renderPrivateUserChips();renderPrivateMsgs();}if(name==='account'){renderUsers();renderPending();updateTopAvatar();document.getElementById('accountInfo').innerHTML=`<p><b>📞</b> ${currentUser.phone}<br><b>📧</b> ${currentUser.gmail||''}<br><b>📍</b> ${currentUser.location}<br><b>💼</b> ${currentUser.skill||'Just Student - No Business'}</p>`;const r=getSellerRating(currentUser.phone);let revHtml='';if(r.all.length>0){revHtml='<h4 style="margin-top:12px">⭐ Reviews</h4>'+r.all.map(x=>`<div class="card" style="margin:5px 0;padding:8px"><b>${x.raterName}</b> - ${starHtml(x.stars)}<br><span class="small">${x.comment||''}</span></div>`).join('');}document.getElementById('myReviewsList').innerHTML=revHtml;}}
-function renderAll(){renderBuy();renderMyProducts();renderSchoolMsgs();renderUsers();renderPublicUsers();renderPending();renderPrivateUserChips();}
+function renderAll(){fixCorruptedOwners();renderBuy();renderMyProducts();renderSchoolMsgs();renderUsers();renderPublicUsers();renderPending();renderPrivateUserChips();}
 function renderUsers(){
   const users=getUsers();
   const count=users.length;
@@ -244,12 +277,13 @@ function renderUsers(){
     const isMe = currentUser && normalizePhone(u.phone)===normalizePhone(currentUser.phone);
     let businessText = u.skill||'general';
     if(!businessText || businessText==='general') businessText='Just Student - No Business 👨‍🎓';
+    const ownerBadge = u.isOwner && normalizePhone(u.phone)===normalizePhone(OWNER_MAIN_PHONE) ? '<span class="badge badge-owner">OWNER</span>' : '';
     const chatBtn = isMe ? '' : `<button class="btn-chat" onclick="startPrivateChat('${u.phone}','${u.name}')">💬 Chat</button>`;
-    return `<div class="user-row">${avatarHtml(u,45)}<div style="flex:1"><b>${u.name}</b> ${u.isOwner?'<span class="badge badge-owner">OWNER</span>':''}<br><span class="small">📍 ${u.location} | ${businessText}</span><br><span class="small rating-box">${ratingText}</span><br><div style="display:flex;gap:4px;margin-top:4px">${chatBtn}<button class="btn-star" onclick="rateSeller('${u.phone}','${u.name}')">⭐ Rate</button></div></div></div>`;
+    return `<div class="user-row">${avatarHtml(u,45)}<div style="flex:1"><b>${u.name}</b> ${ownerBadge}<br><span class="small">📍 ${u.location} | ${businessText}</span><br><span class="small rating-box">${ratingText}</span><br><div style="display:flex;gap:4px;margin-top:4px">${chatBtn}<button class="btn-star" onclick="rateSeller('${u.phone}','${u.name}')">⭐ Rate</button></div></div></div>`;
   }).join('')||'<p class="small">No users yet</p>';
   ['userListPreview','fullUserList','publicListLogin'].forEach(t=>{const el=document.getElementById(t);if(el)el.innerHTML=html;});
 }
-function renderPublicUsers(){renderUsers();}
+function renderPublicUsers(){fixCorruptedOwners();renderUsers();}
 function setBuyFilter(f){buyFilter=f;document.querySelectorAll('#tab-buy .chip').forEach(c=>c.classList.remove('active'));const map={all:'filterAll',plumbing:'filterPlumbing',phone:'filterPhone',gadget:'filterGadget'};const elId=map[f]||'filterAll';const el=document.getElementById(elId);if(el)el.classList.add('active');renderBuy();}
 function updateSellForm(){const type=document.getElementById('sellType').value;document.getElementById('sellProductFields').classList.toggle('hidden',type!=='product');document.getElementById('sellPhoneFields').classList.toggle('hidden',type!=='phone_repair');document.getElementById('sellGadgetFields').classList.toggle('hidden',type!=='gadget');document.getElementById('sellCakeFields').classList.toggle('hidden',type!=='cake');document.getElementById('sellEventFields').classList.toggle('hidden',type!=='event');}
 function getCommentsForProduct(pid){return getComments().filter(c=>c.productId===pid).reverse();}
@@ -294,8 +328,6 @@ function renderMyProducts(){const list=document.getElementById('myProducts');con
 function deleteProduct(id){if(!confirm('Delete?'))return;saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();renderPending();}
 function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>`<div style="margin:6px 0"><b style="font-size:12px">${m.senderName}</b><div style="background:#f3f4f6;padding:8px;border-radius:12px;margin-top:2px">${m.text}</div></div>`).join('')||'<p class="small">No messages</p>';}
 function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();}
-
-// PRIVATE CHAT FUNCTIONS - NEW!
 function switchChatTab(mode){
   chatMode=mode;
   document.getElementById('generalChatBox').classList.toggle('hidden',mode!=='general');
@@ -334,7 +366,7 @@ function renderPrivateMsgs(){
     (normalizePhone(m.from)===normalizePhone(currentUser.phone) && normalizePhone(m.to)===activePrivateChat) ||
     (normalizePhone(m.to)===normalizePhone(currentUser.phone) && normalizePhone(m.from)===activePrivateChat)
   );
-  if(relevant.length===0){box.innerHTML=`<p class="small">No messages yet with this person — Start chatting!<br>Person go see am when dem open Chat → Private Chats</p>`;return}
+  if(relevant.length===0){box.innerHTML=`<p class="small">No messages yet with this person — Start chatting!</p>`;return}
   box.innerHTML=relevant.map(m=>{
     const isMe = normalizePhone(m.from)===normalizePhone(currentUser.phone);
     return `<div class="private-msg ${isMe?'me':'them'}"><b style="font-size:10px">${isMe?'You':m.fromName}</b><br>${m.text}<br><span style="font-size:9px;opacity:0.7">${m.time}</span></div>`;
@@ -361,12 +393,25 @@ function sendPrivateMsg(){
   savePrivateMsgs(msgs);
   input.value='';
   renderPrivateMsgs();
-  // also show badge
   alert('✅ Sent! Person go see am for Private Chats');
 }
-
 function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){window.mapFull.invalidateSize();return;}window.mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.mapFull);},600);}
-(function(){const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;enterApp();}}catch(e){}}renderPublicUsers();})();
+(function(){
+  fixCorruptedOwners();
+  const saved=localStorage.getItem('akc_current');
+  if(saved){try{
+    currentUser=JSON.parse(saved);
+    let users=getUsers();
+    let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));
+    if(fresh){
+      currentUser=fresh;
+      if(normalizePhone(currentUser.phone)===normalizePhone(OWNER_MAIN_PHONE) && localStorage.getItem('akc_owner_unlocked')==='1') currentUser.isOwner=true;
+      if(normalizePhone(currentUser.phone)!==normalizePhone(OWNER_MAIN_PHONE)) currentUser.isOwner=false;
+      enterApp();
+    }
+  }catch(e){}}
+  renderPublicUsers();
+})();
 </script>
 </body>
-                                                                                                                                    </html>
+</html>
