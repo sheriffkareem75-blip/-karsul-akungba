@@ -11,7 +11,7 @@
 body{background:#f3f4f6}
 .hidden{display:none!important}
 .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#1e40af,#3b82f6)}
-.auth-card{background:#fff;width:100%;max-width:420px;border-radius:20px;padding:25px}
+.auth-card{background:#fff;width:100%;max-width:440px;border-radius:20px;padding:25px;max-height:90vh;overflow-y:auto}
 label{font-size:13px;font-weight:600;margin:10px 0 5px;display:block}
 input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px}
 .btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:12px;display:block}
@@ -19,8 +19,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 .btn-secondary{background:#e5e7eb;color:#111}
 .btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
 .btn-green{background:#16a34a;color:#fff}
-.btn-pink{background:linear-gradient(135deg,#ec4899,#be185d);color:#fff}
-.btn-purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff}
 .topbar{position:sticky;top:0;background:#1e40af;color:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;z-index:50}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:6px 0 16px;z-index:50}
 .bottom-nav button{border:none;background:none;display:flex;flex-direction:column;align-items:center;font-size:9px;color:#6b7280;padding:3px 5px}
@@ -60,46 +58,58 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <div class="auth-card">
 <h1 style="text-align:center">AKC</h1>
 <p style="text-align:center;color:#666;font-size:13px;margin-bottom:10px;font-weight:600">Akungba Community Market</p>
-<p style="text-align:center;color:#888;font-size:11px;margin-bottom:15px">Cake • Event Planner • Buy & Sell • Live Map • Online</p>
+<p style="text-align:center;color:#888;font-size:11px;margin-bottom:15px">Food • Fashion • Plumbing • Cake • Event • Map • Online</p>
 
-<div id="refBanner" class="hidden">
-<div class="ref-box">
-<h3>👥 Referred!</h3>
-<p class="small" id="refBannerText"></p>
-</div>
-</div>
+<div id="refBanner" class="hidden"><div class="ref-box"><h3>👥 Referred!</h3><p class="small" id="refBannerText"></p></div></div>
 
 <div id="loginBox">
-<label>Phone Number</label>
-<input id="loginPhone" placeholder="081...">
-<label>Password</label>
-<input id="loginPass" type="password" placeholder="Password">
-
+<label>Phone Number</label><input id="loginPhone" placeholder="081...">
+<label>Password</label><input id="loginPass" type="password" placeholder="Password">
 <div class="pin-box">
 <label style="color:#92400e;margin-top:0">🔐 PUT OWNER PIN HERE (Optional)</label>
 <input id="ownerCodeInput" type="password" placeholder="Put owner pin here - Leave empty if student">
 <p class="small" style="color:#92400e;margin-top:4px">Only owner put pin here! Students leave empty!</p>
 <p id="ownerMsg" class="small" style="font-weight:700;margin-top:4px"></p>
 </div>
-
 <button class="btn btn-primary" onclick="doLogin()">LOG IN</button>
 <p class="small" style="text-align:center;margin-top:8px">One phone = One account | 🟢 Online top right inside app!</p>
-<button type="button" class="btn btn-secondary" id="signupBtn" onclick="showSignup()">SIGN UP - Create Account</button>
+<button type="button" class="btn btn-secondary" onclick="showSignup()">SIGN UP - Create Account</button>
 </div>
 
 <div id="signupBox" class="hidden">
-<label>Full Name</label><input id="suName">
+<label>Full Name</label><input id="suName" placeholder="Your full name">
 <label>Phone - One Number Once!</label><input id="suPhone" placeholder="081...">
 <label>Gender</label><select id="suGender"><option value="">Select</option><option>Male</option><option>Female</option></select>
-<label>Password</label><input id="suPass" type="password">
+<label>Password</label><input id="suPass" type="password" placeholder="Create password">
 <label>Department - OPTIONAL</label><select id="suDept"><option value="">Indigene / No Dept</option><option>Computer Science</option><option>Business Admin</option><option>Others</option></select>
 <label>Location</label><select id="suLocation"><option>Akungba Student - AAUA</option><option>Akungba Community - Indigene</option><option>Akoko Area - Indigene</option><option>Non-Indigene Living in Akungba</option></select>
-<label>What do you do?</label><select id="suSkill"><option value="">General Buyer/Seller</option><option value="cake">🎂 Cake Baker</option><option value="event">🎉 Event Planner</option><option value="both">🎂🎉 Both Cake & Event</option></select>
+
+<label>What do you do? - SELECT YOUR HUSTLE</label>
+<select id="suSkill">
+<option value="">General Buyer/Seller</option>
+<option value="food">🍚 Food Seller - Rice, Snacks, Shawarma</option>
+<option value="fashion">👕 Fashion - Clothes, Shoes, Bags</option>
+<option value="electronics">📱 Electronics - Phones, Gadgets, Laptops</option>
+<option value="hair">💇 Hair / Beauty - Hair, Nails, Makeup, Barber</option>
+<option value="books">📚 Books / Materials - Handouts, Stationery</option>
+<option value="logistics">🚗 Logistics / Delivery - Okada, Keke, Dispatch</option>
+<option value="plumbing">🚿 Plumbing - Pipe, Toilet, Sink, Borehole, Water</option>
+<option value="electrical">🔌 Electrical - Wiring, Socket, Light, Installation</option>
+<option value="building">🏗️ Building - Carpentry, Tiling, Painting, Bricklayer</option>
+<option value="services">🔧 Services - Tailoring, Photography, Printing</option>
+<option value="provisions">🛒 Provisions - Supermarket Items</option>
+<option value="cake">🎂 Cake Baker - Birthday, Wedding, Cupcakes</option>
+<option value="event">🎉 Event Planner - Wedding, Birthday, Burial, Graduation</option>
+<option value="both">🎂🎉 Both Cake & Event</option>
+<option value="food_cake">🍚🎂 Food + Cake - Combo</option>
+<option value="all_business">💼 All Business - I do many things!</option>
+</select>
+
 <label>📍 Allow Live Location?</label><select id="suAllowLocation"><option value="yes">Yes - Show me on map!</option><option value="no">No - Hide my location</option></select>
 <label>Referral Code (Optional)</label><input id="suRefCode" placeholder="If someone referred you">
 <label>Verification Code</label><div style="display:flex;gap:8px"><input id="suCodeInput" placeholder="Enter code"><button type="button" class="btn btn-secondary" style="margin:0;width:110px" onclick="generateCode()">Generate</button></div>
 <p id="codeDisplay" class="small" style="color:#1e40af;font-weight:700;margin-top:5px"></p>
-<button type="button" class="btn btn-primary" onclick="doSignup()">SIGN UP - One Number Once!</button>
+<button type="button" class="btn btn-primary" onclick="doSignup()">SIGN UP NOW</button>
 <button type="button" class="btn btn-secondary" onclick="showLogin()">Already have account? LOG IN</button>
 </div>
 
@@ -108,7 +118,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><b>AKC</b><span id="topBadge" class="badge badge-owner">Akungba</span></div>
+<div style="display:flex;align-items:center;gap:8px"><b>AKC</b><span id="topBadge" class="badge badge-owner">AKC</span></div>
 <div class="top-right-stack">
 <div id="onlineCountTop" class="top-online"><span class="online-dot"></span><span id="onlineCountText">🟢 1 Online</span></div>
 <div style="display:flex;align-items:center;gap:6px"><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px">Logout</button></div>
@@ -116,88 +126,52 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 
 <div id="tab-buy" class="tab active">
-<h2>🛒 Buy + 🎂 Cake + 🎉 Event + 📍 Map</h2>
+<h2>🛒 Buy + Plumbing + Cake + Event</h2>
 <div style="display:flex;gap:4px;margin:10px 0;flex-wrap:wrap">
 <span class="chip active" id="filterAll" onclick="setBuyFilter('all')">All</span>
 <span class="chip" id="filterCake" onclick="setBuyFilter('cake')">🎂 Cake</span>
 <span class="chip" id="filterEvent" onclick="setBuyFilter('event')">🎉 Event</span>
+<span class="chip" id="filterFood" onclick="setBuyFilter('food')">🍚 Food</span>
+<span class="chip" id="filterPlumbing" onclick="setBuyFilter('plumbing')">🚿 Plumbing</span>
 <span class="chip" id="filterLive" onclick="setBuyFilter('live')">📍 Live</span>
 </div>
-<input id="searchBuy" placeholder="Search cake, event, products..." oninput="renderBuy()" style="margin:8px 0">
+<input id="searchBuy" placeholder="Search plumbing, food, cake, event, fashion..." oninput="renderBuy()" style="margin:8px 0">
 <button class="btn btn-green" onclick="getLiveLocation()" style="margin-bottom:8px">📍 Share My Live Location for Map</button>
 <p class="small" id="liveLocationStatus" style="text-align:center;margin-bottom:8px">Not shared yet</p>
 <div id="buyList"></div>
 </div>
 
 <div id="tab-sell" class="tab">
-<h2>💰 Sell - Cake & Event + Live Location!</h2>
+<h2>💰 Sell - All Business + Plumbing!</h2>
 <div class="card">
 <label>What are you selling?</label>
 <select id="sellType" onchange="updateSellForm()">
 <option value="product">📦 General Product</option>
-<option value="cake">🎂 Cake - Birthday, Wedding, etc</option>
-<option value="event">🎉 Event Planner - Wedding, Birthday, etc</option>
+<option value="food">🍚 Food</option>
+<option value="fashion">👕 Fashion</option>
+<option value="electronics">📱 Electronics</option>
+<option value="hair">💇 Hair / Beauty</option>
+<option value="plumbing">🚿 Plumbing - Pipe, Toilet, Borehole</option>
+<option value="electrical">🔌 Electrical - Wiring, Light</option>
+<option value="building">🏗️ Building - Carpentry, Tiling, Painting</option>
+<option value="cake">🎂 Cake</option>
+<option value="event">🎉 Event Planner</option>
 </select>
-<div id="sellProductFields">
-<label>Product Name</label><input id="sellName" placeholder="e.g. Power Bank">
-<label>Price ₦</label><input id="sellPrice" type="number" placeholder="5000">
-<label>Description</label><textarea id="sellDesc" placeholder="Condition, location..."></textarea>
-<label>Category</label><select id="sellCat"><option>Electronics</option><option>Fashion</option><option>Food</option><option>Books</option><option>Services</option><option>Cake</option><option>Event Planner</option><option>Others</option></select>
+<div id="sellProductFields"><label>Name</label><input id="sellName" placeholder="e.g. Plumbing pipe, Toilet repair"><label>Price ₦</label><input id="sellPrice" type="number"><label>Desc</label><textarea id="sellDesc" placeholder="Details... e.g. I fix toilet, pipe leak, borehole..."></textarea><label>Category</label><select id="sellCat"><option>General</option><option>Plumbing</option><option>Electrical</option><option>Building</option><option>Electronics</option><option>Fashion</option><option>Food</option><option>Books</option><option>Services</option><option>Cake</option><option>Event Planner</option><option>Provisions</option><option>Others</option></select></div>
+<div id="sellCakeFields" class="hidden"><label>🎂 Cake Type</label><select id="cakeType"><option>Birthday Cake</option><option>Wedding Cake</option><option>Cupcakes</option><option>Chocolate</option><option>Custom</option></select><label>Price</label><input id="cakePrice" type="number"><label>Details</label><textarea id="cakeDesc"></textarea></div>
+<div id="sellEventFields" class="hidden"><label>🎉 Event Type</label><select id="eventType"><option>Wedding</option><option>Birthday</option><option>Burial</option><option>Graduation</option><option>All Events</option></select><label>Price</label><input id="eventPrice" type="number"><label>Services</label><textarea id="eventDesc"></textarea></div>
+<label>📍 Add Live Location?</label><select id="sellAddLocation"><option value="yes">Yes - Show on map!</option><option value="no">No</option></select>
+<button class="btn btn-primary" onclick="addProduct()" id="sellBtn">Post</button>
 </div>
-<div id="sellCakeFields" class="hidden">
-<label>🎂 Cake Type</label><select id="cakeType"><option>Birthday Cake</option><option>Wedding Cake</option><option>Cupcakes</option><option>Chocolate Cake</option><option>Vanilla Cake</option><option>Custom Cake</option></select>
-<label>🎂 Cake Price From ₦</label><input id="cakePrice" type="number" placeholder="e.g. 5000">
-<label>🎂 Flavors & Details</label><textarea id="cakeDesc" placeholder="e.g. Chocolate, Vanilla, Red Velvet. Delivery in Akungba..."></textarea>
-</div>
-<div id="sellEventFields" class="hidden">
-<label>🎉 Event Type</label><select id="eventType"><option>Wedding Planning</option><option>Birthday Party</option><option>Burial / Funeral</option><option>Graduation Party</option><option>House Opening</option><option>Corporate Event</option><option>All Events</option></select>
-<label>🎉 Planning Price From ₦</label><input id="eventPrice" type="number" placeholder="e.g. 20000">
-<label>🎉 Services Included</label><textarea id="eventDesc" placeholder="e.g. Decoration, MC, DJ, Catering, Canopy, Chairs..."></textarea>
-</div>
-<label>📍 Add Live Location to this product/cake/event?</label>
-<select id="sellAddLocation"><option value="yes">Yes - Show on map!</option><option value="no">No - Hide location</option></select>
-<button class="btn btn-primary" onclick="addProduct()" id="sellBtn">Post + Map Location</button>
-</div>
-<h3>My Products / Cakes / Events</h3>
-<div id="myProducts"></div>
+<h3>My Products</h3><div id="myProducts"></div>
 </div>
 
-<div id="tab-map" class="tab">
-<h2>📍 LIVE MAP - Akungba + 🟢 Online Count</h2>
-<p class="small">🟢 <span id="mapOnlineCount">1</span> Online Now - Top right corner shows count inside app!</p>
-<button class="btn btn-green" onclick="getLiveLocation();initMap();">📍 Update Live Location</button>
-<div id="mapFull"></div>
-<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-<button class="btn btn-secondary" style="margin:0;padding:8px;width:auto" onclick="showOnMap('all')">📍 All</button>
-<button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#ec4899;color:#fff" onclick="showOnMap('cake')">🎂 Cake</button>
-<button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#8b5cf6;color:#fff" onclick="showOnMap('event')">🎉 Event</button>
-<button class="btn btn-green" style="margin:0;padding:8px;width:auto" onclick="showOnMap('live')">📍 Live Only</button>
-</div>
-<div id="mapList" style="margin-top:12px"></div>
-</div>
-
-<div id="tab-chat" class="tab"><h2>💬 Chat <span id="chatOnline" class="small"></span></h2><div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message cake baker, event planner..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
-<div id="tab-advert" class="tab"><h2>📢 Adverts - Cake & Event Promo!</h2><div class="card"><label>Title</label><input id="adTitle" placeholder="e.g. Cake promo!"><label>Details</label><textarea id="adDesc"></textarea><button class="btn btn-primary" onclick="addAdvert()">Post Advert</button></div><div id="advertList"></div></div>
-<div id="tab-reviews" class="tab"><h2>⭐ Reviews - Inside App After Login</h2><div class="app-review-banner"><h2>⭐ AKC APP REVIEW</h2><div style="font-size:26px;margin:8px 0" id="appStarsAvg">★★★★★</div><p style="font-weight:700" id="appAvgText">0.0 / 5.0 - 0 reviews</p><button onclick="openReviewModal('app')" style="margin-top:12px;background:#fff;color:#1d4ed8;border:none;padding:12px;width:100%;border-radius:25px;font-weight:800;font-size:16px">⭐ RATE THIS APP</button></div><div id="reviewsList"></div></div>
-<div id="tab-wallet" class="tab"><h2>Wallet</h2><div class="card" style="text-align:center"><p class="small">Balance</p><h1 id="walletBal">₦0</h1><button class="btn btn-green" onclick="fundWallet()">+ Fund Demo ₦1000</button></div><div id="ownerWalletExtra" class="hidden"><div class="card" style="background:#fffbeb;border:1px solid #fbbf24"><h3>🔐 Referral Earnings</h3><p>Bonus: <span id="refBonus">₦0</span> | Referred: <span id="refCount">0</span></p></div></div></div>
-
-<div id="tab-account" class="tab">
-<h2>My Account</h2>
-<div class="card" id="accountInfo"></div>
-<div class="card"><h3>📍 My Live Location + 🟢 Online Status</h3><p class="small" id="myLocationDisplay">Not set yet</p><p class="small" id="myOnlineDisplay"></p><button class="btn btn-green" onclick="getLiveLocation()">📍 Share Live Location!</button><button class="btn btn-secondary" onclick="clearLiveLocation()">❌ Hide My Location</button><div id="miniMap" style="height:200px;border-radius:12px;border:1px solid #eee;margin-top:10px"></div></div>
-
-<div id="bothLinksBox" class="hidden">
-<div class="card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b">
-<h3>🔗 BOTH LINKS - Owner Only!</h3>
-<p class="small">You put owner pin! Here are your links!</p>
-<div class="link-box"><label>🔐 LINK 1: OWNER LINK (Private - ?owner=893000)</label><div style="display:flex;gap:8px"><input id="ownerPrivateLink" readonly style="background:#fffbeb;font-weight:700;font-size:11px"><button class="btn btn-gold" style="margin:0;width:80px" onclick="copyOwnerLink()">Copy</button></div></div>
-<div class="link-box" style="margin-top:10px"><label>🎓 LINK 2: STUDENT/PUBLIC LINK (Share to students)</label><div style="display:flex;gap:8px"><input id="studentPublicLink" readonly style="background:#f0f9ff;font-weight:700;font-size:11px"><button class="btn btn-primary" style="margin:0;width:80px" onclick="copyStudentLink()">Copy</button></div></div>
-<div class="link-box" style="margin-top:10px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#16a34a"><label>👥 LINK 3: YOUR REFERRAL LINK (You earn ₦100!)</label><div style="display:flex;gap:8px"><input id="myRefLink" readonly style="background:#f0fdf4;font-weight:700;font-size:11px"><button class="btn btn-green" style="margin:0;width:80px" onclick="copyRefLink()">Copy</button></div><p class="small">My Referrals: <span id="myRefCount">0</span> | Bonus: <span id="refBonusDisplay">₦0</span></p><div id="myRefList" class="small"></div></div>
-</div>
-</div>
-
-<div id="ownerPanel" class="hidden"><div class="card" style="background:#fffbeb;border:2px solid #f59e0b"><h3>🔐 OWNER PANEL - 893000</h3><p class="small">🟢 Online: <span id="ownerOnlineCount">1</span> - Top right shows count!</p><label>Warn Phone</label><input id="warnPhone"><label>Reason</label><input id="warnReason"><button class="btn" style="background:#991b1b;color:#fff" onclick="giveWarning()">Give Warning (3=Ban)</button><div id="allUsersAdmin" style="margin-top:10px"></div></div></div>
-</div>
+<div id="tab-map" class="tab"><h2>📍 LIVE MAP + 🟢 Online</h2><p class="small">🟢 <span id="mapOnlineCount">1</span> Online Now!</p><button class="btn btn-green" onclick="getLiveLocation();initMap();">📍 Update Location</button><div id="mapFull"></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto" onclick="showOnMap('all')">📍 All</button><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#06b6d4;color:#fff" onclick="showOnMap('plumbing')">🚿 Plumbing</button><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#ec4899;color:#fff" onclick="showOnMap('cake')">🎂 Cake</button><button class="btn btn-secondary" style="margin:0;padding:8px;width:auto;background:#8b5cf6;color:#fff" onclick="showOnMap('event')">🎉 Event</button><button class="btn btn-green" style="margin:0;padding:8px;width:auto" onclick="showOnMap('live')">📍 Live</button></div><div id="mapList" style="margin-top:12px"></div></div>
+<div id="tab-chat" class="tab"><h2>💬 Chat <span id="chatOnline" class="small"></span></h2><div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
+<div id="tab-advert" class="tab"><h2>📢 Adverts</h2><div class="card"><label>Title</label><input id="adTitle"><label>Details</label><textarea id="adDesc"></textarea><button class="btn btn-primary" onclick="addAdvert()">Post</button></div><div id="advertList"></div></div>
+<div id="tab-reviews" class="tab"><h2>⭐ Reviews</h2><div class="app-review-banner"><h2>⭐ APP REVIEW</h2><div style="font-size:26px;margin:8px 0" id="appStarsAvg">★★★★★</div><p style="font-weight:700" id="appAvgText">0.0 - 0 reviews</p><button onclick="openReviewModal('app')" style="margin-top:12px;background:#fff;color:#1d4ed8;border:none;padding:12px;width:100%;border-radius:25px;font-weight:800">⭐ RATE APP</button></div><div id="reviewsList"></div></div>
+<div id="tab-wallet" class="tab"><h2>Wallet</h2><div class="card" style="text-align:center"><p class="small">Balance</p><h1 id="walletBal">₦0</h1><button class="btn btn-green" onclick="fundWallet()">+ Fund ₦1000</button></div><div id="ownerWalletExtra" class="hidden"><div class="card" style="background:#fffbeb;border:1px solid #fbbf24"><h3>🔐 Referral Earnings</h3><p>Bonus: <span id="refBonus">₦0</span> | Referred: <span id="refCount">0</span></p></div></div></div>
+<div id="tab-account" class="tab"><h2>My Account</h2><div class="card" id="accountInfo"></div><div class="card"><h3>📍 Live Location + 🟢 Online</h3><p class="small" id="myLocationDisplay">Not set</p><p class="small" id="myOnlineDisplay"></p><button class="btn btn-green" onclick="getLiveLocation()">📍 Share Live Location!</button><button class="btn btn-secondary" onclick="clearLiveLocation()">❌ Hide Location</button><div id="miniMap" style="height:200px;border-radius:12px;border:1px solid #eee;margin-top:10px"></div></div><div id="bothLinksBox" class="hidden"><div class="card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b"><h3>🔗 BOTH LINKS - Owner Only!</h3><div class="link-box"><label>🔐 OWNER LINK</label><div style="display:flex;gap:8px"><input id="ownerPrivateLink" readonly style="font-size:11px"><button class="btn btn-gold" style="margin:0;width:80px" onclick="copyOwnerLink()">Copy</button></div></div><div class="link-box" style="margin-top:10px"><label>🎓 STUDENT LINK</label><div style="display:flex;gap:8px"><input id="studentPublicLink" readonly style="font-size:11px"><button class="btn btn-primary" style="margin:0;width:80px" onclick="copyStudentLink()">Copy</button></div></div><div class="link-box" style="margin-top:10px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#16a34a"><label>👥 REFERRAL LINK</label><div style="display:flex;gap:8px"><input id="myRefLink" readonly style="font-size:11px"><button class="btn btn-green" style="margin:0;width:80px" onclick="copyRefLink()">Copy</button></div><p class="small">My Referrals: <span id="myRefCount">0</span> | Bonus: <span id="refBonusDisplay">₦0</span></p><div id="myRefList" class="small"></div></div></div></div><div id="ownerPanel" class="hidden"><div class="card" style="background:#fffbeb;border:2px solid #f59e0b"><h3>🔐 OWNER PANEL - 893000</h3><p class="small">🟢 Online: <span id="ownerOnlineCount">1</span></p><label>Warn Phone</label><input id="warnPhone"><label>Reason</label><input id="warnReason"><button class="btn" style="background:#991b1b;color:#fff" onclick="giveWarning()">Give Warning (3=Ban)</button><div id="allUsersAdmin" style="margin-top:10px"></div></div></div></div>
 
 <div class="bottom-nav">
 <button class="active" onclick="showTab('buy')" id="nav-buy">🛒<br>Buy</button>
@@ -211,7 +185,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 </div>
 
-<div id="reviewModal" class="modal" onclick="if(event.target==this)closeReviewModal()"><div class="modal-box"><h3 style="text-align:center">⭐ Write Review</h3><div style="text-align:center;margin:12px 0"><div class="stars-big" id="starContainer"><span onclick="setStarRating(1)">☆</span><span onclick="setStarRating(2)">☆</span><span onclick="setStarRating(3)">☆</span><span onclick="setStarRating(4)">☆</span><span onclick="setStarRating(5)">☆</span></div><p id="ratingText" style="color:#2563eb;font-weight:700;margin-top:8px">Tap stars!</p></div><label>What?</label><select id="reviewTypeSelect"><option value="">Choose</option><option value="app">⭐ App</option><option value="cake">🎂 Cake</option><option value="event">🎉 Event</option><option value="product">📦 Product</option></select><label>Review</label><textarea id="reviewText"></textarea><div style="display:flex;gap:10px;margin-top:12px"><button class="btn btn-secondary" style="margin:0" onclick="closeReviewModal()">Cancel</button><button class="btn btn-primary" style="margin:0" onclick="submitReview()">Submit</button></div></div></div>
+<div id="reviewModal" class="modal" onclick="if(event.target==this)closeReviewModal()"><div class="modal-box"><h3 style="text-align:center">⭐ Write Review</h3><div style="text-align:center;margin:12px 0"><div class="stars-big" id="starContainer"><span onclick="setStarRating(1)">☆</span><span onclick="setStarRating(2)">☆</span><span onclick="setStarRating(3)">☆</span><span onclick="setStarRating(4)">☆</span><span onclick="setStarRating(5)">☆</span></div><p id="ratingText" style="color:#2563eb;font-weight:700;margin-top:8px">Tap stars!</p></div><label>What?</label><select id="reviewTypeSelect"><option value="">Choose</option><option value="app">⭐ App</option><option value="plumbing">🚿 Plumbing</option><option value="cake">🎂 Cake</option><option value="event">🎉 Event</option><option value="product">📦 Product</option></select><label>Review</label><textarea id="reviewText"></textarea><div style="display:flex;gap:10px;margin-top:12px"><button class="btn btn-secondary" style="margin:0" onclick="closeReviewModal()">Cancel</button><button class="btn btn-primary" style="margin:0" onclick="submitReview()">Submit</button></div></div></div>
 
 <script>
 let currentUser=null,generatedCode="",selectedRating=0,isOwnerMode=false,refFromUrl=null,buyFilter='all',mapFull=null,miniMap=null,currentLat=null,currentLng=null,onlineInterval=null;
@@ -230,203 +204,54 @@ function getSchoolMsgs(){return JSON.parse(localStorage.getItem('akc_school_msgs
 function saveSchoolMsgs(m){localStorage.setItem('akc_school_msgs',JSON.stringify(m))}
 function getOnline(){return JSON.parse(localStorage.getItem('akc_online')||'[]')}
 function saveOnline(o){localStorage.setItem('akc_online',JSON.stringify(o))}
-
 (function checkUrl(){
   const params=new URLSearchParams(window.location.search);
-  if(params.get('owner')===OWNER_SECRET){
-    isOwnerMode=true;
-    localStorage.setItem('akc_owner_unlocked','1');
-  }
+  if(params.get('owner')===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}
   const ref=params.get('ref')||params.get('referral')||params.get('r');
   if(ref){refFromUrl=normalizePhone(ref);localStorage.setItem('akc_pending_ref',refFromUrl);}
 })();
 if(localStorage.getItem('akc_owner_unlocked')==='1')isOwnerMode=true;
-const pendingRef=localStorage.getItem('akc_pending_ref');
-if(pendingRef)refFromUrl=pendingRef;
-
-function updateOnlinePresence(){
-  if(!currentUser)return;
-  let online=getOnline();
-  const now=Date.now();
-  online=online.filter(o=>now - o.lastSeen < 5*60*1000);
-  const idx=online.findIndex(o=>normalizePhone(o.phone)===normalizePhone(currentUser.phone));
-  const entry={phone:currentUser.phone,name:currentUser.name,skill:currentUser.skill||'general',userType:currentUser.userType,lastSeen:now,liveLocation:currentUser.liveLocation||null};
-  if(idx>=0)online[idx]=entry;else online.push(entry);
-  saveOnline(online);
-  updateOnlineCountDisplay(online);
-}
-function updateOnlineCountDisplay(onlineList){
-  let online=onlineList||getOnline();
-  const now=Date.now();
-  online=online.filter(o=>now - o.lastSeen < 5*60*1000);
-  saveOnline(online);
-  const count=online.length;
-  document.getElementById('onlineCountText').textContent=`🟢 ${count} Online`;
-  const mapEl=document.getElementById('mapOnlineCount');if(mapEl)mapEl.textContent=count;
-  const ownerEl=document.getElementById('ownerOnlineCount');if(ownerEl)ownerEl.textContent=count;
-  const chatEl=document.getElementById('chatOnline');if(chatEl)chatEl.textContent=`(${count} online now)`;
-}
-
-function startOnlineTracking(){
-  updateOnlinePresence();
-  if(onlineInterval)clearInterval(onlineInterval);
-  onlineInterval=setInterval(()=>{updateOnlinePresence();},10000);
-  setInterval(()=>{updateOnlineCountDisplay();},5000);
-}
-
-function generateCode(){
-  generatedCode=Math.floor(1000+Math.random()*9000).toString();
-  document.getElementById('codeDisplay').textContent="Your code: "+generatedCode;
-}
-
-function showSignup(){
-  console.log("SIGN UP CLICKED - Opening signup");
-  const loginBox=document.getElementById('loginBox');
-  const signupBox=document.getElementById('signupBox');
-  const refBanner=document.getElementById('refBanner');
-  if(loginBox)loginBox.classList.add('hidden');
-  if(signupBox)signupBox.classList.remove('hidden');
-  if(refFromUrl && document.getElementById('suRefCode')){
-    document.getElementById('suRefCode').value=refFromUrl;
-    if(refBanner){
-      refBanner.classList.remove('hidden');
-      document.getElementById('refBannerText').textContent='Referred by: '+refFromUrl;
-    }
-  }
-}
-
-function showLogin(){
-  console.log("LOGIN CLICKED - Opening login");
-  const loginBox=document.getElementById('loginBox');
-  const signupBox=document.getElementById('signupBox');
-  if(signupBox)signupBox.classList.add('hidden');
-  if(loginBox)loginBox.classList.remove('hidden');
-}
-
-function getLiveLocation(){
-  const statusEl=document.getElementById('liveLocationStatus');
-  if(!navigator.geolocation){if(statusEl)statusEl.textContent='Geolocation not supported';return}
-  if(statusEl)statusEl.textContent='📍 Getting live location...';
-  navigator.geolocation.getCurrentPosition((pos)=>{
-    currentLat=pos.coords.latitude;currentLng=pos.coords.longitude;
-    const locData={lat:currentLat,lng:currentLng,time:new Date().toISOString()};
-    if(currentUser){
-      currentUser.liveLocation=locData;
-      let users=getUsers();
-      let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));
-      if(idx>=0){users[idx].liveLocation=locData;users[idx].allowLocation=true;saveUsers(users);}
-      localStorage.setItem('akc_current',JSON.stringify(currentUser));
-    }
-    if(statusEl)statusEl.innerHTML=`<span class="badge badge-live"><span class="live-dot"></span> Live Now!</span> ${currentLat.toFixed(5)}, ${currentLng.toFixed(5)}`;
-    document.getElementById('myLocationDisplay').innerHTML=`<span class="badge badge-live"><span class="live-dot"></span> Live!</span> ${currentLat.toFixed(5)}, ${currentLng.toFixed(5)}`;
-    initMiniMap();initMap();if(currentUser)updateOnlinePresence();
-    alert('✅ Live location shared!');
-  },(err)=>{if(statusEl)statusEl.textContent='❌ '+err.message;},{enableHighAccuracy:true,timeout:10000});
-}
-
-function clearLiveLocation(){
-  if(!confirm('Hide location?'))return;
-  currentLat=null;currentLng=null;
-  if(currentUser){delete currentUser.liveLocation;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){delete users[idx].liveLocation;users[idx].allowLocation=false;saveUsers(users);}localStorage.setItem('akc_current',JSON.stringify(currentUser));}
-  document.getElementById('myLocationDisplay').textContent='Location hidden';
-  document.getElementById('liveLocationStatus').textContent='Hidden';
-  initMap();if(currentUser)updateOnlinePresence();
-}
-
-function initMap(){
-  setTimeout(()=>{
-    const mapEl=document.getElementById('mapFull');
-    if(!mapEl)return;
-    if(mapFull){mapFull.invalidateSize();}
-    else{mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(mapFull);}
-    showOnMap(buyFilter||'all');
-  },500);
-}
-function initMiniMap(){
-  setTimeout(()=>{
-    const el=document.getElementById('miniMap');
-    if(!el||!currentLat||!currentLng)return;
-    if(miniMap){miniMap.setView([currentLat,currentLng],15); miniMap.eachLayer(l=>{if(l instanceof L.Marker)miniMap.removeLayer(l)}); L.marker([currentLat,currentLng]).addTo(miniMap).bindPopup('📍 You - Live! 🟢 Online!').openPopup();}
-    else{miniMap=L.map('miniMap').setView([currentLat,currentLng],15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(miniMap); L.marker([currentLat,currentLng]).addTo(miniMap).bindPopup('📍 You - Live! 🟢 Online!').openPopup();}
-  },600);
-}
-function showOnMap(filter){
-  if(!mapFull)initMap();
-  setTimeout(()=>{
-    if(!mapFull)return;
-    mapFull.eachLayer(l=>{if(l instanceof L.Marker)mapFull.removeLayer(l)});
-    const users=getUsers();
-    const online=getOnline();
-    const now=Date.now();
-    const onlinePhones=online.filter(o=>now - o.lastSeen < 5*60*1000).map(o=>normalizePhone(o.phone));
-    let count=0;
-    users.forEach(u=>{
-      if(!u.liveLocation||!u.allowLocation)return;
-      if(filter==='cake'&&!(u.skill==='cake'||u.skill==='both'))return;
-      if(filter==='event'&&!(u.skill==='event'||u.skill==='both'))return;
-      if(filter==='live'&&!onlinePhones.includes(normalizePhone(u.phone)))return;
-      const marker=L.marker([u.liveLocation.lat,u.liveLocation.lng]).addTo(mapFull);
-      marker.bindPopup(`<b>${u.name}</b><br>${u.skill||u.userType}<br>Phone: ${u.phone}`);
-      count++;
-    });
-    if(count===0){L.marker([7.4813,5.7415]).addTo(mapFull).bindPopup('📍 Akungba - AAUA<br>🟢 Online: '+onlinePhones.length).openPopup();}
-    document.getElementById('mapList').innerHTML=`<p class="small">📍 Showing ${count} ${filter} - 🟢 ${onlinePhones.length} Online</p>`;
-    if(currentLat&&currentLng)mapFull.setView([currentLat,currentLng],14);
-  },700);
-}
-
+const pendingRef=localStorage.getItem('akc_pending_ref');if(pendingRef)refFromUrl=pendingRef;
+function updateOnlinePresence(){if(!currentUser)return;let online=getOnline();const now=Date.now();online=online.filter(o=>now - o.lastSeen < 5*60*1000);const idx=online.findIndex(o=>normalizePhone(o.phone)===normalizePhone(currentUser.phone));const entry={phone:currentUser.phone,name:currentUser.name,skill:currentUser.skill||'general',userType:currentUser.userType,lastSeen:now,liveLocation:currentUser.liveLocation||null};if(idx>=0)online[idx]=entry;else online.push(entry);saveOnline(online);updateOnlineCountDisplay(online);}
+function updateOnlineCountDisplay(onlineList){let online=onlineList||getOnline();const now=Date.now();online=online.filter(o=>now - o.lastSeen < 5*60*1000);saveOnline(online);const count=online.length;const el=document.getElementById('onlineCountText');if(el)el.textContent=`🟢 ${count} Online`;const mapEl=document.getElementById('mapOnlineCount');if(mapEl)mapEl.textContent=count;const ownerEl=document.getElementById('ownerOnlineCount');if(ownerEl)ownerEl.textContent=count;const chatEl=document.getElementById('chatOnline');if(chatEl)chatEl.textContent=`(${count} online now)`;}
+function startOnlineTracking(){updateOnlinePresence();if(onlineInterval)clearInterval(onlineInterval);onlineInterval=setInterval(()=>{updateOnlinePresence();},10000);setInterval(()=>{updateOnlineCountDisplay();},5000);}
+function generateCode(){generatedCode=Math.floor(1000+Math.random()*9000).toString();document.getElementById('codeDisplay').textContent="Your code: "+generatedCode;}
+function showSignup(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('signupBox').classList.remove('hidden');if(refFromUrl){document.getElementById('suRefCode').value=refFromUrl;const b=document.getElementById('refBanner');b.classList.remove('hidden');document.getElementById('refBannerText').textContent='Referred by: '+refFromUrl;}}
+function showLogin(){document.getElementById('signupBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');}
+function getLiveLocation(){const statusEl=document.getElementById('liveLocationStatus')||document.getElementById('myLocationDisplay');if(!navigator.geolocation){if(statusEl)statusEl.textContent='Geolocation not supported';return}if(statusEl)statusEl.textContent='📍 Getting live location...';navigator.geolocation.getCurrentPosition((pos)=>{currentLat=pos.coords.latitude;currentLng=pos.coords.longitude;const locData={lat:currentLat,lng:currentLng,accuracy:pos.coords.accuracy,time:new Date().toISOString()};if(currentUser){currentUser.liveLocation=locData;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].liveLocation=locData;users[idx].allowLocation=true;users[idx].lastActive=Date.now();saveUsers(users);}localStorage.setItem('akc_current',JSON.stringify(currentUser));}if(statusEl)statusEl.innerHTML=`<span class="badge badge-live"><span class="live-dot"></span> Live Now!</span> ${currentLat.toFixed(5)}, ${currentLng.toFixed(5)}`;document.getElementById('myLocationDisplay').innerHTML=`<span class="badge badge-live"><span class="live-dot"></span> Live!</span> ${currentLat.toFixed(5)}, ${currentLng.toFixed(5)}`;initMiniMap();initMap();if(currentUser)updateOnlinePresence();alert('✅ Live location shared!');},(err)=>{if(statusEl)statusEl.textContent='❌ Location error: '+err.message;},{enableHighAccuracy:true,timeout:10000,maximumAge:0});}
+function clearLiveLocation(){if(!confirm('Hide live location?'))return;currentLat=null;currentLng=null;if(currentUser){delete currentUser.liveLocation;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){delete users[idx].liveLocation;users[idx].allowLocation=false;saveUsers(users);}localStorage.setItem('akc_current',JSON.stringify(currentUser));}document.getElementById('myLocationDisplay').textContent='Location hidden';document.getElementById('liveLocationStatus').textContent='Hidden';alert('Hidden!');initMap();if(currentUser)updateOnlinePresence();}
+function initMap(){setTimeout(()=>{const mapEl=document.getElementById('mapFull');if(!mapEl)return;if(mapFull){mapFull.invalidateSize();}else{mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(mapFull);}showOnMap(buyFilter||'all');},500);}
+function initMiniMap(){setTimeout(()=>{const el=document.getElementById('miniMap');if(!el||!currentLat||!currentLng)return;if(miniMap){miniMap.setView([currentLat,currentLng],15); miniMap.eachLayer(l=>{if(l instanceof L.Marker)miniMap.removeLayer(l)}); L.marker([currentLat,currentLng]).addTo(miniMap).bindPopup('📍 You - Live! 🟢 Online!').openPopup();}else{miniMap=L.map('miniMap').setView([currentLat,currentLng],15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(miniMap); L.marker([currentLat,currentLng]).addTo(miniMap).bindPopup('📍 You - Live! 🟢 Online!').openPopup();}},600);}
+function showOnMap(filter){if(!mapFull)initMap();setTimeout(()=>{if(!mapFull)return;mapFull.eachLayer(l=>{if(l instanceof L.Marker)mapFull.removeLayer(l)});const users=getUsers();const online=getOnline();const now=Date.now();const onlinePhones=online.filter(o=>now - o.lastSeen < 5*60*1000).map(o=>normalizePhone(o.phone));let count=0;users.forEach(u=>{if(!u.liveLocation||!u.allowLocation)return;if(filter==='plumbing'&&!(u.skill==='plumbing'||u.skill==='all_business'))return;if(filter==='cake'&&!(u.skill==='cake'||u.skill==='both'))return;if(filter==='event'&&!(u.skill==='event'||u.skill==='both'))return;if(filter==='live'&&!onlinePhones.includes(normalizePhone(u.phone)))return;const marker=L.marker([u.liveLocation.lat,u.liveLocation.lng]).addTo(mapFull);marker.bindPopup(`<b>${u.name}</b> ${onlinePhones.includes(normalizePhone(u.phone))?'🟢 Online Now':''}<br>${u.skill||u.userType}<br>Phone: ${u.phone}`);count++;});if(count===0){L.marker([7.4813,5.7415]).addTo(mapFull).bindPopup('📍 Akungba - AAUA<br>🟢 Online: '+onlinePhones.length+' users').openPopup();}document.getElementById('mapList').innerHTML=`<p class="small">📍 Showing ${count} ${filter} on map - 🟢 ${onlinePhones.length} Online Now!</p>`;if(currentLat&&currentLng)mapFull.setView([currentLat,currentLng],14);},700);}
 function doSignup(){
-  const name=document.getElementById('suName').value.trim();
-  const phoneRaw=document.getElementById('suPhone').value.trim();
-  const gender=document.getElementById('suGender').value;
-  const pass=document.getElementById('suPass').value.trim();
-  const dept=document.getElementById('suDept').value;
-  const loc=document.getElementById('suLocation').value;
-  const skill=document.getElementById('suSkill').value;
-  const allowLoc=document.getElementById('suAllowLocation').value;
-  const refCodeRaw=document.getElementById('suRefCode').value.trim()||'';
-  const codeInput=document.getElementById('suCodeInput').value.trim();
-  
+  const name=document.getElementById('suName').value.trim(),phoneRaw=document.getElementById('suPhone').value.trim(),gender=document.getElementById('suGender').value,pass=document.getElementById('suPass').value.trim(),dept=document.getElementById('suDept').value,loc=document.getElementById('suLocation').value,skill=document.getElementById('suSkill').value,allowLoc=document.getElementById('suAllowLocation').value,refCodeRaw=document.getElementById('suRefCode')?.value.trim()||'',codeInput=document.getElementById('suCodeInput').value.trim();
   if(!name||!phoneRaw||!pass){alert('Fill name, phone, password');return}
-  if(!generatedCode){alert('Click Generate first!');return}
-  if(codeInput!==generatedCode){alert('Code no match - Click Generate and copy code!');return}
+  if(!generatedCode){alert('Generate code');return}
+  if(codeInput!==generatedCode){alert('Code no match');return}
   const phone=normalizePhone(phoneRaw);
-  if(phone.length<10){alert('Invalid phone - Use 081...');return}
+  if(phone.length<10){alert('Invalid phone');return}
   let users=getUsers();
-  if(users.find(u=>normalizePhone(u.phone)===phone)){alert('❌ Phone don sign up before! One number once! Use LOG IN!');showLogin();return;}
-  
+  if(users.find(u=>normalizePhone(u.phone)===phone)){alert('❌ Phone don sign up! One number once!');showLogin();return;}
   const isIndigene=!dept||dept.includes('Indigene');
   const isOwnerSignup=isOwnerMode||phoneRaw.includes(OWNER_SECRET);
   const refCode=refCodeRaw?normalizePhone(refCodeRaw):(refFromUrl||'');
   let referredBy=null;
-  if(refCode){
-    const refUser=users.find(u=>normalizePhone(u.phone)===normalizePhone(refCode));
-    if(refUser)referredBy=refUser.phone;
-  }
+  if(refCode){const refUser=users.find(u=>normalizePhone(u.phone)===normalizePhone(refCode));if(refUser)referredBy=refUser.phone;}
   const user={id:uid(),name,phone,phoneRaw,gender,password:pass,dept:dept||'Indigene',location:loc,skill:skill||'general',allowLocation:allowLoc==='yes',liveLocation:null,lastActive:Date.now(),userType:isIndigene?'Indigene':'Student',isAdmin:isOwnerSignup,isOwner:isOwnerSignup,referredBy,referrals:[],refBonus:0,warnings:[],isBanned:false,wallet:0,createdAt:new Date().toISOString()};
   users.push(user);
-  if(referredBy){
-    const idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(referredBy));
-    if(idx>=0){users[idx].referrals=users[idx].referrals||[];users[idx].referrals.push(phone);users[idx].refBonus=(users[idx].refBonus||0)+100;users[idx].wallet=(users[idx].wallet||0)+100;}
-  }
+  if(referredBy){const idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(referredBy));if(idx>=0){users[idx].referrals=users[idx].referrals||[];users[idx].referrals.push(phone);users[idx].refBonus=(users[idx].refBonus||0)+100;users[idx].wallet=(users[idx].wallet||0)+100;}}
   saveUsers(users);
   localStorage.removeItem('akc_pending_ref');
-  alert('✅ Signed up successfully! Now LOG IN with phone & password! One phone once!');
+  alert('✅ Signed up!');
   showLogin();
   document.getElementById('loginPhone').value=phone;
 }
-
 function doLogin(){
-  const phoneRaw=document.getElementById('loginPhone').value.trim();
-  const pass=document.getElementById('loginPass').value.trim();
-  const ownerPin=document.getElementById('ownerCodeInput').value.trim();
-  
+  const phoneRaw=document.getElementById('loginPhone').value.trim(),pass=document.getElementById('loginPass').value.trim(),ownerPin=document.getElementById('ownerCodeInput').value.trim();
   if(!phoneRaw||!pass){alert('Enter phone & password');return}
-  
   if(ownerPin){
     if(ownerPin===OWNER_SECRET){
-      isOwnerMode=true;
-      localStorage.setItem('akc_owner_unlocked','1');
+      isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');
       document.getElementById('ownerMsg').textContent='✅ Owner pin correct!';
       document.getElementById('ownerMsg').style.color='green';
     }else{
@@ -436,14 +261,12 @@ function doLogin(){
       return;
     }
   }
-  
   const phone=normalizePhone(phoneRaw);
   let users=getUsers();
   let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);
   if(!u)u=users.find(x=>x.phone===phoneRaw && x.password===pass);
   if(!u){alert('Wrong phone or password - If new, click SIGN UP first!');return}
-  if(u.isBanned){alert('BANNED - Contact owner!');return}
-  
+  if(u.isBanned){alert('BANNED');return}
   currentUser=u;
   if(isOwnerMode){currentUser.isOwner=true;currentUser.isAdmin=true}
   if(currentUser.liveLocation){currentLat=currentUser.liveLocation.lat;currentLng=currentUser.liveLocation.lng;}
@@ -453,20 +276,16 @@ function doLogin(){
   localStorage.setItem('akc_current',JSON.stringify(currentUser));
   enterApp();
 }
-
 function enterApp(){
-  document.getElementById('authPage').classList.add('hidden');
-  document.getElementById('mainApp').classList.remove('hidden');
+  document.getElementById('authPage').classList.add('hidden');document.getElementById('mainApp').classList.remove('hidden');
   document.getElementById('topUser').textContent=currentUser.name;
   const badge=document.getElementById('topBadge');
   const baseUrl=window.location.origin+window.location.pathname;
   const studentLink=baseUrl;
   const ownerLink=baseUrl+'?owner='+OWNER_SECRET;
   const refLink=baseUrl+'?ref='+currentUser.phone;
-  
   if(currentUser.isOwner||isOwnerMode){
-    badge.textContent='OWNER';
-    badge.className='badge badge-owner';
+    badge.textContent='OWNER - PLUMBING + ALL';badge.className='badge badge-owner';
     document.getElementById('bothLinksBox').classList.remove('hidden');
     document.getElementById('ownerPanel').classList.remove('hidden');
     document.getElementById('ownerWalletExtra').classList.remove('hidden');
@@ -479,97 +298,21 @@ function enterApp(){
     document.getElementById('refCount').textContent=(currentUser.referrals||[]).length;
     document.getElementById('refBonus').textContent='₦'+(currentUser.refBonus||0);
   }else{
-    badge.textContent=currentUser.skill==='cake'?'🎂 CAKE':currentUser.skill==='event'?'🎉 EVENT':currentUser.userType;
+    badge.textContent=currentUser.skill==='plumbing'?'🚿 PLUMBING':currentUser.skill==='cake'?'🎂 CAKE':currentUser.skill==='event'?'🎉 EVENT':currentUser.skill;
     document.getElementById('bothLinksBox').classList.add('hidden');
     document.getElementById('ownerPanel').classList.add('hidden');
     document.getElementById('ownerWalletExtra').classList.add('hidden');
   }
-  renderAll();
-  startOnlineTracking();
-  setTimeout(()=>{initMap();initMiniMap();},1000);
+  renderAll();startOnlineTracking();setTimeout(()=>{initMap();initMiniMap();},1000);
 }
-
-function doLogout(){
-  if(currentUser){
-    let online=getOnline();
-    online=online.filter(o=>normalizePhone(o.phone)!==normalizePhone(currentUser.phone));
-    saveOnline(online);
-  }
-  localStorage.removeItem('akc_current');
-  location.reload();
-}
-
-function showTab(name){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-'+name).classList.add('active');
-  if(name==='buy')renderBuy();
-  if(name==='sell')renderMyProducts();
-  if(name==='map'){initMap();showOnMap('all');}
-  if(name==='chat')renderSchoolMsgs();
-  if(name==='advert')renderAdverts();
-  if(name==='reviews')renderReviews();
-  if(name==='wallet')document.getElementById('walletBal').textContent='₦'+(currentUser.wallet||0);
-  if(name==='account'){renderAccount();setTimeout(()=>{initMiniMap();},500);}
-}
-
+function doLogout(){if(currentUser){let online=getOnline();online=online.filter(o=>normalizePhone(o.phone)!==normalizePhone(currentUser.phone));saveOnline(online);}localStorage.removeItem('akc_current');location.reload();}
+function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+name).classList.add('active');if(name==='buy')renderBuy();if(name==='sell')renderMyProducts();if(name==='map'){initMap();showOnMap(buyFilter||'all');}if(name==='chat')renderSchoolMsgs();if(name==='advert')renderAdverts();if(name==='reviews')renderReviews();if(name==='wallet')document.getElementById('walletBal').textContent='₦'+(currentUser.wallet||0);if(name==='account'){renderAccount();setTimeout(()=>{initMiniMap();},500);}}
 function renderAll(){renderBuy();renderMyProducts();renderSchoolMsgs();renderAdverts();renderReviews();renderAccount();document.getElementById('walletBal').textContent='₦'+(currentUser.wallet||0);updateOnlineCountDisplay();}
-function setBuyFilter(f){buyFilter=f;document.querySelectorAll('#tab-buy .chip').forEach(c=>c.classList.remove('active'));const el=document.getElementById('filter'+f.charAt(0).toUpperCase()+f.slice(1));if(el)el.classList.add('active');if(f==='all')document.getElementById('filterAll').classList.add('active');renderBuy();}
+function setBuyFilter(f){buyFilter=f;document.querySelectorAll('#tab-buy .chip').forEach(c=>c.classList.remove('active'));const el=document.getElementById('filter'+f.charAt(0).toUpperCase()+f.slice(1));if(el)el.classList.add('active');if(f==='all')document.getElementById('filterAll').classList.add('active');renderBuy();if(document.getElementById('tab-map').classList.contains('active'))showOnMap(f);}
 function updateSellForm(){const type=document.getElementById('sellType').value;document.getElementById('sellProductFields').classList.toggle('hidden',type!=='product');document.getElementById('sellCakeFields').classList.toggle('hidden',type!=='cake');document.getElementById('sellEventFields').classList.toggle('hidden',type!=='event');}
-
-function renderBuy(){
-  const list=document.getElementById('buyList');
-  const q=(document.getElementById('searchBuy')?.value||'').toLowerCase();
-  let products=getProducts();
-  if(buyFilter!=='all'){
-    products=products.filter(p=>{
-      if(buyFilter==='cake')return p.category==='Cake'||p.type==='cake';
-      if(buyFilter==='event')return p.category==='Event Planner'||p.type==='event';
-      if(buyFilter==='live')return p.liveLocation;
-      return true
-    });
-  }
-  if(q){products=products.filter(p=> (p.name||'').toLowerCase().includes(q)||(p.desc||'').toLowerCase().includes(q));}
-  products=products.reverse();
-  if(products.length===0){list.innerHTML='<p class="small">No '+buyFilter+' found. Be first to post!</p>';return}
-  list.innerHTML=products.map(p=>{
-    const isCake=p.type==='cake'||p.category==='Cake';
-    const isEvent=p.type==='event'||p.category==='Event Planner';
-    return `<div class="card ${isCake?'card-cake':isEvent?'card-event':''}"><div style="display:flex;justify-content:space-between"><b>${isCake?'🎂 ':isEvent?'🎉 ':''}${p.name}</b><b>₦${p.price}</b></div><p class="small">${p.desc}</p><span class="badge">${p.category}</span> <span class="badge">${p.sellerName}</span> ${p.liveLocation?'<span class="badge badge-live">📍 Live</span>':''}</div>`
-  }).join('');
-}
-
-function addProduct(){
-  const type=document.getElementById('sellType').value;
-  const addLoc=document.getElementById('sellAddLocation').value;
-  let p={id:uid(),sellerPhone:currentUser.phone,sellerName:currentUser.name,userType:currentUser.userType,sellerSkill:currentUser.skill,createdAt:new Date().toISOString()};
-  if(addLoc==='yes'&&currentLat&&currentLng){p.liveLocation={lat:currentLat,lng:currentLng,time:new Date().toISOString()};}
-  else if(addLoc==='yes'&&!currentLat){if(confirm('Share live location now?')){getLiveLocation();return;}}
-  
-  if(type==='cake'){
-    const cakeType=document.getElementById('cakeType').value,price=document.getElementById('cakePrice').value,desc=document.getElementById('cakeDesc').value;
-    if(!price||!desc){alert('Cake price & details needed');return}
-    p.type='cake';p.category='Cake';p.name=cakeType+' - Cake';p.price=price;p.desc=desc;
-  }else if(type==='event'){
-    const eventType=document.getElementById('eventType').value,price=document.getElementById('eventPrice').value,desc=document.getElementById('eventDesc').value;
-    if(!price||!desc){alert('Event price & services needed');return}
-    p.type='event';p.category='Event Planner';p.name=eventType;p.price=price;p.desc=desc;
-  }else{
-    const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;
-    if(!name||!price){alert('Name & price needed');return}
-    p.type='product';p.category=cat;p.name=name;p.price=price;p.desc=desc;
-  }
-  const arr=getProducts();arr.push(p);saveProducts(arr);
-  alert('✅ Posted!');
-  renderBuy();renderMyProducts();initMap();updateOnlinePresence();
-}
-
-function renderMyProducts(){
-  const list=document.getElementById('myProducts');
-  const my=getProducts().filter(p=>normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone)).reverse();
-  list.innerHTML=my.map(p=>`<div class="card"><b>${p.name} - ₦${p.price}</b><p class="small">${p.desc}</p><button class="btn" style="background:#fee2e2;color:#991b1b;margin-top:8px" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join('')||'<p class="small">You never post.</p>';
-}
+function renderBuy(){const list=document.getElementById('buyList');const q=(document.getElementById('searchBuy')?.value||'').toLowerCase();let products=getProducts();if(buyFilter!=='all'){products=products.filter(p=>{if(buyFilter==='cake')return p.category==='Cake'||p.type==='cake'; if(buyFilter==='event')return p.category==='Event Planner'||p.type==='event'; if(buyFilter==='plumbing')return p.category==='Plumbing'||p.type==='plumbing'; if(buyFilter==='food')return p.category==='Food'||p.type==='food'; if(buyFilter==='live')return p.liveLocation; return true});}if(q){products=products.filter(p=> (p.name||'').toLowerCase().includes(q)||(p.desc||'').toLowerCase().includes(q));}products=products.reverse();if(products.length===0){list.innerHTML='<p class="small">No '+buyFilter+' found.</p>';return}list.innerHTML=products.map(p=>{const isCake=p.type==='cake'||p.category==='Cake';const isEvent=p.type==='event'||p.category==='Event Planner';const isPlumbing=p.type==='plumbing'||p.category==='Plumbing';const hasLive=p.liveLocation;return `<div class="card ${isCake?'card-cake':isEvent?'card-event':''}"><div style="display:flex;justify-content:space-between"><b>${isPlumbing?'🚿 ':isCake?'🎂 ':isEvent?'🎉 ':''}${p.name}</b><b>₦${p.price}</b></div><p class="small" style="margin:6px 0">${p.desc}</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"><span class="badge">${p.category}</span><span class="badge">${p.sellerName}</span>${hasLive?'<span class="badge badge-live"><span class="live-dot"></span> Live</span>':''}</div></div>`}).join('');}
+function addProduct(){const type=document.getElementById('sellType').value,addLoc=document.getElementById('sellAddLocation').value;let p={id:uid(),sellerPhone:currentUser.phone,sellerName:currentUser.name,userType:currentUser.userType,sellerSkill:currentUser.skill,createdAt:new Date().toISOString()};if(addLoc==='yes'&&currentLat&&currentLng){p.liveLocation={lat:currentLat,lng:currentLng,time:new Date().toISOString()};}else if(addLoc==='yes'&&!currentLat){if(confirm('Share live location now?')){getLiveLocation();alert('Allow location, then post again!');return;}}if(type==='cake'){const cakeType=document.getElementById('cakeType').value,price=document.getElementById('cakePrice').value,desc=document.getElementById('cakeDesc').value;if(!price||!desc){alert('Cake price & details needed');return}p.type='cake';p.category='Cake';p.name=cakeType+' - Cake';p.price=price;p.desc=desc;}else if(type==='event'){const eventType=document.getElementById('eventType').value,price=document.getElementById('eventPrice').value,desc=document.getElementById('eventDesc').value;if(!price||!desc){alert('Event price & services needed');return}p.type='event';p.category='Event Planner';p.name=eventType;p.price=price;p.desc=desc;}else{const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;if(!name||!price){alert('Name & price needed');return}p.type='product';p.category=cat;p.name=name;p.price=price;p.desc=desc;}const arr=getProducts();arr.push(p);saveProducts(arr);alert('Posted!');renderBuy();renderMyProducts();initMap();updateOnlinePresence();}
+function renderMyProducts(){const list=document.getElementById('myProducts');const my=getProducts().filter(p=>normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone)).reverse();list.innerHTML=my.map(p=>`<div class="card"><b>${p.name} - ₦${p.price}</b><p class="small">${p.desc}</p><button class="btn" style="background:#fee2e2;color:#991b1b;margin-top:8px" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join('')||'<p class="small">You never post.</p>';}
 function deleteProduct(id){if(!confirm('Delete?'))return;saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();initMap();}
 function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>`<div style="margin:6px 0"><b style="font-size:12px">${m.senderName}</b><div style="background:#f3f4f6;padding:8px;border-radius:12px">${m.text}</div></div>`).join('')||'<p class="small">No messages</p>';}
 function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name,time:new Date().toISOString()});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();updateOnlinePresence();}
@@ -578,41 +321,16 @@ function renderAdverts(){const list=document.getElementById('advertList');const 
 function setStarRating(n){selectedRating=n;document.querySelectorAll('#starContainer span').forEach((s,i)=>{s.textContent=i<n?'★':'☆';s.style.color=i<n?'#fbbf24':'#d1d5db'});document.getElementById('ratingText').textContent=n+' stars!';}
 function openReviewModal(type){document.getElementById('reviewModal').classList.add('show');selectedRating=0;document.querySelectorAll('#starContainer span').forEach(s=>{s.textContent='☆';s.style.color='#d1d5db'});if(type)document.getElementById('reviewTypeSelect').value=type}
 function closeReviewModal(){document.getElementById('reviewModal').classList.remove('show')}
-function submitReview(){const type=document.getElementById('reviewTypeSelect').value,text=document.getElementById('reviewText').value.trim();if(!type||!selectedRating||!text){alert('Fill all');return}const r={id:uid(),type,text,rating:selectedRating,reviewerPhone:currentUser.phone,reviewerName:currentUser.name,createdAt:new Date().toISOString()};const arr=getReviews();arr.push(r);saveReviews(arr);closeReviewModal();renderReviews();}
+function submitReview(){const type=document.getElementById('reviewTypeSelect').value,text=document.getElementById('reviewText').value.trim();if(!type||!selectedRating||!text){alert('Fill all');return}const r={id:uid(),type,text,rating:selectedRating,reviewerPhone:currentUser.phone,reviewerName:currentUser.name,createdAt:new Date().toISOString()};const arr=getReviews();arr.push(r);saveReviews(arr);closeReviewModal();renderReviews();updateOnlinePresence();}
 function renderReviews(){const list=document.getElementById('reviewsList');let reviews=getReviews().reverse();const appReviews=getReviews().filter(r=>r.type==='app');const avg=appReviews.length?(appReviews.reduce((s,r)=>s+r.rating,0)/appReviews.length).toFixed(1):'0.0';document.getElementById('appStarsAvg').textContent='★'.repeat(Math.round(parseFloat(avg)))+'☆'.repeat(5-Math.round(parseFloat(avg)));document.getElementById('appAvgText').textContent=`${avg} / 5.0 - ${appReviews.length} reviews`;list.innerHTML=reviews.map(r=>`<div class="card"><b>${r.type.toUpperCase()} - ${'★'.repeat(r.rating)}</b><p>${r.text}</p></div>`).join('')||'<p class="small">No reviews</p>';}
 function fundWallet(){currentUser.wallet=(currentUser.wallet||0)+1000;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].wallet=currentUser.wallet;saveUsers(users)}document.getElementById('walletBal').textContent='₦'+currentUser.wallet}
-function renderAccount(){const div=document.getElementById('accountInfo');const online=getOnline().filter(o=>Date.now() - o.lastSeen < 5*60*1000);div.innerHTML=`<b>${currentUser.name}</b> ${currentUser.isOwner?'<span class="badge badge-owner">OWNER</span>':''}<br><span class="small">Phone: ${currentUser.phone}</span><br><span class="small">🟢 Online: ${online.length} people - Top right!</span>`;if(currentUser.isOwner){const users=getUsers();document.getElementById('allUsersAdmin').innerHTML=`<p class="small">All: ${users.length} | Online: ${online.length}</p>`+users.map(u=>`<div class="card" style="padding:6px"><b>${u.name}</b> ${u.phone} - ${online.find(o=>normalizePhone(o.phone)===normalizePhone(u.phone))?'🟢 Online':'⚪ Offline'}</div>`).join('');}}
+function renderAccount(){const div=document.getElementById('accountInfo');const online=getOnline().filter(o=>Date.now() - o.lastSeen < 5*60*1000);div.innerHTML=`<b>${currentUser.name}</b> ${currentUser.isOwner?'<span class="badge badge-owner">OWNER</span>':''}<br><span class="small">Phone: ${currentUser.phone} - ${currentUser.skill}</span><br><span class="small">🟢 Online: ${online.length} people</span>`;if(currentUser.isOwner){const users=getUsers();document.getElementById('allUsersAdmin').innerHTML=`<p class="small">All: ${users.length} | Online: ${online.length}</p>`+users.map(u=>`<div class="card" style="padding:6px"><b>${u.name}</b> ${u.phone} - ${u.skill} - ${online.find(o=>normalizePhone(o.phone)===normalizePhone(u.phone))?'<span class="badge badge-online">🟢 Online</span>':'⚪ Offline'}</div>`).join('');}}
 function giveWarning(){const phoneRaw=document.getElementById('warnPhone').value.trim(),reason=document.getElementById('warnReason').value.trim();if(!phoneRaw||!reason)return;const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone);if(!u){alert('Not found');return}u.warnings=u.warnings||[];u.warnings.push({reason,date:new Date().toISOString()});if(u.warnings.length>=3)u.isBanned=true;saveUsers(users);alert('Warning given');renderAccount();}
 function copyOwnerLink(){const input=document.getElementById('ownerPrivateLink');input.select();document.execCommand('copy');alert('✅ OWNER LINK COPIED!')}
 function copyStudentLink(){const input=document.getElementById('studentPublicLink');input.select();document.execCommand('copy');alert('✅ STUDENT LINK COPIED!')}
 function copyRefLink(){const input=document.getElementById('myRefLink');input.select();document.execCommand('copy');alert('✅ REFERRAL LINK COPIED!')}
-
-(function(){
-  const saved=localStorage.getItem('akc_current');
-  if(saved){
-    try{
-      currentUser=JSON.parse(saved);
-      let users=getUsers();
-      let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));
-      if(fresh){
-        currentUser=fresh;
-        if(fresh.isBanned)return;
-        if(fresh.liveLocation){currentLat=fresh.liveLocation.lat;currentLng=fresh.liveLocation.lng;}
-        if(localStorage.getItem('akc_owner_unlocked')==='1'){currentUser.isOwner=true;currentUser.isAdmin=true}
-        enterApp()
-      }
-    }catch(e){}
-  }
-  updateOnlineCountDisplay();
-})();
-
-window.addEventListener('beforeunload',()=>{
-  if(currentUser){
-    let online=getOnline();
-    online=online.filter(o=>normalizePhone(o.phone)!==normalizePhone(currentUser.phone));
-    saveOnline(online);
-  }
-});
+(function(){const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(fresh.isBanned)return;if(fresh.liveLocation){currentLat=fresh.liveLocation.lat;currentLng=fresh.liveLocation.lng;}if(localStorage.getItem('akc_owner_unlocked')==='1'){currentUser.isOwner=true;currentUser.isAdmin=true}enterApp()}}catch(e){}}updateOnlineCountDisplay();})();
+window.addEventListener('beforeunload',()=>{if(currentUser){let online=getOnline();online=online.filter(o=>normalizePhone(o.phone)!==normalizePhone(currentUser.phone));saveOnline(online);}});
 </script>
 </body>
 </html>
