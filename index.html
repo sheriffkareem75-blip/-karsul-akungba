@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AKC V35.5 GOOGLE MAP</title>
+<title>AKC V35.6 FIXED LINK</title>
 <style>
 :root{--bg:#f3f4f6;--card:#fff;--text:#111;--border:#e5e7eb;--top:#1e40af;--input:#fff}
 body.dark{--bg:#0f172a;--card:#1e293b;--text:#f1f5f9;--border:#334155;--top:#020617;--input:#1e293b}
@@ -65,8 +65,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <body>
 <div id="authPage" class="auth-wrap">
 <div class="auth-card">
-<h1 style="text-align:center">AKC V35.5</h1>
-<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">GOOGLE MAP + 500 + Video</p>
+<h1 style="text-align:center">AKC V35.6</h1>
+<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">FIXED LINK + GOOGLE MAP</p>
 <div id="loginBox">
 <label>Phone</label><input id="loginPhone" placeholder="081...">
 <label>Password</label><input id="loginPass" type="password">
@@ -88,17 +88,15 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 </div>
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V35.5</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V35.6</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
 <div><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px;margin-left:6px">Logout</button></div>
 </div>
-
 <div id="tab-buy" class="tab active">
 <h2>Adverts - Tap to Chat Owner</h2>
 <div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3 style="color:#111">Registered - <span id="userCount">0</span></h3><div id="userListPreview" style="max-height:250px;overflow-y:auto;margin-top:8px"></div></div>
 <div style="display:flex;gap:4px;margin:10px 0;flex-wrap:wrap"><span class="chip active" id="filterAll" onclick="setBuyFilter('all')">All</span><span class="chip" id="filterPhone" onclick="setBuyFilter('phone')">Phone Repair</span><span class="chip" id="filterGadget" onclick="setBuyFilter('gadget')">Gadgets</span><span class="chip" id="filterPlumbing" onclick="setBuyFilter('plumbing')">Plumbing</span></div>
 <input id="searchBuy" placeholder="Search adverts..." oninput="renderBuy()" style="margin:8px 0"><div id="buyList"></div>
 </div>
-
 <div id="tab-sell" class="tab">
 <h2 id="sellTitle">Sell</h2>
 <div id="studentSellBox" class="card" style="border:3px solid #3b82f6">
@@ -112,23 +110,20 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <h3>My Posted Adverts</h3><div id="myProducts"></div>
 </div>
 </div>
-
 <div id="tab-map" class="tab">
-<h2>Akungba MAP - V35.5 GOOGLE MAP</h2>
+<h2>Akungba MAP - GOOGLE MAP</h2>
 <p class="small">Real Google Map - Works 100%</p>
 <div style="margin:12px 0;border:3px solid #1e40af;border-radius:14px;overflow:hidden">
 <iframe class="map-frame" src="https://maps.google.com/maps?q=Akungba%20Akoko%20Ondo%20Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
 </div>
 <div class="card" style="background:#eff6ff;border:2px solid #1e40af;text-align:center"><b>📍 Akungba Akoko - AAUA</b><br><span class="small">Adekunle Ajasin University, Akungba<br>Akoko, Ondo State, Nigeria<br><br><a href="https://maps.google.com/?q=Akungba+Akoko+Ondo" target="_blank" style="background:#1e40af;color:#fff;padding:10px 20px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block">📱 Open in Google Maps App</a></span><br><br><p class="small">Shops around AAUA, Akungba market, Student lodges, Phone repair spots - all here!</p></div>
 </div>
-
 <div id="tab-chat" class="tab">
 <h2>Chats</h2>
 <div style="display:flex;gap:8px;margin-bottom:10px"><button id="chatTabGeneral" class="btn btn-primary" style="flex:1;margin:0" onclick="switchChatTab('general')">General</button><button id="chatTabPrivate" class="btn btn-secondary" style="flex:1;margin:0" onclick="switchChatTab('private')">Private</button></div>
 <div id="generalChatBox"><div id="schoolMessages" style="max-height:300px;overflow:auto;background:var(--card);padding:10px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message everyone..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
 <div id="privateChatBox" class="hidden"><div id="privateUserChips" class="private-user-list"></div><div id="privateMessages" class="private-chat-box" style="min-height:250px">Select person</div><div style="display:flex;gap:8px;margin-top:8px"><input id="privateInput" placeholder="Type message..."><button class="btn btn-primary" style="width:80px;margin:0;background:#10b981" onclick="sendPrivateMsg()">Send</button></div><div style="margin-top:8px;background:var(--bg);padding:8px;border-radius:8px;border:1px solid var(--border)"><label class="small">Send Video/Picture</label><input id="privateMediaFile" type="file" accept="image/*,video/*" onchange="sendPrivateMedia(event)"></div></div>
 </div>
-
 <div id="tab-account" class="tab">
 <h2>My Profile</h2>
 <div class="card" style="text-align:center;padding:20px"><img id="myPicBig" class="pic-big" src="" /><h2 id="profileNameDisplay" style="margin:8px 0 2px">Your Name</h2><p class="small" id="profileSkillDisplay" style="color:#1e40af;font-weight:600"></p><div id="myRatingDisplay" class="rating-box" style="margin:10px auto"></div><div style="background:var(--bg);border:2px dashed #1e40af;border-radius:12px;padding:15px;margin:15px 0"><label style="font-weight:700;color:#1e40af;margin:0 0 8px">Add Profile Pic</label><input id="changePicFile" type="file" accept="image/*" onchange="changeMyPic(event)"></div><div id="accountInfo" style="text-align:left;background:var(--bg);padding:12px;border-radius:10px"></div></div>
@@ -138,19 +133,18 @@ input,select,textarea{width:100%;padding:12px;border:1px solid var(--border);bor
 <div id="ownerPanel" class="hidden"><h2 style="margin-top:15px;color:#92400e">OWNER PANEL</h2><button class="btn btn-red" style="margin-top:10px" onclick="fixAllOwnersNow()">Fix OWNER</button></div>
 <h2 style="margin-top:15px">All Registered (<span id="accountUserCount">0</span>)</h2><div class="card"><div id="fullUserList" style="max-height:400px;overflow-y:auto"></div></div>
 </div>
-
 <div class="bottom-nav"><button class="active" onclick="showTab('buy')" id="nav-buy">Buy</button><button onclick="showTab('sell')" id="nav-sell">Sell</button><button onclick="showTab('map')" id="nav-map">Map</button><button onclick="showTab('chat')" id="nav-chat">Chat</button><button onclick="showTab('account')" id="nav-account">Account</button></div>
 </div>
-
 <script>
 let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all',tempPicBase64="",ownerMediaBase64="",ownerMediaType="",stuMediaBase64="",stuMediaType="",activePrivateChat=null;
 const OWNER_SECRET="893000";const OWNER_MAIN_PHONE="08105986759";
+const REAL_SITE_LINK="https://karsul-akungba.vercel.app";
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function normalizePhone(p){let d=(p||'').replace(/\D/g,'');if(d.length>11)d=d.slice(-11);if(d.length===10)d='0'+d;return d;}
 function generateReferralCode(name,phone){const n=(name||'USER').substring(0,4).toUpperCase().replace(/[^A-Z]/g,'');const p=(phone||'').slice(-3);return n+p+Math.floor(100+Math.random()*900).toString();}
 function copyText(t){navigator.clipboard.writeText(t).then(()=>alert('Copied: '+t)).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Copied: '+t);});}
 function copyReferral(){copyText(document.getElementById('myReferralCode').textContent);}
-function copyReferralLink(){const c=document.getElementById('myReferralCode').textContent;copyText(window.location.origin+window.location.pathname+'?ref='+c);}
+function copyReferralLink(){const c=document.getElementById('myReferralCode').textContent;copyText(REAL_SITE_LINK+"?ref="+c);}
 function getUsers(){return JSON.parse(localStorage.getItem('akc_users')||'[]')}function saveUsers(u){localStorage.setItem('akc_users',JSON.stringify(u))}
 function getProducts(){return JSON.parse(localStorage.getItem('akc_products')||'[]')}function saveProducts(p){localStorage.setItem('akc_products',JSON.stringify(p))}
 function getSchoolMsgs(){return JSON.parse(localStorage.getItem('akc_school_msgs')||'[]')}function saveSchoolMsgs(m){localStorage.setItem('akc_school_msgs',JSON.stringify(m))}
@@ -190,18 +184,4 @@ function renderBuy(){const list=document.getElementById('buyList');const q=(docu
 function openAdChat(phone,name){if(normalizePhone(phone)===normalizePhone(currentUser.phone)){alert('Your own advert!');return}startPrivateChat(phone,name);}
 function rateSeller(sellerPhone,sellerName){if(normalizePhone(sellerPhone)===normalizePhone(currentUser.phone)){alert('No fit rate yourself');return}const stars=prompt('Rate '+sellerName+' - 1 to 5');if(!stars)return;const s=parseInt(stars);if(isNaN(s)||s<1||s>5){alert('1-5 only');return}const comment=prompt('Review:')||'';const ratings=getRatings();const existing=ratings.find(r=>normalizePhone(r.sellerPhone)===normalizePhone(sellerPhone) && normalizePhone(r.raterPhone)===normalizePhone(currentUser.phone));if(existing){if(!confirm('Update rating?'))return;existing.stars=s;existing.comment=comment;}else{ratings.push({id:uid(),sellerPhone,sellerName,raterPhone:currentUser.phone,raterName:currentUser.name,stars:s,comment,date:new Date().toLocaleDateString()});}saveRatings(ratings);alert('Rated '+sellerName+' '+s+'⭐');renderBuy();renderUsers();updateTopAvatar();}
 function ownerPostAdvert(){if(!currentUser.isOwner){alert('Only owner can post!');return}const name=document.getElementById('sellName').value.trim(),price=document.getElementById('sellPrice').value.trim(),desc=document.getElementById('sellDesc').value.trim(),cat=document.getElementById('sellCat').value;if(!name||!price){alert('Add name & price');return}if(!ownerMediaBase64){alert('Upload video or picture!');return}const p={id:uid(),name,price,desc:desc||cat,category:cat,media:ownerMediaBase64,mediaType:ownerMediaType,sellerPhone:currentUser.phone,sellerName:currentUser.name,sellerAvatar:currentUser.avatar||"",createdAt:new Date().toISOString(),status:'approved'};const arr=getProducts();arr.push(p);saveProducts(arr);ownerMediaBase64="";ownerMediaType="";document.getElementById('ownerMediaFile').value='';document.getElementById('ownerMediaPreviewImg').classList.add('hidden');document.getElementById('ownerMediaPreviewVid').classList.add('hidden');document.getElementById('sellName').value='';document.getElementById('sellPrice').value='';document.getElementById('sellDesc').value='';alert('Advert posted!');renderBuy();renderMyProducts();}
-function sendAdToOwner(){const name=document.getElementById('stuAdName').value.trim(),price=document.getElementById('stuAdPrice').value.trim(),desc=document.getElementById('stuAdDesc').value.trim();if(!name||!price){alert('Add what you sell & price');return}if(!stuMediaBase64){alert('Upload video or picture!');return}const ownerPhone=OWNER_MAIN_PHONE;const msgs=getPrivateMsgs();const adText='ADVERT REQUEST - N500 Product: '+name+' Price: N'+price+' Desc: '+desc+' I don pay N500 to Moniepoint 8105986759 Please post my advert!';msgs.push({id:uid(),from:currentUser.phone,fromName:currentUser.name,to:ownerPhone,toName:'Kareem Sheriff (Owner)',text:adText,time:new Date().toLocaleString(),media:stuMediaBase64,mediaType:stuMediaType,adData:{name,price,desc}});savePrivateMsgs(msgs);stuMediaBase64="";stuMediaType="";document.getElementById('stuAdMediaFile').value='';document.getElementById('stuMediaPreviewImg').classList.add('hidden');document.getElementById('stuMediaPreviewVid').classList.add('hidden');document.getElementById('stuAdName').value='';document.getElementById('stuAdPrice').value='';document.getElementById('stuAdDesc').value='';alert('Sent to Owner private chat!');startPrivateChat(ownerPhone,'Kareem Sheriff (Owner)');}
-function renderMyProducts(){const list=document.getElementById('myProducts');if(!currentUser.isOwner){list.innerHTML='';return}const my=getProducts().filter(p=>normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone)).reverse();list.innerHTML=my.map(p=>{let mediaHtml='';if(p.media){if(p.mediaType==='video')mediaHtml='<video src="'+p.media+'" class="ad-media-video" controls></video>';else mediaHtml='<img src="'+p.media+'" class="ad-media" />';}return '<div class="card"><div style="display:flex;justify-content:space-between"><b>'+p.name+' - N'+p.price+'</b><span class="badge badge-approved">POSTED</span></div>'+mediaHtml+'<p class="small">'+p.desc+' - '+p.category+'</p><button class="btn btn-red" style="margin-top:8px" onclick="deleteProduct(\''+p.id+'\')">Delete</button></div>';}).join('')||'<p class="small">No adverts yet</p>';}
-function deleteProduct(id){if(!confirm('Delete?'))return;saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();}
-function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>'<div style="margin:6px 0"><b style="font-size:12px">'+m.senderName+'</b><div style="background:var(--bg);padding:8px;border-radius:12px;margin-top:2px;border:1px solid var(--border)">'+m.text+'</div></div>').join('')||'<p class="small">No messages</p>';}
-function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();}
-function switchChatTab(mode){document.getElementById('generalChatBox').classList.toggle('hidden',mode!=='general');document.getElementById('privateChatBox').classList.toggle('hidden',mode!=='private');document.getElementById('chatTabGeneral').className=mode==='general'?'btn btn-primary':'btn btn-secondary';document.getElementById('chatTabPrivate').className=mode==='private'?'btn btn-primary':'btn btn-secondary';document.getElementById('chatTabGeneral').style.flex='1';document.getElementById('chatTabGeneral').style.margin='0';document.getElementById('chatTabPrivate').style.flex='1';document.getElementById('chatTabPrivate').style.margin='0';if(mode==='private'){renderPrivateUserChips();renderPrivateMsgs();}}
-function startPrivateChat(phone,name){activePrivateChat=normalizePhone(phone);showTab('chat');setTimeout(()=>{switchChatTab('private');renderPrivateUserChips();renderPrivateMsgs();document.getElementById('privateInput').placeholder='Message '+name+'...';},100);}
-function renderPrivateUserChips(){const users=getUsers().filter(u=>normalizePhone(u.phone)!==normalizePhone(currentUser.phone));const box=document.getElementById('privateUserChips');if(!box)return;if(users.length===0){box.innerHTML='<p class="small">No other users</p>';return}box.innerHTML=users.map(u=>{const active=activePrivateChat===normalizePhone(u.phone)?'active':'';return '<div class="private-user-chip '+active+'" onclick="startPrivateChat(\''+u.phone+'\',\''+u.name+'\')">'+u.name+'</div>';}).join('');}
-function renderPrivateMsgs(){const box=document.getElementById('privateMessages');if(!activePrivateChat){box.innerHTML='<p class="small">Select person above</p>';return}const all=getPrivateMsgs();const relevant=all.filter(m=>(normalizePhone(m.from)===normalizePhone(currentUser.phone) && normalizePhone(m.to)===activePrivateChat) || (normalizePhone(m.to)===normalizePhone(currentUser.phone) && normalizePhone(m.from)===activePrivateChat));if(relevant.length===0){box.innerHTML='<p class="small">No messages yet</p>';return}box.innerHTML=relevant.map(m=>{const isMe=normalizePhone(m.from)===normalizePhone(currentUser.phone);let mediaHtml='';if(m.media){if(m.mediaType==='video')mediaHtml='<video src="'+m.media+'" style="width:100%;max-height:200px;border-radius:8px;margin-top:5px" controls></video>';else mediaHtml='<img src="'+m.media+'" style="width:100%;max-height:200px;border-radius:8px;margin-top:5px" />';}return '<div class="private-msg '+(isMe?'me':'them')+'"><b style="font-size:10px">'+(isMe?'You':m.fromName)+'</b><br>'+m.text+mediaHtml+'<br><span style="font-size:9px;opacity:0.7">'+m.time+'</span></div>';}).join('');box.scrollTop=box.scrollHeight;}
-function sendPrivateMsg(){const input=document.getElementById('privateInput');const text=input.value.trim();if(!text){alert('Type message');return}if(!activePrivateChat){alert('Select person first!');return}const users=getUsers();const target=users.find(u=>normalizePhone(u.phone)===activePrivateChat);const msgs=getPrivateMsgs();msgs.push({id:uid(),from:currentUser.phone,fromName:currentUser.name,to:activePrivateChat,toName:target?target.name:activePrivateChat,text,time:new Date().toLocaleString()});savePrivateMsgs(msgs);input.value='';renderPrivateMsgs();}
-function sendPrivateMedia(e){const file=e.target.files[0];if(!file)return;if(!activePrivateChat){alert('Select person first!');return}const r=new FileReader();r.onload=function(ev){const b64=ev.target.result;const type=file.type.startsWith('video')?'video':'image';const users=getUsers();const target=users.find(u=>normalizePhone(u.phone)===activePrivateChat);const msgs=getPrivateMsgs();msgs.push({id:uid(),from:currentUser.phone,fromName:currentUser.name,to:activePrivateChat,toName:target?target.name:activePrivateChat,text: type==='video'?'📹 Video':'🖼️ Picture',time:new Date().toLocaleString(),media:b64,mediaType:type});savePrivateMsgs(msgs);renderPrivateMsgs();document.getElementById('privateMediaFile').value='';};r.readAsDataURL(file);}
-(function(){fixCorruptedOwners();applyTheme();const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(normalizePhone(currentUser.phone)===normalizePhone(OWNER_MAIN_PHONE) && localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;if(normalizePhone(currentUser.phone)!==normalizePhone(OWNER_MAIN_PHONE))currentUser.isOwner=false;enterApp();}}catch(e){}}renderPublicUsers();})();
-</script>
-</body>
-</html>
+function sendAdToOwner(){const name=document.getElementById('stuAdName').value
