@@ -205,3 +205,4 @@ function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');i
 </script>
 </body>
 </html>
+function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){try{window.mapFull.remove();}catch(e){} window.mapFull=null;} el.innerHTML=''; window.mapFull=L.map('mapFull').setView([7.488,5.746],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(window.mapFull);setTimeout(()=>{if(window.mapFull)window.mapFull.invalidateSize();},300);},300);}
