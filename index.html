@@ -2,85 +2,168 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KARSUL - Akungba</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KARSUL AKUNGBA - Premium Products</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.landing{text-align:center;padding:20px}
-.enter-btn{padding:20px 70px;font-size:24px;font-weight:bold;background:#00ff88;color:#000;border:none;border-radius:50px;cursor:pointer}
-.enter-btn:active{transform:scale(0.95)}
-.main-content{display:none;padding:20px;width:100%;max-width:1000px}
-.admin-login{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
-.admin-login input{padding:14px;width:300px;margin:10px;border-radius:8px;border:none;font-size:16px}
-.admin-login button{padding:14px 40px;background:#00ff88;border:none;border-radius:8px;font-weight:bold;font-size:16px}
-#adminPanel{display:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0f0f0f;color:#fff}
+.landing{padding:40px 20px;text-align:center;min-height:100vh}
+.landing h1{font-size:42px;margin-bottom:10px;color:#ffcc00}
+.landing p{color:#aaa;margin-bottom:30px}
+.btn{padding:14px 32px;border:none;border-radius:10px;font-weight:700;cursor:pointer}
+.btn-yellow{background:#ffcc00;color:#000}
+.btn-dark{background:#222;color:#fff;border:1px solid #333}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;max-width:900px;margin:20px auto}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:12px}
+.card img{width:100%;height:130px;object-fit:cover;border-radius:10px;background:#222}
+.card h3{font-size:14px;margin:8px 0}
+.card .price{color:#ffcc00;font-weight:800}
+.admin-link{margin-top:30px;display:inline-block;color:#555;font-size:13px;cursor:pointer;text-decoration:underline}
+#adminPanel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#0f0f0f;overflow-y:auto;padding:20px;z-index:99}
+.admin-login{text-align:center;margin-top:80px}
+.admin-login input{padding:14px;width:280px;border-radius:10px;border:1px solid #333;background:#1a1a1a;color:#fff;text-align:center;font-size:18px;letter-spacing:3px}
+.admin-login button{padding:14px 40px;border-radius:10px;margin-top:12px;background:#ffcc00;font-weight:800;border:none}
+.tabs{display:flex;gap:10px;margin:20px 0;overflow-x:auto}
+.tab{padding:10px 18px;background:#222;border-radius:20px;cursor:pointer;white-space:nowrap;border:1px solid #333}
+.tab.active{background:#ffcc00;color:#000}
+.section{display:none}
+.section.active{display:block}
+.input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#1a1a1a;color:#fff;margin:6px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.order-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:10px}
+.small{font-size:12px;color:#aaa}
 </style>
 </head>
 <body>
-
 <div id="landing" class="landing">
-<h1 style="font-size:48px;margin-bottom:15px;">KARSUL AKUNGBA</h1>
-<p style="color:#888;margin-bottom:30px;">Official Portal</p>
-<button class="enter-btn" onclick="enterSite()">ENTER</button>
-<br><br><br>
-<a href="#" onclick="showAdminLogin()" style="color:#222;font-size:11px;">Admin Access</a>
+<h1>KARSUL AKUNGBA</h1>
+<p>Premium Quality • Fast Delivery in Akungba • Pay on Delivery</p>
+<button class="btn btn-yellow" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+<div id="products" class="products"></div>
+<p class="admin-link" onclick="showAdmin()">Admin Login</p>
 </div>
-
-<div id="mainContent" class="main-content">
-<h1>Welcome to KARSUL</h1>
-<p>Main site content here. Edit this later.</p>
-<br><br>
-<button onclick="showAdminLogin()" style="padding:10px;background:#111;color:#fff;border:1px solid #333;">Admin Login</button>
+<div id="adminPanel">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h2 style="color:#ffcc00">ADMIN PANEL</h2>
+<button class="btn btn-dark" onclick="hideAdmin()">✕ Close</button>
 </div>
-
-<div id="adminLogin" class="admin-login">
-<h2>🔒 PRIVATE ADMIN</h2>
-<p style="color:red;margin:10px 0;">Only Owner Allowed - Password Required</p>
-<input type="password" id="adminPass" placeholder="Enter Password">
-<button onclick="checkAdmin()">LOGIN</button>
-<p id="loginError" style="color:red;margin-top:10px;display:none;">Wrong password!</p>
-<br><br>
-<button onclick="hideAdminLogin()" style="background:#222;color:#fff;">Close</button>
+<div id="loginBox" class="admin-login">
+<h3>Enter Admin Password</h3>
+<input id="passInput" type="password" placeholder="893000"><br>
+<button onclick="checkPass()">Unlock</button>
+<p class="small" style="margin-top:10px">Hint: 893000 • WhatsApp: 08105986759</p>
 </div>
-
-<div id="adminPanel" class="main-content">
-<h1>ADMIN CHAT</h1>
-<p style="color:#00ff88;">✓ Logged in as Owner - Private (Password: 893000)</p>
-<div style="background:#111;padding:20px;margin-top:20px;border-radius:10px;min-height:200px;">
-<p>Your private admin chat controls go here. Only you can see this.</p>
-<p>This panel is protected. Only person with password 893000 can enter.</p>
+<div id="dashBox" style="display:none">
+<div class="tabs">
+<div class="tab active" onclick="switchTab('productsTab')">📦 Products</div>
+<div class="tab" onclick="switchTab('ordersTab')">🧾 Order Inbox <span id="orderCount"></span></div>
+<div class="tab" onclick="switchTab('chatTab')">💬 Chat Inbox</div>
 </div>
-<br>
-<button onclick="logoutAdmin()" style="padding:10px;background:red;color:white;border:none;border-radius:5px;">Logout</button>
+<div id="productsTab" class="section active">
+<h3>Add New Product</h3>
+<input id="pName" class="input" placeholder="Product Name e.g. Nike Slides">
+<div class="grid2">
+<input id="pPrice" class="input" placeholder="Price e.g. 15000" type="number">
+<input id="pImg" class="input" placeholder="Image URL (or leave empty)">
 </div>
-
+<input id="pDesc" class="input" placeholder="Description">
+<button class="btn btn-yellow" style="width:100%;margin-top:10px" onclick="addProduct()">+ Add Product</button>
+<div id="adminProducts" style="margin-top:20px"></div>
+</div>
+<div id="ordersTab" class="section">
+<h3>Live Orders / Bookings - 08105986759</h3>
+<p class="small">Orders appear here instantly.</p>
+<div id="ordersList"></div>
+</div>
+<div id="chatTab" class="section">
+<h3>Customer Chats</h3>
+<div id="chatList"></div>
+</div>
+</div>
+</div>
 <script>
-const MY_SECRET_PASSWORD = "893000";
-function enterSite(){
-document.getElementById('landing').style.display='none';
-document.getElementById('mainContent').style.display='block';
+let PRODUCTS = JSON.parse(localStorage.getItem('karsul_products')||'[]');
+if(PRODUCTS.length===0){
+ PRODUCTS=[
+  {id:1,name:'Premium Slides',price:12000,img:'https://via.placeholder.com/300x300?text=Slides',desc:'Comfortable'},
+  {id:2,name:'Karsul Cap',price:5000,img:'https://via.placeholder.com/300x300?text=Cap',desc:'Quality cap'}
+ ];
+ saveProducts();
 }
-function showAdminLogin(){
-document.getElementById('adminLogin').style.display='flex';
+let ORDERS = JSON.parse(localStorage.getItem('karsul_orders')||'[]');
+let CHATS = JSON.parse(localStorage.getItem('karsul_chats')||'[]');
+const ADMIN_PASS='893000';
+const ADMIN_WA='2348105986759';
+function saveProducts(){localStorage.setItem('karsul_products',JSON.stringify(PRODUCTS))}
+function renderProducts(){
+ const c=document.getElementById('products');
+ c.innerHTML=PRODUCTS.map(p=>`<div class="card"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/300'"><h3>${p.name}</h3><div class="price">₦${Number(p.price).toLocaleString()}</div><button class="btn btn-yellow" style="width:100%;margin-top:8px;padding:8px" onclick="orderProduct(${p.id})">Order Now</button></div>`).join('');
+ renderAdminProducts();
 }
-function hideAdminLogin(){
-document.getElementById('adminLogin').style.display='none';
-document.getElementById('adminPass').value='';
-document.getElementById('loginError').style.display='none';
+function renderAdminProducts(){
+ const c=document.getElementById('adminProducts');
+ if(!c) return;
+ c.innerHTML=PRODUCTS.map(p=>`<div class="order-box" style="display:flex;justify-content:space-between;align-items:center"><div><b>${p.name}</b><br><span class="small">₦${p.price}</span></div><button class="btn btn-dark" onclick="deleteProduct(${p.id})">Delete</button></div>`).join('');
 }
-function checkAdmin(){
-const pass=document.getElementById('adminPass').value;
-if(pass===MY_SECRET_PASSWORD){
-document.getElementById('adminLogin').style.display='none';
-document.getElementById('landing').style.display='none';
-document.getElementById('mainContent').style.display='none';
-document.getElementById('adminPanel').style.display='block';
-}else{
-document.getElementById('loginError').style.display='block';
+function addProduct(){
+ const name=document.getElementById('pName').value.trim();
+ const price=document.getElementById('pPrice').value.trim();
+ const img=document.getElementById('pImg').value.trim()||'https://via.placeholder.com/300x300?text='+encodeURIComponent(name);
+ const desc=document.getElementById('pDesc').value.trim();
+ if(!name||!price){alert('Enter name and price');return}
+ PRODUCTS.unshift({id:Date.now(),name,price,img,desc});
+ saveProducts(); renderProducts();
+ document.getElementById('pName').value='';document.getElementById('pPrice').value='';document.getElementById('pImg').value='';document.getElementById('pDesc').value='';
+ alert('Product Added!');
 }
+function deleteProduct(id){
+ if(!confirm('Delete this product?'))return;
+ PRODUCTS=PRODUCTS.filter(p=>p.id!==id);saveProducts();renderProducts();
 }
-function logoutAdmin(){location.reload();}
+function orderProduct(id){
+ const p=PRODUCTS.find(x=>x.id===id);
+ const customerName=prompt('Your Name:');
+ if(!customerName)return;
+ const phone=prompt('Your Phone Number:');
+ if(!phone)return;
+ const address=prompt('Delivery Address in Akungba:');
+ const order={id:Date.now(),product:p.name,price:p.price,customer:customerName,phone,address,time:new Date().toLocaleString()};
+ ORDERS.unshift(order);
+ localStorage.setItem('karsul_orders',JSON.stringify(ORDERS));
+ alert('Order Placed! Seller will contact you via 08105986759');
+ renderOrders();
+}
+function renderOrders(){
+ const c=document.getElementById('ordersList');
+ const count=document.getElementById('orderCount');
+ if(count) count.textContent=ORDERS.length?`(${ORDERS.length})`:'';
+ if(!c)return;
+ if(ORDERS.length===0){c.innerHTML='<p class="small">No orders yet.</p>';return}
+ c.innerHTML=ORDERS.map(o=>`<div class="order-box"><b>${o.product}</b> - ₦${Number(o.price).toLocaleString()}<br><span class="small">👤 ${o.customer} | 📞 ${o.phone}<br>📍 ${o.address}<br>🕒 ${o.time}</span><br><div style="margin-top:8px;display:flex;gap:8px"><a href="https://wa.me/${o.phone.replace(/\D/g,'')}?text=Hello ${o.customer}, your order for ${o.product} is confirmed!" target="_blank" class="btn btn-yellow" style="padding:8px 14px;text-decoration:none;font-size:13px">Chat Customer</a><a href="https://wa.me/${ADMIN_WA}?text=New Order: ${o.product}" target="_blank" class="btn btn-dark" style="padding:8px 14px;text-decoration:none;font-size:13px">Forward</a><button class="btn btn-dark" style="padding:8px 14px" onclick="deleteOrder(${o.id})">Done</button></div></div>`).join('');
+}
+function deleteOrder(id){ORDERS=ORDERS.filter(o=>o.id!==id);localStorage.setItem('karsul_orders',JSON.stringify(ORDERS));renderOrders();}
+function renderChats(){
+ const c=document.getElementById('chatList');
+ if(!c)return;
+ if(CHATS.length===0){c.innerHTML='<p class="small">No chats yet.</p>';return}
+ c.innerHTML=CHATS.map(ch=>`<div class="order-box"><b>${ch.name}</b><br><span class="small">${ch.msg}<br>${ch.time}</span></div>`).join('');
+}
+function showAdmin(){document.getElementById('adminPanel').style.display='block'}
+function hideAdmin(){document.getElementById('adminPanel').style.display='none'}
+function checkPass(){
+ const v=document.getElementById('passInput').value;
+ if(v===ADMIN_PASS){document.getElementById('loginBox').style.display='none';document.getElementById('dashBox').style.display='block';renderOrders();renderChats();}
+ else alert('Wrong password! Hint is 893000');
+}
+function switchTab(id){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ event.target.classList.add('active');
+ if(id==='ordersTab')renderOrders();
+ if(id==='chatTab')renderChats();
+}
+renderProducts();renderOrders();
 </script>
 </body>
 </html>
