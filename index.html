@@ -1,1 +1,86 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARSUL AKUNGBA CONNECT</title><style>_{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0a0a0a;color:#fff}#L{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}.b{background:#fff;color:#000;border-radius:24px;padding:22px;width:100%;max-width:380px;text-align:center}.lg{width:60px;height:60px;background:#000;border-radius:16px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:#ffcc00;font-weight:900;font-size:20px;border:3px solid #ffcc00}input,select{width:100%;padding:13px;border-radius:12px;border:1.5px solid #ddd;margin:6px 0;font-size:14px}.bt{background:#000;color:#ffcc00;border:2px solid #ffcc00;padding:13px;width:100%;border-radius:12px;font-weight:800;font-size:15px;margin-top:8px}.t{position:sticky;top:0;background:#000;border-bottom:2px solid #ffcc00;padding:10px 12px;display:flex;justify-content:space-between;z-index:100}.tabs{display:flex;gap:5px;padding:8px;background:#111;overflow:auto;position:sticky;top:52px;z-index:99}.tb{padding:7px 12px;background:#222;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;border:1px solid #333}.tb.a{background:#ffcc00;color:#000}.gr{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}.cd{background:#fff;color:#000;border-radius:14px;overflow:hidden}.cd img{width:100%;height:100px;object-fit:cover}.cb{padding:8px}.pr{color:#000;font-weight:800;background:#ffcc00;display:inline-block;padding:2px 6px;border-radius:8px;font-size:10px;margin-top:3px}.cbBtn{background:#000;color:#ffcc00;width:100%;border:none;padding:7px;border-radius:8px;font-weight:700;margin-top:5px;font-size:11px}#lb{position:fixed;bottom:15px;right:12px;background:#000;color:#ffcc00;border:2px solid #ffcc00;border-radius:30px;padding:10px 14px;font-weight:900;z-index:800}#cr{position:fixed;bottom:0;right:0;width:100%;max-width:400px;height:72vh;background:#fff;color:#000;border-radius:20px 20px 0 0;z-index:900;display:none;flex-direction:column}.ch{background:#000;color:#ffcc00;padding:12px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between}#ms{flex:1;overflow:auto;padding:10px}.m{margin:6px 0;padding:7px 9px;background:#f5f5f5;border-radius:10px;font-size:12px}.tg{font-size:8px;background:#ffcc00;padding:1px 5px;border-radius:8px}</style></head><body><div id="L"><div class="b"><div class="lg">KAC</div><h3>KARSUL AKUNGBA CONNECT</h3><p style="font-size:11px;color:#666;margin:4px 0 10px">AAUA Akungba Buy & Sell</p><input id="n" placeholder="Full Name"><input id="p" placeholder="WhatsApp e.g 081..."><select id="l"><option value="">Select Location</option><option>Ibaka</option><option>Supare</option><option>AAUA Campus</option><option>Akungba Town</option><option>Ilepa</option></select><button class="bt" onclick="login()">ENTER KAC →</button></div></div><div class="t"><div style="display:flex;align-items:center;gap:8px"><div class="lg" style="width:36px;height:36px;font-size:12px;margin:0">KAC</div><div><div style="font-weight:900;color:#ffcc00;font-size:12px">KARSUL</div><div style="font-size:9px;color:#aaa">AKUNGBA CONNECT</div></div></div><div style="text-align:right"><div id="hi" style="font-size:10px;color:#ffcc00;font-weight:700"></div><div style="font-size:8px;color:#888" onclick="logout()">Logout</div></div></div><div class="tabs"><div class="tb a" onclick="tab('b',this)">🛒 BUY</div><div class="tb" onclick="tab('s',this)">📦 SELL</div><div class="tb" onclick="openC()">💬 CHAT</div><div class="tb" onclick="openC()">🔴 LIVE</div><div class="tb">💰 WALLET</div><div class="tb">⚙️ SET</div></div><div id="buy"><div style="padding:8px 10px 0;font-size:11px;color:#ffcc00">No fixed price - Chat seller</div><div class="gr" id="g"></div></div><div id="sell" style="display:none;padding:12px"><div style="background:#fff;color:#000;border-radius:14px;padding:12px"><h4>Add Product</h4><input id="pn" placeholder="Product e.g Tailoring"><input id="pp" placeholder="Your Price"><select id="pc"><option>Tailoring</option><option>Barbing</option><option>Plumbing</option><option>Phone Repair</option><option>Food</option><option>Lodge</option><option>Others</option></select><button class="bt" onclick="addP()">Post</button></div></div><button id="lb" onclick="openC()">💬 LIVE • <span id="oc">12</span> Online</button><div id="cr"><div class="ch"><b>🔴 LIVE Akungba</b><span onclick="closeC()" style="cursor:pointer;background:#222;padding:4px 9px;border-radius:20px">✕</span></div><div id="ms"></div><div style="display:flex;padding:8px;border-top:1px solid #eee;gap:5px"><input id="ci" placeholder="Message..." style="flex:1"><button onclick="send()" style="background:#000;color:#ffcc00;border:2px solid #ffcc00;padding:8px 12px;border-radius:20px;font-weight:800">Send</button></div></div><script>let P=[{n:"Tailoring Akungba",s:"Shemzy",l:"Ibaka",i:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400"},{n:"Shemzy Barber",s:"Shemzy",l:"Supare",i:"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400"},{n:"Bayo Plumbing",s:"Bayo",l:"AAUA",i:"https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400"},{n:"PhoneFix",s:"Kareem",l:"Ibaka",i:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"},{n:"Mama Put",s:"Mama Nkechi",l:"Akungba Town",i:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400"},{n:"Lodge Agent",s:"Agent T",l:"Supare",i:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400"}];let U=null;function chk(){let s=localStorage.kac_user;if(s){U=JSON.parse(s);L.style.display='none';hi.innerText='Hi, '+U.name+' - '+U.l}}chk();function login(){let a=n.value.trim(),b=p.value.trim(),c=l.value;if(!a||!b||!c)return alert('Fill all');U={name:a,phone:b,l:c};localStorage.kac_user=JSON.stringify(U);L.style.display='none';hi.innerText='Hi, '+a+' - '+c;render()}function logout(){localStorage.removeItem('kac_user');location.reload()}function render(){g.innerHTML=P.map(x=>`<div class="cd"><img src="${x.i}"><div class="cb"><div style="font-size:11px;font-weight:800">${x.n}</div><div style="font-size:9px;color:#666">${x.s} • ${x.l} • <span style="color:green">● online</span></div><div class="pr">Chat for price</div><button class="cbBtn" onclick="chatS('${x.s}','${x.l}')">💬 Chat ${x.s}</button></div></div>`).join('')}render();function tab(t,e){document.querySelectorAll('.tb').forEach(x=>x.classList.remove('a'));if(e)e.classList.add('a');buy.style.display=t=='b'?'block':'none';sell.style.display=t=='s'?'block':'none';if(t!='b'&&t!='s')openC()}function addP(){if(!U)return alert('Login first');let a=pn.value;if(!a)return alert('Name');P.unshift({n:a,s:U.name,l:U.l,i:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"});render();tab('b',document.querySelector('.tb'));alert('Posted!')}function openC(){if(!U)return alert('Login first');cr.style.display='flex';showM()}function closeC(){cr.style.display='none'}function send(){let t=ci.value.trim();if(!t)return;let A=JSON.parse(localStorage.kac_chats||'[]');A.push({u:U.name,l:U.l,t:t,ti:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});localStorage.kac_chats=JSON.stringify(A);ci.value='';showM()}function showM(){let A=JSON.parse(localStorage.kac_chats||'[]');if(A.length==0){A=[{u:"KAC Admin",l:"AAUA",t:"Welcome to KARSUL AKUNGBA CONNECT 🔥",ti:"now"}];localStorage.kac_chats=JSON.stringify(A)}ms.innerHTML=A.map(m=>`<div class="m"><b>${m.u} <span class="tg">${m.l}</span></b> <span style="font-size:9px;color:#888;float:right">${m.ti}</span><div style="margin-top:3px">${m.t}</div></div>`).join('');ms.scrollTop=99999;oc.innerText=Math.floor(10+Math.random()_12)}showM();setInterval(showM,3000);function chatS(a,b){if(!U)return alert('Login first');let A=JSON.parse(localStorage.kac_chats||'[]');A.push({u:U.name,l:U.l,t:`@ ${a} I want to buy`,ti:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});localStorage.kac_chats=JSON.stringify(A);openC();window.open(`https://wa.me/?text=Hi ${a} from ${b}, I saw your product on KARSUL AKUNGBA CONNECT`,'_blank')}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KARSUL - Akungba</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.landing{text-align:center;padding:20px}
+.enter-btn{padding:20px 70px;font-size:24px;font-weight:bold;background:#00ff88;color:#000;border:none;border-radius:50px;cursor:pointer}
+.enter-btn:active{transform:scale(0.95)}
+.main-content{display:none;padding:20px;width:100%;max-width:1000px}
+.admin-login{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.admin-login input{padding:14px;width:300px;margin:10px;border-radius:8px;border:none;font-size:16px}
+.admin-login button{padding:14px 40px;background:#00ff88;border:none;border-radius:8px;font-weight:bold;font-size:16px}
+#adminPanel{display:none}
+</style>
+</head>
+<body>
+
+<div id="landing" class="landing">
+<h1 style="font-size:48px;margin-bottom:15px;">KARSUL AKUNGBA</h1>
+<p style="color:#888;margin-bottom:30px;">Official Portal</p>
+<button class="enter-btn" onclick="enterSite()">ENTER</button>
+<br><br><br>
+<a href="#" onclick="showAdminLogin()" style="color:#222;font-size:11px;">Admin Access</a>
+</div>
+
+<div id="mainContent" class="main-content">
+<h1>Welcome to KARSUL</h1>
+<p>Main site content here. Edit this later.</p>
+<br><br>
+<button onclick="showAdminLogin()" style="padding:10px;background:#111;color:#fff;border:1px solid #333;">Admin Login</button>
+</div>
+
+<div id="adminLogin" class="admin-login">
+<h2>🔒 PRIVATE ADMIN</h2>
+<p style="color:red;margin:10px 0;">Only Owner Allowed - Password Required</p>
+<input type="password" id="adminPass" placeholder="Enter Password">
+<button onclick="checkAdmin()">LOGIN</button>
+<p id="loginError" style="color:red;margin-top:10px;display:none;">Wrong password!</p>
+<br><br>
+<button onclick="hideAdminLogin()" style="background:#222;color:#fff;">Close</button>
+</div>
+
+<div id="adminPanel" class="main-content">
+<h1>ADMIN CHAT</h1>
+<p style="color:#00ff88;">✓ Logged in as Owner - Private (Password: 893000)</p>
+<div style="background:#111;padding:20px;margin-top:20px;border-radius:10px;min-height:200px;">
+<p>Your private admin chat controls go here. Only you can see this.</p>
+<p>This panel is protected. Only person with password 893000 can enter.</p>
+</div>
+<br>
+<button onclick="logoutAdmin()" style="padding:10px;background:red;color:white;border:none;border-radius:5px;">Logout</button>
+</div>
+
+<script>
+const MY_SECRET_PASSWORD = "893000";
+function enterSite(){
+document.getElementById('landing').style.display='none';
+document.getElementById('mainContent').style.display='block';
+}
+function showAdminLogin(){
+document.getElementById('adminLogin').style.display='flex';
+}
+function hideAdminLogin(){
+document.getElementById('adminLogin').style.display='none';
+document.getElementById('adminPass').value='';
+document.getElementById('loginError').style.display='none';
+}
+function checkAdmin(){
+const pass=document.getElementById('adminPass').value;
+if(pass===MY_SECRET_PASSWORD){
+document.getElementById('adminLogin').style.display='none';
+document.getElementById('landing').style.display='none';
+document.getElementById('mainContent').style.display='none';
+document.getElementById('adminPanel').style.display='block';
+}else{
+document.getElementById('loginError').style.display='block';
+}
+}
+function logoutAdmin(){location.reload();}
+</script>
+</body>
+</html>
