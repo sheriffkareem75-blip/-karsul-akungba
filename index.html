@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AKC V34.6 - Hidden Owner</title>
+<title>AKC V34.7 - Private Chat</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -18,6 +18,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 .btn-primary{background:#1e40af;color:#fff}
 .btn-secondary{background:#e5e7eb;color:#111}
 .btn-copy{background:#1e40af;color:#fff;padding:8px 14px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer}
+.btn-chat{background:#10b981;color:#fff;padding:6px 12px;border-radius:20px;border:none;font-weight:700;cursor:pointer;margin:2px;font-size:12px}
 .btn-red{background:#fee2e2;color:#991b1b}
 .btn-star{background:#fbbf24;color:#000;padding:6px 10px;border-radius:20px;border:none;font-weight:700;cursor:pointer;margin:2px;font-size:12px}
 .topbar{position:sticky;top:0;background:#1e40af;color:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;z-index:50}
@@ -51,14 +52,21 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 .comment-input input{flex:1;padding:8px;border-radius:20px}
 .comment{padding:6px 10px;background:#fff;border-radius:10px;margin:4px 0;border:1px solid #eee}
 .rating-box{background:#fffbeb;border:1px solid #fbbf24;padding:6px 10px;border-radius:8px;display:inline-block;margin:4px 0;font-size:12px}
+.private-chat-box{background:#fff;border:2px solid #10b981;border-radius:14px;padding:10px;margin:10px 0;max-height:400px;overflow-y:auto}
+.private-msg{padding:8px 12px;border-radius:12px;margin:5px 0;max-width:80%;font-size:13px}
+.private-msg.me{background:#1e40af;color:#fff;margin-left:auto}
+.private-msg.them{background:#f3f4f6;color:#111}
+.private-user-list{display:flex;gap:8px;overflow-x:auto;padding:8px 0}
+.private-user-chip{padding:8px 12px;background:#fff;border:2px solid #10b981;border-radius:20px;white-space:nowrap;cursor:pointer;font-size:12px;font-weight:700}
+.private-user-chip.active{background:#10b981;color:#fff}
 </style>
 </head>
 <body>
 
 <div id="authPage" class="auth-wrap">
 <div class="auth-card">
-<h1 style="text-align:center">AKC V34.6</h1>
-<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">Akungba Market</p>
+<h1 style="text-align:center">AKC V34.7</h1>
+<p style="text-align:center;font-size:11px;color:#666;margin-bottom:10px">Private Chat Added</p>
 <div id="loginBox">
 <label>Phone</label><input id="loginPhone" placeholder="081...">
 <label>Password</label><input id="loginPass" type="password">
@@ -69,7 +77,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 <div id="signupBox" class="hidden">
 <label>📸 Profile Pic</label><input id="suPicFile" type="file" accept="image/*" onchange="previewPic(event)"><img id="picPreview" class="pic-preview hidden" />
-<label>Full Name</label><input id="suName"><label>Phone</label><input id="suPhone"><label>Gmail</label><input id="suGmail" type="email"><label>Password</label><input id="suPass" type="password"><label>Location</label><select id="suLocation"><option>Akungba - AAUA Student</option><option>Akungba Resident</option><option>Outside Akungba</option></select><label>What do you do?</label><select id="suSkill"><option value="">General</option><option value="phone_repair">📱 Phone Repair</option><option value="gadget">🎧 Gadget</option><option value="food">🍚 Food</option><option value="plumbing">🚿 Plumbing</option><option value="electrical">🔌 Electrical</option><option value="building">🏗️ Building</option><option value="cake">🎂 Cake</option><option value="event">🎉 Event</option></select>
+<label>Full Name</label><input id="suName"><label>Phone</label><input id="suPhone"><label>Gmail</label><input id="suGmail" type="email"><label>Password</label><input id="suPass" type="password"><label>Location</label><select id="suLocation"><option>Akungba - AAUA Student</option><option>Akungba Resident</option><option>Outside Akungba</option></select><label>What do you do?</label><select id="suSkill"><option value="">Just Student - No Business</option><option value="phone_repair">📱 Phone Repair</option><option value="gadget">🎧 Gadget Seller</option><option value="food">🍚 Food Vendor</option><option value="plumbing">🚿 Plumbing</option><option value="electrical">🔌 Electrical</option><option value="building">🏗️ Building</option><option value="cake">🎂 Cake / Baking</option><option value="event">🎉 Event Planner</option></select>
 <label>Verification</label><div style="display:flex;gap:8px"><input id="suCodeInput" placeholder="Enter code"><button type="button" class="btn btn-secondary" style="margin:0;width:110px" onclick="generateCode()">Generate</button></div><p id="codeDisplay" class="small" style="color:#1e40af;font-weight:700"></p>
 <button type="button" class="btn btn-primary" onclick="doSignup()">SIGN UP</button><button type="button" class="btn btn-secondary" onclick="showLogin()">LOG IN</button>
 </div>
@@ -79,15 +87,15 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 
 <div id="mainApp" class="hidden">
 <div class="topbar">
-<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V34.6</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><div id="topAvatar" class="user-avatar" style="width:35px;height:35px">AK</div><div><b>AKC V34.7</b> <span id="topBadge" class="badge badge-owner">AKC</span><br><span id="totalUsersTop" class="small" style="color:#bfdbfe">0 Users</span></div></div>
 <div><span id="topUser" style="font-size:11px"></span><button onclick="doLogout()" style="background:#fff;color:#1e40af;border:none;padding:4px 8px;border-radius:8px;font-weight:700;font-size:10px;margin-left:6px">Logout</button></div>
 </div>
 
 <div id="tab-buy" class="tab active">
 <h2>🛒 Market</h2>
-<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>👥 Registered - <span id="userCount">0</span></h3><div id="userListPreview" style="max-height:200px;overflow-y:auto;margin-top:8px"></div></div>
+<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>👥 Registered - <span id="userCount">0</span> — Tap Chat to Private Message!</h3><div id="userListPreview" style="max-height:350px;overflow-y:auto;margin-top:8px"></div></div>
 <div style="display:flex;gap:4px;margin:10px 0;flex-wrap:wrap"><span class="chip active" id="filterAll" onclick="setBuyFilter('all')">All</span><span class="chip" id="filterPhone" onclick="setBuyFilter('phone')">📱 Phone Repair</span><span class="chip" id="filterGadget" onclick="setBuyFilter('gadget')">🎧 Gadgets</span><span class="chip" id="filterPlumbing" onclick="setBuyFilter('plumbing')">🚿 Plumbing</span></div>
-<input id="searchBuy" placeholder="Search..." oninput="renderBuy()" style="margin:8px 0"><div id="buyList"></div>
+<input id="searchBuy" placeholder="Search product or person..." oninput="renderBuy()" style="margin:8px 0"><div id="buyList"></div>
 </div>
 
 <div id="tab-sell" class="tab">
@@ -127,7 +135,29 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 
 <div id="tab-map" class="tab"><h2>📍 MAP</h2><div id="mapFull"></div></div>
-<div id="tab-chat" class="tab"><h2>💬 General Chat</h2><div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div></div>
+
+<div id="tab-chat" class="tab">
+<h2>💬 Chats</h2>
+<div style="display:flex;gap:8px;margin-bottom:10px">
+<button id="chatTabGeneral" class="btn btn-primary" style="flex:1;margin:0" onclick="switchChatTab('general')">General Chat</button>
+<button id="chatTabPrivate" class="btn btn-secondary" style="flex:1;margin:0" onclick="switchChatTab('private')">Private Chats</button>
+</div>
+
+<div id="generalChatBox">
+<div id="schoolMessages" style="max-height:300px;overflow:auto;background:#fff;padding:10px;border-radius:12px;border:1px solid #eee;margin-bottom:10px"></div>
+<div style="display:flex;gap:8px"><input id="schoolInput" placeholder="Message everyone..."><button class="btn btn-primary" style="width:80px;margin:0" onclick="sendSchoolMsg()">Send</button></div>
+</div>
+
+<div id="privateChatBox" class="hidden">
+<div id="privateUserChips" class="private-user-list"></div>
+<div id="privateMessages" class="private-chat-box" style="min-height:250px">Select person to chat</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input id="privateInput" placeholder="Type private message...">
+<button class="btn btn-primary" style="width:80px;margin:0;background:#10b981" onclick="sendPrivateMsg()">Send</button>
+</div>
+<p class="small" style="margin-top:8px">🔒 Private — Only you and them can see am (on this phone)</p>
+</div>
+</div>
 
 <div id="tab-account" class="tab">
 <h2>👤 My Profile</h2>
@@ -144,7 +174,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 <div id="myReviewsList" style="text-align:left;margin-top:10px"></div>
 </div>
 <div class="bank-copy-box">
-<h3 style="text-align:center;color:#1e40af;margin-bottom:12px">💳 Your Payment Account</h3>
+<h3 style="text-align:center;color:#1e40af;margin-bottom:12px">💳 Payment Account</h3>
 <div class="bank-line"><span>bank: <b>moniepoint</b></span><button class="btn-copy" onclick="copyText('moniepoint')">Copy</button></div>
 <div class="bank-line"><span>Acc no: <b style="font-size:18px;color:#1e40af">8105986759</b></span><button class="btn-copy" onclick="copyText('8105986759')">Copy Acc No</button></div>
 <div class="bank-line"><span>Bank name: <b>kareem sheriff</b></span><button class="btn-copy" onclick="copyText('kareem sheriff')">Copy Name</button></div>
@@ -167,16 +197,11 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-ra
 </div>
 
 <script>
-let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all',tempPicBase64="",tempProofBase64="";
+let currentUser=null,generatedCode="",isOwnerMode=false,buyFilter='all',tempPicBase64="",tempProofBase64="",activePrivateChat=null,chatMode='general';
 const OWNER_SECRET="893000";
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function normalizePhone(p){let d=(p||'').replace(/\D/g,'');if(d.length>11)d=d.slice(-11);if(d.length===10)d='0'+d;return d;}
-function copyText(text){
-  navigator.clipboard.writeText(text).then(()=>{alert('✅ Copied: '+text)}).catch(()=>{
-    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
-    document.execCommand('copy');document.body.removeChild(ta);alert('✅ Copied: '+text);
-  });
-}
+function copyText(text){navigator.clipboard.writeText(text).then(()=>{alert('✅ Copied: '+text)}).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('✅ Copied: '+text);});}
 function getUsers(){return JSON.parse(localStorage.getItem('akc_users')||'[]')}
 function saveUsers(u){localStorage.setItem('akc_users',JSON.stringify(u))}
 function getProducts(){return JSON.parse(localStorage.getItem('akc_products')||'[]')}
@@ -187,44 +212,43 @@ function getRatings(){return JSON.parse(localStorage.getItem('akc_ratings')||'[]
 function saveRatings(r){localStorage.setItem('akc_ratings',JSON.stringify(r))}
 function getComments(){return JSON.parse(localStorage.getItem('akc_comments')||'[]')}
 function saveComments(c){localStorage.setItem('akc_comments',JSON.stringify(c))}
+function getPrivateMsgs(){return JSON.parse(localStorage.getItem('akc_private_msgs')||'[]')}
+function savePrivateMsgs(m){localStorage.setItem('akc_private_msgs',JSON.stringify(m))}
 function getSellerRating(phone){const ratings=getRatings().filter(r=>normalizePhone(r.sellerPhone)===normalizePhone(phone));if(ratings.length===0)return {avg:0,count:0,all:[]};const sum=ratings.reduce((a,b)=>a+b.stars,0);return {avg:(sum/ratings.length).toFixed(1),count:ratings.length,all:ratings};}
 function starHtml(avg){let s='';let full=Math.round(avg);for(let i=1;i<=5;i++){s+=i<=full?'⭐':'☆';}return s;}
-// HIDDEN OWNER CHECK - ONLY VIA URL ?owner=893000
-(function checkUrl(){
-  const params=new URLSearchParams(window.location.search);
-  if(params.get('owner')===OWNER_SECRET){
-    isOwnerMode=true;
-    localStorage.setItem('akc_owner_unlocked','1');
-  }
-})();
+(function checkUrl(){const params=new URLSearchParams(window.location.search);if(params.get('owner')===OWNER_SECRET){isOwnerMode=true;localStorage.setItem('akc_owner_unlocked','1');}})();
 if(localStorage.getItem('akc_owner_unlocked')==='1')isOwnerMode=true;
 function previewPic(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){tempPicBase64=e.target.result;document.getElementById('picPreview').src=tempPicBase64;document.getElementById('picPreview').classList.remove('hidden');};reader.readAsDataURL(file);}
 function previewProof(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){tempProofBase64=e.target.result;document.getElementById('proofPreview').src=tempProofBase64;document.getElementById('proofPreview').classList.remove('hidden');};reader.readAsDataURL(file);}
 function changeMyPic(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){const base64=e.target.result;let users=getUsers();let idx=users.findIndex(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(idx>=0){users[idx].avatar=base64;saveUsers(users);currentUser.avatar=base64;localStorage.setItem('akc_current',JSON.stringify(currentUser));document.getElementById('myPicBig').src=base64;updateTopAvatar();renderUsers();alert('✅ Pic added!');}};reader.readAsDataURL(file);}
-function updateTopAvatar(){const el=document.getElementById('topAvatar');const big=document.getElementById('myPicBig');const nameDisp=document.getElementById('profileNameDisplay');const skillDisp=document.getElementById('profileSkillDisplay');if(currentUser){if(currentUser.avatar){el.innerHTML=`<img src="${currentUser.avatar}">`;if(big)big.src=currentUser.avatar;}else{el.textContent=(currentUser.name||'U')[0].toUpperCase();}if(nameDisp)nameDisp.textContent=currentUser.name;if(skillDisp)skillDisp.textContent=(currentUser.skill||'')+' - '+(currentUser.location||'');const r=getSellerRating(currentUser.phone);const ratingEl=document.getElementById('myRatingDisplay');if(ratingEl){if(r.count===0)ratingEl.innerHTML='⭐ No ratings yet';else ratingEl.innerHTML=`${starHtml(r.avg)} <b>${r.avg}</b> (${r.count})`;}}}
+function updateTopAvatar(){const el=document.getElementById('topAvatar');const big=document.getElementById('myPicBig');const nameDisp=document.getElementById('profileNameDisplay');const skillDisp=document.getElementById('profileSkillDisplay');if(currentUser){if(currentUser.avatar){el.innerHTML=`<img src="${currentUser.avatar}">`;if(big)big.src=currentUser.avatar;}else{el.textContent=(currentUser.name||'U')[0].toUpperCase();}if(nameDisp)nameDisp.textContent=currentUser.name;if(skillDisp){let skillText=currentUser.skill||'general';if(skillText==='general'||!skillText)skillText='Just Student - No Business';skillDisp.textContent=skillText+' - '+(currentUser.location||'');}const r=getSellerRating(currentUser.phone);const ratingEl=document.getElementById('myRatingDisplay');if(ratingEl){if(r.count===0)ratingEl.innerHTML='⭐ No ratings yet';else ratingEl.innerHTML=`${starHtml(r.avg)} <b>${r.avg}</b> (${r.count})`;}}}
 function generateCode(){generatedCode=Math.floor(1000+Math.random()*9000).toString();document.getElementById('codeDisplay').textContent="Your code: "+generatedCode;}
 function showSignup(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('forgotBox').classList.add('hidden');document.getElementById('signupBox').classList.remove('hidden');}
 function showLogin(){document.getElementById('signupBox').classList.add('hidden');document.getElementById('forgotBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');renderPublicUsers();}
 function showForgot(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('signupBox').classList.add('hidden');document.getElementById('forgotBox').classList.remove('hidden');}
 function doSignup(){const name=document.getElementById('suName').value.trim(),phoneRaw=document.getElementById('suPhone').value.trim(),gmail=document.getElementById('suGmail').value.trim().toLowerCase(),pass=document.getElementById('suPass').value.trim(),loc=document.getElementById('suLocation').value,skill=document.getElementById('suSkill').value,codeInput=document.getElementById('suCodeInput').value.trim();if(!name||!phoneRaw||!pass){alert('Fill name phone pass');return}if(!gmail||!gmail.includes('@')){alert('Add valid Gmail');return}if(!generatedCode){alert('Generate code');return}if(codeInput!==generatedCode){alert('Code no match');return}const phone=normalizePhone(phoneRaw);let users=getUsers();if(users.find(u=>normalizePhone(u.phone)===phone)){alert('Phone don sign up');showLogin();return;}const isOwnerSignup=isOwnerMode||phoneRaw.includes(OWNER_SECRET);const user={id:uid(),name,phone,gmail,password:pass,location:loc,skill:skill||'general',isOwner:isOwnerSignup,wallet:0,avatar:tempPicBase64||"",registeredAt:new Date().toLocaleDateString()};users.push(user);saveUsers(users);alert('✅ Signed up!');tempPicBase64="";showLogin();document.getElementById('loginPhone').value=phone;renderPublicUsers();}
-function doLogin(){
-  const phoneRaw=document.getElementById('loginPhone').value.trim();
-  const pass=document.getElementById('loginPass').value.trim();
-  const phone=normalizePhone(phoneRaw);
-  let users=getUsers();
-  let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);
-  if(!u){alert('Wrong phone/pass');return}
-  currentUser=u;
-  if(isOwnerMode)currentUser.isOwner=true;
-  localStorage.setItem('akc_current',JSON.stringify(currentUser));
-  enterApp();
-}
+function doLogin(){const phoneRaw=document.getElementById('loginPhone').value.trim(),pass=document.getElementById('loginPass').value.trim();const phone=normalizePhone(phoneRaw);let users=getUsers();let u=users.find(x=>normalizePhone(x.phone)===phone && x.password===pass);if(!u){alert('Wrong phone/pass');return}currentUser=u;if(isOwnerMode)currentUser.isOwner=true;localStorage.setItem('akc_current',JSON.stringify(currentUser));enterApp();}
 function doResetPassword(){const phoneRaw=document.getElementById('forgotPhone').value.trim(),gmail=document.getElementById('forgotGmail').value.trim().toLowerCase(),newPass=document.getElementById('forgotNewPass').value.trim();const msgEl=document.getElementById('forgotMsg');if(!phoneRaw||!gmail||!newPass){msgEl.textContent='Fill all';msgEl.style.color='red';return}const phone=normalizePhone(phoneRaw);let users=getUsers();const idx=users.findIndex(u=>normalizePhone(u.phone)===phone);if(idx<0){msgEl.textContent='Phone not found';msgEl.style.color='red';return}if((users[idx].gmail||'').toLowerCase()!==gmail){msgEl.textContent='Gmail no match';msgEl.style.color='red';return}users[idx].password=newPass;saveUsers(users);msgEl.textContent='✅ Reset done!';msgEl.style.color='green';setTimeout(()=>{showLogin();},1000);}
 function enterApp(){document.getElementById('authPage').classList.add('hidden');document.getElementById('mainApp').classList.remove('hidden');document.getElementById('topUser').textContent=currentUser.name;document.getElementById('topBadge').textContent=currentUser.isOwner?'OWNER':'AKC';updateTopAvatar();renderAll();if(currentUser.isOwner)document.getElementById('ownerPanel').classList.remove('hidden');}
 function doLogout(){localStorage.removeItem('akc_current');location.reload();}
-function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+name).classList.add('active');if(name==='buy'){renderBuy();renderUsers();}if(name==='sell')renderMyProducts();if(name==='map')initMap();if(name==='chat')renderSchoolMsgs();if(name==='account'){renderUsers();renderPending();updateTopAvatar();document.getElementById('accountInfo').innerHTML=`<p><b>📞</b> ${currentUser.phone}<br><b>📧</b> ${currentUser.gmail||''}<br><b>📍</b> ${currentUser.location}<br><b>💼</b> ${currentUser.skill}</p>`;const r=getSellerRating(currentUser.phone);let revHtml='';if(r.all.length>0){revHtml='<h4 style="margin-top:12px">⭐ Reviews</h4>'+r.all.map(x=>`<div class="card" style="margin:5px 0;padding:8px"><b>${x.raterName}</b> - ${starHtml(x.stars)}<br><span class="small">${x.comment||''}</span></div>`).join('');}document.getElementById('myReviewsList').innerHTML=revHtml;}}
-function renderAll(){renderBuy();renderMyProducts();renderSchoolMsgs();renderUsers();renderPublicUsers();renderPending();}
-function renderUsers(){const users=getUsers();const count=users.length;['userCount','accountUserCount','totalUsersTop','publicCountLogin'].forEach(id=>{const el=document.getElementById(id);if(el){if(id==='totalUsersTop')el.textContent=count+' Users'; else el.textContent=count;}});function avatarHtml(u,size=45){if(u.avatar){return `<div class="user-avatar" style="width:${size}px;height:${size}px"><img src="${u.avatar}"></div>`;}else{return `<div class="user-avatar" style="width:${size}px;height:${size}px">${(u.name||'U')[0].toUpperCase()}</div>`;}}const html=users.slice().reverse().map(u=>{const rat=getSellerRating(u.phone);const ratingText=rat.count===0?'No rating':`${starHtml(rat.avg)} ${rat.avg} (${rat.count})`;return `<div class="user-row">${avatarHtml(u,45)}<div style="flex:1"><b>${u.name}</b> ${u.isOwner?'<span class="badge badge-owner">OWNER</span>':''}<br><span class="small">📍 ${u.location} | 💼 ${u.skill}</span><br><span class="small rating-box">${ratingText}</span><br><button class="btn-star" onclick="rateSeller('${u.phone}','${u.name}')">⭐ Rate</button></div></div>`;}).join('')||'<p class="small">No users yet</p>';['userListPreview','fullUserList','publicListLogin'].forEach(t=>{const el=document.getElementById(t);if(el)el.innerHTML=html;});}
+function showTab(name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+name).classList.add('active');if(name==='buy'){renderBuy();renderUsers();}if(name==='sell')renderMyProducts();if(name==='map')initMap();if(name==='chat'){renderSchoolMsgs();renderPrivateUserChips();renderPrivateMsgs();}if(name==='account'){renderUsers();renderPending();updateTopAvatar();document.getElementById('accountInfo').innerHTML=`<p><b>📞</b> ${currentUser.phone}<br><b>📧</b> ${currentUser.gmail||''}<br><b>📍</b> ${currentUser.location}<br><b>💼</b> ${currentUser.skill||'Just Student - No Business'}</p>`;const r=getSellerRating(currentUser.phone);let revHtml='';if(r.all.length>0){revHtml='<h4 style="margin-top:12px">⭐ Reviews</h4>'+r.all.map(x=>`<div class="card" style="margin:5px 0;padding:8px"><b>${x.raterName}</b> - ${starHtml(x.stars)}<br><span class="small">${x.comment||''}</span></div>`).join('');}document.getElementById('myReviewsList').innerHTML=revHtml;}}
+function renderAll(){renderBuy();renderMyProducts();renderSchoolMsgs();renderUsers();renderPublicUsers();renderPending();renderPrivateUserChips();}
+function renderUsers(){
+  const users=getUsers();
+  const count=users.length;
+  ['userCount','accountUserCount','totalUsersTop','publicCountLogin'].forEach(id=>{const el=document.getElementById(id);if(el){if(id==='totalUsersTop')el.textContent=count+' Users'; else el.textContent=count;}});
+  function avatarHtml(u,size=45){if(u.avatar){return `<div class="user-avatar" style="width:${size}px;height:${size}px"><img src="${u.avatar}"></div>`;}else{return `<div class="user-avatar" style="width:${size}px;height:${size}px">${(u.name||'U')[0].toUpperCase()}</div>`;}}
+  const html=users.slice().reverse().map(u=>{
+    const rat=getSellerRating(u.phone);
+    const ratingText=rat.count===0?'No rating':`${starHtml(rat.avg)} ${rat.avg} (${rat.count})`;
+    const isMe = currentUser && normalizePhone(u.phone)===normalizePhone(currentUser.phone);
+    let businessText = u.skill||'general';
+    if(!businessText || businessText==='general') businessText='Just Student - No Business 👨‍🎓';
+    const chatBtn = isMe ? '' : `<button class="btn-chat" onclick="startPrivateChat('${u.phone}','${u.name}')">💬 Chat</button>`;
+    return `<div class="user-row">${avatarHtml(u,45)}<div style="flex:1"><b>${u.name}</b> ${u.isOwner?'<span class="badge badge-owner">OWNER</span>':''}<br><span class="small">📍 ${u.location} | ${businessText}</span><br><span class="small rating-box">${ratingText}</span><br><div style="display:flex;gap:4px;margin-top:4px">${chatBtn}<button class="btn-star" onclick="rateSeller('${u.phone}','${u.name}')">⭐ Rate</button></div></div></div>`;
+  }).join('')||'<p class="small">No users yet</p>';
+  ['userListPreview','fullUserList','publicListLogin'].forEach(t=>{const el=document.getElementById(t);if(el)el.innerHTML=html;});
+}
 function renderPublicUsers(){renderUsers();}
 function setBuyFilter(f){buyFilter=f;document.querySelectorAll('#tab-buy .chip').forEach(c=>c.classList.remove('active'));const map={all:'filterAll',plumbing:'filterPlumbing',phone:'filterPhone',gadget:'filterGadget'};const elId=map[f]||'filterAll';const el=document.getElementById(elId);if(el)el.classList.add('active');renderBuy();}
 function updateSellForm(){const type=document.getElementById('sellType').value;document.getElementById('sellProductFields').classList.toggle('hidden',type!=='product');document.getElementById('sellPhoneFields').classList.toggle('hidden',type!=='phone_repair');document.getElementById('sellGadgetFields').classList.toggle('hidden',type!=='gadget');document.getElementById('sellCakeFields').classList.toggle('hidden',type!=='cake');document.getElementById('sellEventFields').classList.toggle('hidden',type!=='event');}
@@ -235,7 +259,7 @@ function renderBuy(){
   const q=(document.getElementById('searchBuy')?.value||'').toLowerCase();
   let products=getProducts().filter(p=>p.status==='approved');
   if(buyFilter!=='all'){products=products.filter(p=>{if(buyFilter==='phone')return p.category==='Phone Repair';if(buyFilter==='gadget')return p.category==='Gadget';if(buyFilter==='plumbing')return p.category==='Plumbing'||p.category==='Electrical'||p.category==='Building';return true;});}
-  if(q)products=products.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
+  if(q)products=products.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.sellerName.toLowerCase().includes(q));
   products=products.reverse();
   if(products.length===0){list.innerHTML='<p class="small">No approved posts yet. Pay ₦100 to bank below!</p>';return}
   list.innerHTML=products.map(p=>{
@@ -245,7 +269,9 @@ function renderBuy(){
     const ratingText=rat.count===0?'⭐ New':`${starHtml(rat.avg)} ${rat.avg} (${rat.count})`;
     const comments=getCommentsForProduct(p.id);
     const commentsHtml=comments.map(c=>`<div class="comment"><b style="font-size:11px">${c.senderName}</b>: ${c.text}<br><span class="small" style="font-size:10px">${c.date}</span></div>`).join('')||'<p class="small">No comments yet</p>';
-    return `<div class="card ${cls}"><div style="display:flex;justify-content:space-between"><b>${icon} ${p.name} - ₦${p.price}</b><span class="badge badge-approved">APPROVED</span></div><p class="small" style="margin:6px 0">${p.desc}</p><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="small">By: ${p.sellerName}<br><span class="rating-box">${ratingText}</span></span><button class="btn-star" onclick="rateSeller('${p.sellerPhone}','${p.sellerName}')">⭐ Rate</button></div><div class="comment-box"><b style="font-size:12px">💬 Comments (${comments.length})</b><div style="max-height:150px;overflow-y:auto;margin-top:6px">${commentsHtml}</div><div class="comment-input"><input id="commentInput-${p.id}" placeholder="Add comment..." /><button class="btn btn-primary" style="width:70px;margin:0;padding:8px" onclick="addComment('${p.id}')">Send</button></div></div></div>`;
+    const isMe = normalizePhone(p.sellerPhone)===normalizePhone(currentUser.phone);
+    const chatBtn = isMe ? '' : `<button class="btn-chat" onclick="startPrivateChat('${p.sellerPhone}','${p.sellerName}')">💬 Private Chat Seller</button>`;
+    return `<div class="card ${cls}"><div style="display:flex;justify-content:space-between"><b>${icon} ${p.name} - ₦${p.price}</b><span class="badge badge-approved">APPROVED</span></div><p class="small" style="margin:6px 0">${p.desc}</p><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="small">By: ${p.sellerName}<br><span class="rating-box">${ratingText}</span></span><div><button class="btn-star" onclick="rateSeller('${p.sellerPhone}','${p.sellerName}')">⭐ Rate</button></div></div><div style="margin-top:6px">${chatBtn}</div><div class="comment-box"><b style="font-size:12px">💬 Comments (${comments.length})</b><div style="max-height:150px;overflow-y:auto;margin-top:6px">${commentsHtml}</div><div class="comment-input"><input id="commentInput-${p.id}" placeholder="Add comment..." /><button class="btn btn-primary" style="width:70px;margin:0;padding:8px" onclick="addComment('${p.id}')">Send</button></div></div></div>`;
   }).join('');
 }
 function rateSeller(sellerPhone,sellerName){if(normalizePhone(sellerPhone)===normalizePhone(currentUser.phone)){alert('No fit rate yourself');return}const stars=prompt(`Rate ${sellerName} - 1 to 5`);if(!stars)return;const s=parseInt(stars);if(isNaN(s)||s<1||s>5){alert('1-5 only');return}const comment=prompt('Review (optional):')||'';const ratings=getRatings();const existing=ratings.find(r=>normalizePhone(r.sellerPhone)===normalizePhone(sellerPhone) && normalizePhone(r.raterPhone)===normalizePhone(currentUser.phone));if(existing){if(!confirm('Update rating?'))return;existing.stars=s;existing.comment=comment;}else{ratings.push({id:uid(),sellerPhone,sellerName,raterPhone:currentUser.phone,raterName:currentUser.name,stars:s,comment,date:new Date().toLocaleDateString()});}saveRatings(ratings);alert(`✅ Rated ${sellerName} ${s}⭐`);renderBuy();renderUsers();updateTopAvatar();}
@@ -268,8 +294,79 @@ function renderMyProducts(){const list=document.getElementById('myProducts');con
 function deleteProduct(id){if(!confirm('Delete?'))return;saveProducts(getProducts().filter(p=>p.id!==id));renderBuy();renderMyProducts();renderPending();}
 function renderSchoolMsgs(){const box=document.getElementById('schoolMessages');const msgs=getSchoolMsgs();box.innerHTML=msgs.map(m=>`<div style="margin:6px 0"><b style="font-size:12px">${m.senderName}</b><div style="background:#f3f4f6;padding:8px;border-radius:12px;margin-top:2px">${m.text}</div></div>`).join('')||'<p class="small">No messages</p>';}
 function sendSchoolMsg(){const input=document.getElementById('schoolInput');const text=input.value.trim();if(!text)return;const msgs=getSchoolMsgs();msgs.push({id:uid(),text,senderPhone:currentUser.phone,senderName:currentUser.name});saveSchoolMsgs(msgs);input.value='';renderSchoolMsgs();}
+
+// PRIVATE CHAT FUNCTIONS - NEW!
+function switchChatTab(mode){
+  chatMode=mode;
+  document.getElementById('generalChatBox').classList.toggle('hidden',mode!=='general');
+  document.getElementById('privateChatBox').classList.toggle('hidden',mode!=='private');
+  document.getElementById('chatTabGeneral').className = mode==='general' ? 'btn btn-primary' : 'btn btn-secondary';
+  document.getElementById('chatTabPrivate').className = mode==='private' ? 'btn btn-primary' : 'btn btn-secondary';
+  document.getElementById('chatTabGeneral').style.flex='1';document.getElementById('chatTabGeneral').style.margin='0';
+  document.getElementById('chatTabPrivate').style.flex='1';document.getElementById('chatTabPrivate').style.margin='0';
+  if(mode==='private'){renderPrivateUserChips();renderPrivateMsgs();}
+}
+function startPrivateChat(phone,name){
+  activePrivateChat=normalizePhone(phone);
+  showTab('chat');
+  setTimeout(()=>{
+    switchChatTab('private');
+    renderPrivateUserChips();
+    renderPrivateMsgs();
+    document.getElementById('privateInput').placeholder='Message '+name+'...';
+  },100);
+}
+function renderPrivateUserChips(){
+  const users=getUsers().filter(u=>normalizePhone(u.phone)!==normalizePhone(currentUser.phone));
+  const box=document.getElementById('privateUserChips');
+  if(!box)return;
+  if(users.length===0){box.innerHTML='<p class="small">No other users</p>';return}
+  box.innerHTML=users.map(u=>{
+    const active = activePrivateChat===normalizePhone(u.phone) ? 'active' : '';
+    return `<div class="private-user-chip ${active}" onclick="startPrivateChat('${u.phone}','${u.name}')">${u.name}</div>`;
+  }).join('');
+}
+function renderPrivateMsgs(){
+  const box=document.getElementById('privateMessages');
+  if(!activePrivateChat){box.innerHTML='<p class="small">👆 Select person above to start private chat — Works even if person no get business!</p>';return}
+  const all=getPrivateMsgs();
+  const relevant=all.filter(m=>
+    (normalizePhone(m.from)===normalizePhone(currentUser.phone) && normalizePhone(m.to)===activePrivateChat) ||
+    (normalizePhone(m.to)===normalizePhone(currentUser.phone) && normalizePhone(m.from)===activePrivateChat)
+  );
+  if(relevant.length===0){box.innerHTML=`<p class="small">No messages yet with this person — Start chatting!<br>Person go see am when dem open Chat → Private Chats</p>`;return}
+  box.innerHTML=relevant.map(m=>{
+    const isMe = normalizePhone(m.from)===normalizePhone(currentUser.phone);
+    return `<div class="private-msg ${isMe?'me':'them'}"><b style="font-size:10px">${isMe?'You':m.fromName}</b><br>${m.text}<br><span style="font-size:9px;opacity:0.7">${m.time}</span></div>`;
+  }).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function sendPrivateMsg(){
+  const input=document.getElementById('privateInput');
+  const text=input.value.trim();
+  if(!text){alert('Type message');return}
+  if(!activePrivateChat){alert('Select person to chat first! Go to Market → Tap Chat button');return}
+  const users=getUsers();
+  const target=users.find(u=>normalizePhone(u.phone)===activePrivateChat);
+  const msgs=getPrivateMsgs();
+  msgs.push({
+    id:uid(),
+    from:currentUser.phone,
+    fromName:currentUser.name,
+    to:activePrivateChat,
+    toName:target?target.name:activePrivateChat,
+    text,
+    time:new Date().toLocaleString()
+  });
+  savePrivateMsgs(msgs);
+  input.value='';
+  renderPrivateMsgs();
+  // also show badge
+  alert('✅ Sent! Person go see am for Private Chats');
+}
+
 function initMap(){setTimeout(()=>{const el=document.getElementById('mapFull');if(!el)return;if(window.mapFull){window.mapFull.invalidateSize();return;}window.mapFull=L.map('mapFull').setView([7.4813,5.7415],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.mapFull);},600);}
 (function(){const saved=localStorage.getItem('akc_current');if(saved){try{currentUser=JSON.parse(saved);let users=getUsers();let fresh=users.find(u=>normalizePhone(u.phone)===normalizePhone(currentUser.phone));if(fresh){currentUser=fresh;if(localStorage.getItem('akc_owner_unlocked')==='1')currentUser.isOwner=true;enterApp();}}catch(e){}}renderPublicUsers();})();
 </script>
 </body>
-</html>
+                                                                                                                                    </html>
