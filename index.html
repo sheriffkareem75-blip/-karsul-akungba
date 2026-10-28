@@ -3,30 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKC V36 FULL RESTORED</title>
+<title>AKC V36.4 Ultimate</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#f6f7fb;padding-bottom:70px}
+body{background:#f6f7fb;padding-bottom:75px}
 .header{background:#0a1931;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
 .logo{background:white;color:#0a1931;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
 .owner-badge{background:#f9c74f;color:#333;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:bold}
-.card{background:white;margin:10px;border-radius:12px;padding:12px;box-shadow:0 2px 5px rgba(0,0,0,.08)}
+.card{background:white;margin:10px;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 .user-card{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eee;align-items:center}
 .avatar{width:48px;height:48px;border-radius:50%;background:#1a3a8f;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold}
 .filters{display:flex;gap:8px;padding:8px 10px;overflow:auto}
 .filter{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;white-space:nowrap;font-size:13px;cursor:pointer}
 .filter.active{background:#0a1931;color:white}
-.search{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #eee;z-index:1000}
 .nav-item{text-align:center;font-size:11px;color:#888;cursor:pointer}
 .nav-item.active{color:#0a1931;font-weight:bold}
 input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc}
 button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 .hidden{display:none}
-#map{height:400px;border-radius:12px}
-.badge-wallet{background:#00b894;color:white;padding:4px 8px;border-radius:10px;font-size:12px}
+#map{height:420px;border-radius:12px;z-index:1}
+.chat-tabs{display:flex;gap:5px;margin-bottom:10px}
+.chat-tab{flex:1;padding:10px;text-align:center;border-radius:8px;background:#eee;cursor:pointer;font-weight:bold;font-size:13px}
+.chat-tab.active{background:#0a1931;color:white}
+.msg-bubble{padding:10px 12px;border-radius:15px;margin:6px 0;max-width:80%;font-size:14px}
+.msg-me{background:#0a1931;color:white;margin-left:auto}
+.msg-them{background:#eee}
+.google-box{background:#e8f0fe;padding:10px;border-radius:8px;margin:8px 0;border:1px solid #4285f4}
 </style>
 </head>
 <body>
@@ -36,202 +41,153 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 </div>
 
 <div id="authSection" class="card">
-<h3>AKC Login - V36 FULL</h3>
+<h3>AKC V36.4 Ultimate Login</h3>
 <input id="phone" value="08105986759">
 <input id="password" type="password" placeholder="Password">
 <input id="name" value="Kareem Sheriff">
-<select id="skill"><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option><option>Tailoring</option><option>Baking</option></select>
-<button class="primary" onclick="registerFull()">Register New Account</button>
-<button class="primary" style="background:#0984e3" onclick="loginFull()">Login</button>
-<p id="msg" style="margin-top:8px"></p>
+<select id="skill"><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option><option>Tailoring</option><option>Baking</option><option>Barbing</option></select>
+<button class="primary" onclick="register()">Register New Account</button>
+<button class="primary" style="background:#0984e3" onclick="login()">Login</button>
+<p id="msg"></p>
 </div>
 
 <div id="mainSection" class="hidden">
-  <!-- BUY TAB -->
-  <div id="buyTab">
-    <div style="padding:10px 12px"><h2>Adverts</h2></div>
-    <div class="card"><b>Registered - <span id="regCount">1</span> | <span style="color:green">● 1 Online Now</span></b><div id="usersList" style="margin-top:10px"></div></div>
-    <div class="filters">
-      <div class="filter active" onclick="filterSkill('All',this)">All</div>
-      <div class="filter" onclick="filterSkill('Phone Repair',this)">Phone Repair</div>
-      <div class="filter" onclick="filterSkill('Gadgets',this)">Gadgets</div>
-      <div class="filter" onclick="filterSkill('Plumbing',this)">Plumbing</div>
-    </div>
-    <div class="card"><input class="search" id="searchInput" placeholder="Search adverts, skills, names..." onkeyup="searchAll()"><div id="advertsList" style="margin-top:10px"></div></div>
-  </div>
-
-  <!-- SELL TAB -->
-  <div id="sellTab" class="hidden">
-    <div class="card"><h3>Sell - Post Advert</h3><input id="prodName" placeholder="Product name e.g iPhone 12"><input id="prodPrice" type="number" placeholder="Price ₦"><textarea id="prodDesc" placeholder="Description"></textarea><button class="primary" onclick="postAdvert()">Post Advert</button><p id="sellMsg"></p></div>
-    <div class="card"><h4>My Adverts</h4><div id="myAdverts"></div></div>
-  </div>
-
-  <!-- MAP TAB -->
-  <div id="mapTab" class="hidden">
-    <div class="card"><h3>Live Map - Akungba Artisans</h3><p style="font-size:12px;color:#666">See all artisans near you</p><div id="map"></div><button class="primary" style="margin-top:10px" onclick="shareLocation()">📍 Share My Live Location</button></div>
-  </div>
-
-  <!-- CHAT TAB -->
-  <div id="chatTab" class="hidden">
-    <div class="card"><h3>Chats</h3><div id="chatList"><p style="color:#888;text-align:center;padding:20px">Select a user from Buy tab to chat</p></div></div>
-    <div class="card hidden" id="chatBox"><div id="chatMessages" style="height:200px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;margin-bottom:8px"></div><input id="chatInput" placeholder="Type message..."><button class="primary" onclick="sendMessage()">Send</button></div>
-  </div>
-
-  <!-- ACCOUNT TAB -->
-  <div id="accountTab" class="hidden">
-    <div class="card"><h3>My Account</h3><p><b>Name:</b> <span id="accName"></span></p><p><b>Phone:</b> <span id="accPhone"></span></p><p><b>Skill:</b> <span id="accSkill"></span></p><p><b>Wallet:</b> <span class="badge-wallet" id="accWallet">₦0</span></p><button class="primary" style="background:#00b894;margin-top:10px" onclick="fundWallet()">💰 Fund Wallet +₦1000 (Demo)</button></div>
-    <div class="card"><h4>Owner Panel</h4><p style="font-size:12px">Total Users: <span id="totalUsers">1</span><br>Total Adverts: <span id="totalAdverts">0</span><br>Total Chats: <span id="totalChats">0</span></p><button class="primary" style="background:#d63031" onclick="clearAllData()">🗑️ Clear All Data (Owner Only)</button></div>
-  </div>
+<!-- BUY -->
+<div id="buyTab"><div style="padding:10px 12px"><h2>Buy - Artisans & Adverts</h2></div>
+<div class="card"><b>Registered - <span id="regCount">1</span> | <span style="color:green">● 1 Online</span></b><div id="usersList"></div></div>
+<div class="filters"><div class="filter active" onclick="filterSkill('All',this)">All</div><div class="filter" onclick="filterSkill('Phone Repair',this)">Phone Repair</div><div class="filter" onclick="filterSkill('Gadgets',this)">Gadgets</div><div class="filter" onclick="filterSkill('Plumbing',this)">Plumbing</div></div>
+<div class="card"><input id="searchInput" placeholder="Search..." onkeyup="searchAll()"><div id="advertsList" style="margin-top:10px"></div></div>
+</div>
+<!-- SELL -->
+<div id="sellTab" class="hidden"><div class="card"><h3>Sell - Post Advert</h3><input id="prodName" placeholder="Product name"><input id="prodPrice" type="number" placeholder="Price ₦"><textarea id="prodDesc" placeholder="Description"></textarea><button class="primary" onclick="postAdvert()">Post Advert</button><p id="sellMsg"></p></div><div class="card"><h4>My Adverts</h4><div id="myAdverts"></div></div></div>
+<!-- MAP -->
+<div id="mapTab" class="hidden">
+<div class="card">
+<h3>🗺️ Live Map - Akungba Artisans</h3>
+<div class="google-box">
+<b>🌐 Google Location Enabled</b><br>
+<small>Your location: <span id="myLocText">Not shared yet</span></small><br>
+<a id="googleLink" href="#" target="_blank" style="color:#4285f4;font-size:13px">Open in Google Maps</a>
+</div>
+<div id="map"></div>
+<button class="primary" style="margin-top:10px" onclick="shareLocation()">📍 Share My Live Location (Google)</button>
+<button class="primary" style="background:#4285f4;margin-top:5px" onclick="openGoogleMaps()">🌍 Open All Artisans in Google Maps</button>
+</div>
+</div>
+<!-- CHAT -->
+<div id="chatTab" class="hidden">
+<div class="card">
+<h3>💬 Chats</h3>
+<div class="chat-tabs">
+<div class="chat-tab active" id="privateTabBtn" onclick="switchChatType('private')">Private Chat</div>
+<div class="chat-tab" id="liveTabBtn" onclick="switchChatType('live')">🔴 Live Chat</div>
+</div>
+<div id="privateChatSection">
+<div id="chatList"></div>
+<div class="hidden" id="chatBox"><div id="chatMessages" style="height:250px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="chatInput" placeholder="Type private message..."><button class="primary" onclick="sendPrivate()">Send Private</button></div>
+</div>
+<div id="liveChatSection" class="hidden">
+<div id="liveMessages" style="height:300px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="liveInput" placeholder="Type live message to everyone..."><button class="primary" style="background:#e17055" onclick="sendLive()">🔴 Send to Live Chat</button>
+</div>
+</div>
+</div>
+<!-- ACCOUNT -->
+<div id="accountTab" class="hidden">
+<div class="card">
+<h3>👤 My Account - Edit</h3>
+<p><b>Name:</b> <span id="accName"></span></p><p><b>Phone:</b> <span id="accPhone"></span></p><p><b>Skill:</b> <span id="accSkill"></span></p><p><b>Wallet:</b> <span id="accWallet" style="background:#00b894;color:white;padding:4px 8px;border-radius:10px">₦0</span></p>
+<hr style="margin:10px 0">
+<h4>✏️ Change Account Details</h4>
+<input id="editName" placeholder="Change Name"><input id="editSkill" placeholder="Change Skill (e.g Tailoring)"><input id="editLocation" placeholder="Change Location - e.g Akungba, AAUA Gate"><button class="primary" style="background:#0984e3" onclick="updateAccount()">💾 Save Changes</button>
+<button class="primary" style="background:#00b894;margin-top:8px" onclick="fundWallet()">💰 Fund Wallet +₦1000</button>
+<div class="google-box" style="margin-top:10px"><b>📍 Google Location:</b> <span id="accLoc">Not set</span><br><button onclick="shareLocation()" style="width:auto;padding:6px 12px;background:#4285f4;color:white;border:none;border-radius:8px;font-size:12px;margin-top:5px">Update Google Location</button></div>
+</div>
+<div class="card"><h4>Owner Panel</h4><p style="font-size:12px">Users: <span id="totalUsers">1</span> | Adverts: <span id="totalAdverts">0</span> | Private Chats: <span id="totalChats">0</span> | Live Chats: <span id="totalLive">0</span></p><button class="primary" style="background:#d63031" onclick="clearAllData()">🗑️ Clear All</button></div>
+</div>
 </div>
 
-<div class="bottom-nav" id="bottomNav">
-  <div class="nav-item active" onclick="switchTab('buy',this)">🏠<br>Buy</div>
-  <div class="nav-item" onclick="switchTab('sell',this)">➕<br>Sell</div>
-  <div class="nav-item" onclick="switchTab('map',this)">🗺️<br>Map</div>
-  <div class="nav-item" onclick="switchTab('chat',this)">💬<br>Chat</div>
-  <div class="nav-item" onclick="switchTab('account',this)">👤<br>Account</div>
+<div class="bottom-nav" id="bottomNav" style="display:none">
+<div class="nav-item active" onclick="switchTab('buy',this)">🏠<br>Buy</div>
+<div class="nav-item" onclick="switchTab('sell',this)">➕<br>Sell</div>
+<div class="nav-item" onclick="switchTab('map',this)">🗺️<br>Map</div>
+<div class="nav-item" onclick="switchTab('chat',this)">💬<br>Chat</div>
+<div class="nav-item" onclick="switchTab('account',this)">👤<br>Account</div>
 </div>
 
 <script>
-let currentUser=null, activeChat=null, map=null, markers=[];
+let currentUser=null, activeChat=null, map=null, markers=[], chatType='private';
 const getUsers=()=>JSON.parse(localStorage.getItem('akc_v36_users')||'[]');
 const saveUsers=u=>localStorage.setItem('akc_v36_users',JSON.stringify(u));
 const getAdverts=()=>JSON.parse(localStorage.getItem('akc_v36_adverts')||'[]');
 const saveAdverts=a=>localStorage.setItem('akc_v36_adverts',JSON.stringify(a));
 const getChats=()=>JSON.parse(localStorage.getItem('akc_v36_chats')||'[]');
 const saveChats=c=>localStorage.setItem('akc_v36_chats',JSON.stringify(c));
+const getLive=()=>JSON.parse(localStorage.getItem('akc_v36_live')||'[]');
+const saveLive=l=>localStorage.setItem('akc_v36_live',JSON.stringify(l));
 
-function registerFull(){
-  const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim(), name=document.getElementById('name').value.trim(), skill=document.getElementById('skill').value;
-  if(!phone||!pass||!name){msg.innerHTML="<span style='color:red'>Fill all fields</span>";return;}
-  let users=getUsers();
-  if(users.find(x=>x.phone===phone)){msg.innerHTML="<span style='color:red'>Already exists, Login</span>";return;}
-  const u={id:Date.now().toString(),phone,name,password:pass,skill,is_owner:phone==='08105986759',wallet:0,lat:7.476, lng:5.738, created: new Date().toLocaleDateString()};
-  users.push(u); saveUsers(users);
-  msg.innerHTML="<span style='color:green'>✅ Registered! Click Login now</span>";
+function register(){
+ const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim(), name=document.getElementById('name').value.trim(), skill=document.getElementById('skill').value;
+ if(!phone||!pass||!name){msg.innerHTML="<span style='color:red'>Fill all</span>";return;}
+ let users=getUsers(); if(users.find(x=>x.phone===phone)){msg.innerHTML="<span style='color:red'>Already exists, Login</span>";return;}
+ const u={id:Date.now().toString(),phone,name,password:pass,skill,is_owner:phone==='08105986759',wallet:0,lat:7.476+Math.random()*0.01,lng:5.738+Math.random()*0.01,location:'Akungba, AAUA'};
+ users.push(u); saveUsers(users); msg.innerHTML="<span style='color:green'>✅ Registered! Login</span>";
 }
-function loginFull(){
-  const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim();
-  let users=getUsers();
-  if(users.length===0){
-    users=[
-      {id:'1',phone:'08105986759',name:'Kareem Sheriff',password:'123',skill:'Plumbing',is_owner:true,wallet:5000,lat:7.476,lng:5.738},
-      {id:'2',phone:'08011111111',name:'Tunde Phone Repair',password:'123',skill:'Phone Repair',is_owner:false,wallet:0,lat:7.478,lng:5.74},
-      {id:'3',phone:'08022222222',name:'Aisha Gadgets',password:'123',skill:'Gadgets',is_owner:false,wallet:0,lat:7.474,lng:5.736}
-    ]; saveUsers(users);
-  }
-  const found=users.find(u=>u.phone===phone && u.password===pass) || users.find(u=>u.phone===phone);
-  if(!found){msg.innerHTML="<span style='color:red'>User not found, Register first</span>";return;}
-  currentUser=found; localStorage.setItem('akc_v36_current',JSON.stringify(found));
-  showMainFull();
+function login(){
+ let users=getUsers();
+ if(users.length===0){users=[{id:'1',phone:'08105986759',name:'Kareem Sheriff',password:'123',skill:'Plumbing',is_owner:true,wallet:5000,lat:7.476,lng:5.738,location:'Akungba'},{id:'2',phone:'08011111111',name:'Tunde Phone Repair',password:'123',skill:'Phone Repair',is_owner:false,wallet:0,lat:7.478,lng:5.74,location:'AAUA Gate'},{id:'3',phone:'08022222222',name:'Aisha Gadgets',password:'123',skill:'Gadgets',is_owner:false,wallet:0,lat:7.474,lng:5.736,location:'Akungba'}]; saveUsers(users);}
+ const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim();
+ const found=users.find(u=>u.phone===phone); if(!found){msg.innerHTML="<span style='color:red'>Not found, Register</span>";return;}
+ currentUser=found; localStorage.setItem('akc_v36_current',JSON.stringify(found)); showMain();
 }
-function showMainFull(){
-  document.getElementById('authSection').classList.add('hidden');
-  document.getElementById('mainSection').classList.remove('hidden');
-  document.getElementById('bottomNav').style.display='flex';
-  refreshAll();
-}
+function showMain(){document.getElementById('authSection').classList.add('hidden');document.getElementById('mainSection').classList.remove('hidden');document.getElementById('bottomNav').style.display='flex';refreshAll();}
 function refreshAll(){
-  const users=getUsers(), adverts=getAdverts();
-  document.getElementById('regCount').innerText=users.length;
-  document.getElementById('userCount').innerText=users.length+" Users";
-  document.getElementById('currentName').innerText=currentUser.name;
-  document.getElementById('accName').innerText=currentUser.name;
-  document.getElementById('accPhone').innerText=currentUser.phone;
-  document.getElementById('accSkill').innerText=currentUser.skill;
-  document.getElementById('accWallet').innerText="₦"+(currentUser.wallet||0);
-  document.getElementById('totalUsers').innerText=users.length;
-  document.getElementById('totalAdverts').innerText=adverts.length;
-  document.getElementById('totalChats').innerText=getChats().length;
-
-  let html="";
-  users.forEach(u=>{
-    const code="["+u.name.substring(0,4).toUpperCase()+Math.floor(100000+Math.random()*900000).toString().substring(0,3)+"]";
-    html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b> ${u.is_owner?'<span style="background:#f9c74f;padding:2px 6px;border-radius:10px;font-size:10px">OWNER</span>':''} <span style="color:#0a1931;font-size:11px">${code}</span><br><small style="color:#888">AAUA - ${u.skill} | ${u.phone}</small><br><span style="font-size:11px;background:#eee;padding:2px 6px;border-radius:5px">⭐ No rating</span><br><button onclick="openChat('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px;margin-top:5px">Chat</button> <button style="width:auto;padding:5px 12px;border-radius:15px;background:#fdcb6e;border:none;font-size:12px">Rate</button></div></div>`;
-  });
-  document.getElementById('usersList').innerHTML=html;
-
-  let adHtml="";
-  if(adverts.length===0) adHtml="<p style='color:#999;text-align:center;padding:15px'>No adverts yet. Post from Sell tab!</p>";
-  else adverts.forEach(a=>{adHtml+=`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${a.name}</b> - ₦${a.price}<br><small>${a.desc} | by ${a.sellerName}</small></div>`});
-  document.getElementById('advertsList').innerHTML=adHtml;
-  document.getElementById('myAdverts').innerHTML=adHtml;
+ const users=getUsers(), adverts=getAdverts();
+ document.getElementById('regCount').innerText=users.length; document.getElementById('userCount').innerText=users.length+" Users"; document.getElementById('currentName').innerText=currentUser.name;
+ document.getElementById('accName').innerText=currentUser.name; document.getElementById('accPhone').innerText=currentUser.phone; document.getElementById('accSkill').innerText=currentUser.skill; document.getElementById('accWallet').innerText="₦"+(currentUser.wallet||0);
+ document.getElementById('accLoc').innerText=currentUser.location||'Not set'; document.getElementById('myLocText').innerText=currentUser.location||'Not shared yet';
+ document.getElementById('editName').value=currentUser.name;
+ document.getElementById('totalUsers').innerText=users.length; document.getElementById('totalAdverts').innerText=adverts.length; document.getElementById('totalChats').innerText=getChats().length; document.getElementById('totalLive').innerText=getLive().length;
+ document.getElementById('googleLink').href=`https://www.google.com/maps?q=${currentUser.lat||7.476},${currentUser.lng||5.738}`;
+ let html=""; users.forEach(u=>{const code="["+u.name.substring(0,3).toUpperCase()+Math.floor(100+Math.random()*900)+"]"; html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b> ${u.is_owner?'<span style="background:#f9c74f;padding:2px 6px;border-radius:10px;font-size:10px">OWNER</span>':''} <span style="color:#0a1931;font-size:11px">${code}</span><br><small>📍 ${u.location||'Akungba'} - ${u.skill} | ${u.phone}</small><br><button onclick="openPrivate('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px;margin-top:5px">💬 Private Chat</button> <button onclick="openGoogleUser('${u.lat}','${u.lng}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#4285f4;color:white;border:none;font-size:12px">📍 Google</button></div></div>`;});
+ document.getElementById('usersList').innerHTML=html;
+ let adHtml=""; if(adverts.length===0) adHtml="<p style='color:#999;text-align:center'>No adverts yet</p>"; else adverts.forEach(a=>{adHtml+=`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${a.name}</b> - ₦${a.price}<br><small>${a.desc} | by ${a.sellerName}</small></div>`});
+ document.getElementById('advertsList').innerHTML=adHtml; document.getElementById('myAdverts').innerHTML=adHtml;
+ loadPrivateList(); loadLiveMessages();
 }
-
-function switchTab(tab,el){
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); el.classList.add('active');
-  ['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(t=>document.getElementById(t).classList.add('hidden'));
-  document.getElementById(tab+'Tab').classList.remove('hidden');
-  if(tab==='map') setTimeout(initMap,300);
-}
-function filterSkill(cat,el){
-  document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active')); el.classList.add('active');
-  const users=cat==='All'?getUsers():getUsers().filter(u=>u.skill===cat);
-  document.getElementById('regCount').innerText=users.length;
-  let html=""; users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}</div></div>`});
-  document.getElementById('usersList').innerHTML=html||"<p style='text-align:center;color:#999'>No users for "+cat+"</p>";
-}
-function searchAll(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const users=getUsers().filter(u=>u.name.toLowerCase().includes(q)||u.skill.toLowerCase().includes(q)||u.phone.includes(q));
-  let html=""; users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}</div></div>`});
-  document.getElementById('usersList').innerHTML=html;
-}
-function postAdvert(){
-  const name=document.getElementById('prodName').value, price=document.getElementById('prodPrice').value, desc=document.getElementById('prodDesc').value;
-  if(!name||!price){document.getElementById('sellMsg').innerText="Fill name and price";return;}
-  const adverts=getAdverts();
-  adverts.unshift({id:Date.now().toString(),name,price,desc,sellerName:currentUser.name,sellerId:currentUser.id});
-  saveAdverts(adverts); document.getElementById('sellMsg').innerHTML="<span style='color:green'>✅ Advert posted!</span>";
-  document.getElementById('prodName').value="";document.getElementById('prodPrice').value="";document.getElementById('prodDesc').value="";
-  refreshAll();
-}
+function switchTab(tab,el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(tab+'Tab').classList.remove('hidden'); if(tab==='map') setTimeout(initMap,400);}
+function switchChatType(type){chatType=type; document.getElementById('privateTabBtn').classList.toggle('active',type==='private'); document.getElementById('liveTabBtn').classList.toggle('active',type==='live'); document.getElementById('privateChatSection').classList.toggle('hidden',type!=='private'); document.getElementById('liveChatSection').classList.toggle('hidden',type!=='live'); if(type==='live') loadLiveMessages();}
+function filterSkill(cat,el){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));el.classList.add('active');const users=cat==='All'?getUsers():getUsers().filter(u=>u.skill===cat); let html="";users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}</div></div>`});document.getElementById('usersList').innerHTML=html;}
+function searchAll(){const q=document.getElementById('searchInput').value.toLowerCase(); const users=getUsers().filter(u=>u.name.toLowerCase().includes(q)||u.skill.toLowerCase().includes(q)); let html="";users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b></div></div>`});document.getElementById('usersList').innerHTML=html;}
+function postAdvert(){const name=document.getElementById('prodName').value, price=document.getElementById('prodPrice').value, desc=document.getElementById('prodDesc').value; if(!name||!price){document.getElementById('sellMsg').innerText="Fill name & price";return;} const adverts=getAdverts(); adverts.unshift({id:Date.now().toString(),name,price,desc,sellerName:currentUser.name,sellerId:currentUser.id}); saveAdverts(adverts); document.getElementById('sellMsg').innerHTML="<span style='color:green'>✅ Posted!</span>"; refreshAll();}
 function initMap(){
-  if(map) {map.invalidateSize(); return;}
-  map=L.map('map').setView([7.476,5.738],14);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-  const users=getUsers();
-  markers.forEach(m=>map.removeLayer(m)); markers=[];
-  users.forEach(u=>{
-    const m=L.marker([u.lat||7.476+Math.random()*0.01, u.lng||5.738+Math.random()*0.01]).addTo(map).bindPopup(`<b>${u.name}</b><br>${u.skill}<br>${u.phone}`);
-    markers.push(m);
-  });
+ if(!map){map=L.map('map').setView([currentUser.lat||7.476,currentUser.lng||5.738],14); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap & Google'}).addTo(map);}
+ setTimeout(()=>{map.invalidateSize(); const users=getUsers(); markers.forEach(m=>map.removeLayer(m)); markers=[]; users.forEach(u=>{const m=L.marker([u.lat||7.476+Math.random()*0.01,u.lng||5.738+Math.random()*0.01]).addTo(map).bindPopup(`<b>${u.name}</b><br>${u.skill}<br>${u.location||''}<br><a href="https://www.google.com/maps?q=${u.lat},${u.lng}" target="_blank">Open in Google Maps</a>`); markers.push(m);});},200);
 }
 function shareLocation(){
-  if(!navigator.geolocation){alert("Geolocation not supported");return;}
-  navigator.geolocation.getCurrentPosition(pos=>{
-    let users=getUsers();
-    const idx=users.findIndex(u=>u.id===currentUser.id);
-    if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); alert("✅ Location shared!"); initMap();}
-  });
-}
-function openChat(uid){
-  switchTab('chat',document.querySelectorAll('.nav-item')[3]);
-  const user=getUsers().find(u=>u.id===uid);
-  activeChat=user;
-  document.getElementById('chatList').innerHTML=`<p>Chatting with <b>${user.name}</b></p>`;
-  document.getElementById('chatBox').classList.remove('hidden');
-  loadMessages();
-}
-function loadMessages(){
-  const chats=getChats().filter(c=>(c.from===currentUser.id&&c.to===activeChat.id)||(c.from===activeChat.id&&c.to===currentUser.id));
-  let html=""; chats.forEach(c=>{html+=`<div style="margin:5px 0;padding:8px;border-radius:10px;background:${c.from===currentUser.id?'#0a1931;color:white;align-self:flex-end':'#eee'}">${c.text}<br><small style="font-size:10px">${new Date(c.time).toLocaleTimeString()}</small></div>`});
-  document.getElementById('chatMessages').innerHTML=html||"<p style='color:#999'>No messages yet</p>";
-}
-function sendMessage(){
-  const text=document.getElementById('chatInput').value.trim(); if(!text||!activeChat) return;
-  const chats=getChats(); chats.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,text,time:Date.now()});
-  saveChats(chats); document.getElementById('chatInput').value=""; loadMessages();
-}
-function fundWallet(){
+ if(!navigator.geolocation){alert("No geolocation");return;}
+ navigator.geolocation.getCurrentPosition(pos=>{
   let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id);
-  if(idx>=0){users[idx].wallet=(users[idx].wallet||0)+1000; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert("Wallet funded ₦1000!");}
+  if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; users[idx].location=document.getElementById('editLocation').value||`Lat ${pos.coords.latitude.toFixed(4)}, Lng ${pos.coords.longitude.toFixed(4)}`; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); document.getElementById('myLocText').innerText=users[idx].location; document.getElementById('accLoc').innerText=users[idx].location; document.getElementById('googleLink').href=`https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`; alert("✅ Google Location Shared!\n"+users[idx].location); initMap(); refreshAll();}
+ },err=>{alert("Location error: "+err.message);});
 }
-function clearAllData(){if(confirm("Owner: Clear ALL data?")){localStorage.clear();location.reload();}}
+function openGoogleMaps(){const users=getUsers(); if(users.length>0){const first=users[0]; window.open(`https://www.google.com/maps?q=${first.lat},${first.lng}`,'_blank');} else {window.open('https://www.google.com/maps/search/Akungba+Akoko','_blank');}}
+function openGoogleUser(lat,lng){window.open(`https://www.google.com/maps?q=${lat},${lng}`,'_blank');}
+function loadPrivateList(){
+ const users=getUsers().filter(u=>u.id!==currentUser.id);
+ let html=""; if(users.length===0) html="<p style='color:#999;text-align:center'>No other users yet. Register 2 phones to test private chat!</p>";
+ else users.forEach(u=>{const lastChat=getChats().filter(c=>(c.from===currentUser.id&&c.to===u.id)||(c.from===u.id&&c.to===currentUser.id)).slice(-1)[0]; html+=`<div class="user-card" onclick="openPrivate('${u.id}')" style="cursor:pointer"><div class="avatar">${u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b><br><small>${lastChat?lastChat.text.substring(0,30):'Tap to start private chat'} - ${u.skill}</small></div><div style="color:#00b894">💬</div></div>`;});
+ document.getElementById('chatList').innerHTML=html;
+}
+function openPrivate(uid){activeChat=getUsers().find(u=>u.id===uid); document.getElementById('chatBox').classList.remove('hidden'); document.getElementById('chatList').innerHTML=`<p><b>Private with ${activeChat.name}</b> <a onclick="loadPrivateList()" style="color:#4285f4;cursor:pointer">Back</a></p>`; loadPrivateMessages();}
+function loadPrivateMessages(){const chats=getChats().filter(c=>(c.from===currentUser.id&&c.to===activeChat.id)||(c.from===activeChat.id&&c.to===currentUser.id)); let html=""; chats.forEach(c=>{html+=`<div class="msg-bubble ${c.from===currentUser.id?'msg-me':'msg-them'}">${c.text}<br><small style="font-size:10px;opacity:.7">${new Date(c.time).toLocaleTimeString()}</small></div>`}); document.getElementById('chatMessages').innerHTML=html||"<p style='color:#999'>No private messages yet. Say hi!</p>"; document.getElementById('chatMessages').scrollTop=9999;}
+function sendPrivate(){const text=document.getElementById('chatInput').value.trim(); if(!text||!activeChat) return; const chats=getChats(); chats.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,text,time:Date.now()}); saveChats(chats); document.getElementById('chatInput').value=""; loadPrivateMessages(); refreshAll();}
+function loadLiveMessages(){const live=getLive(); let html=""; live.forEach(m=>{html+=`<div class="msg-bubble ${m.fromId===currentUser.id?'msg-me':'msg-them'}"><b>${m.fromName}:</b> ${m.text}<br><small style="font-size:10px;opacity:.7">${new Date(m.time).toLocaleTimeString()}</small></div>`}); document.getElementById('liveMessages').innerHTML=html||"<p style='color:#999;text-align:center'>🔴 Live Chat - Everyone sees this!<br>Be the first to message</p>"; document.getElementById('liveMessages').scrollTop=9999;}
+function sendLive(){const text=document.getElementById('liveInput').value.trim(); if(!text) return; const live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,text,time:Date.now()}); saveLive(live); document.getElementById('liveInput').value=""; loadLiveMessages(); refreshAll();}
+function updateAccount(){const newName=document.getElementById('editName').value.trim(), newSkill=document.getElementById('editSkill').value.trim(), newLoc=document.getElementById('editLocation').value.trim(); let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){if(newName) users[idx].name=newName; if(newSkill) users[idx].skill=newSkill; if(newLoc) users[idx].location=newLoc; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); alert("✅ Account Updated!\nName: "+currentUser.name+"\nSkill: "+currentUser.skill+"\nLocation: "+currentUser.location); refreshAll();}}
+function fundWallet(){let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){users[idx].wallet=(users[idx].wallet||0)+1000; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}}
+function clearAllData(){if(confirm("Clear ALL?")){localStorage.clear();location.reload();}}
 function logout(){localStorage.removeItem('akc_v36_current');location.reload();}
-const msg=document.getElementById('msg');
-let stored=JSON.parse(localStorage.getItem('akc_v36_current')||'null');
-if(stored){currentUser=stored; showMainFull();}
+const msg=document.getElementById('msg'); let stored=JSON.parse(localStorage.getItem('akc_v36_current')||'null'); if(stored){currentUser=stored; showMain();}
 </script>
 </body>
 </html>
