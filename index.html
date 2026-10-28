@@ -3,167 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKC V36 Supabase</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>AKC V36.1 Fixed</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#f6f7fb}
 .header{background:#0a1931;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center}
-.header .left{display:flex;align-items:center;gap:10px}
 .logo{background:white;color:#0a1931;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
-.owner-badge{background:#f9c74f;color:#333;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin-left:5px}
-.card{background:white;margin:10px;border-radius:12px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-.top-count{font-weight:bold;font-size:18px;margin-bottom:10px}
-.top-count span{color:green}
-.user-card{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;align-items:center}
+.owner-badge{background:#f9c74f;color:#333;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.card{background:white;margin:10px;border-radius:12px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.user-card{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
 .avatar{width:50px;height:50px;border-radius:50%;background:#1a3a8f;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px}
-.status{font-size:11px;padding:2px 6px;border-radius:10px;background:#eee}
-.btn{padding:8px 15px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;margin-top:5px}
-.btn-chat{background:#00b894;color:white}
-.btn-rate{background:#fdcb6e;color:#333}
-.filters{display:flex;gap:8px;padding:0 10px;overflow:auto}
-.filter{padding:8px 15px;border-radius:20px;border:1px solid #ddd;background:white;white-space:nowrap}
-.filter.active{background:#0a1931;color:white}
-.search{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin:10px 0}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #eee}
-.nav-item{text-align:center;font-size:12px;color:#888}
-.nav-item.active{color:#0a1931;font-weight:bold}
+.btn{padding:8px 15px;border-radius:20px;border:none;font-weight:bold;margin-top:5px}
 input,select,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc}
 button.primary{background:#0a1931;color:white;font-weight:bold}
 .hidden{display:none}
-.online-dot{width:10px;height:10px;background:#00ff00;border-radius:50%;display:inline-block;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div class="left">
-    <div class="logo">K</div>
-    <div><b>AKC V36 <span class="owner-badge">OWNER</span></b><br><small id="userCount">3 Users</small></div>
-  </div>
-  <div><small id="currentName">Kareem Sheriff</small> <button onclick="logout()" style="width:auto;padding:5px 10px;border-radius:10px;background:white;color:#0a1931;border:none;font-size:11px">Logout</button></div>
+<div style="display:flex;gap:10px;align-items:center"><div class="logo">K</div><div><b>AKC V36 <span class="owner-badge">OWNER</span></b><br><small id="userCount">Loading...</small></div></div>
+<div><small id="currentName">Kareem Sheriff</small> <button onclick="logout()" style="width:auto;padding:5px 10px;border-radius:10px;background:white;color:#0a1931;border:none;font-size:11px">Logout</button></div>
 </div>
 
 <div id="authSection" class="card">
-  <h3>Login / Register - V36 Supabase</h3>
-  <input id="phone" placeholder="Phone e.g 08105986759" value="08105986759">
-  <input id="password" type="password" placeholder="Password">
-  <input id="name" placeholder="Full Name e.g Kareem Sheriff">
-  <select id="skill"><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option><option>Tailoring</option><option>Baking</option></select>
-  <button class="primary" onclick="registerV36()">Register New Account</button>
-  <button class="primary" style="background:#0984e3" onclick="loginV36()">Login</button>
-  <p id="msg" style="color:red;margin-top:10px"></p>
-  <p style="font-size:12px;color:green">🟢 Online - Supabase Connected</p>
+<h3>Login / Register - V36.1 Supabase FIXED</h3>
+<input id="phone" placeholder="Phone" value="08105986759">
+<input id="password" type="password" placeholder="Password">
+<input id="name" placeholder="Full Name" value="Kareem Sheriff">
+<select id="skill"><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option></select>
+<button class="primary" onclick="registerDirect()">Register New Account</button>
+<button class="primary" style="background:#0984e3" onclick="loginDirect()">Login</button>
+<p id="msg" style="color:red;margin-top:10px"></p>
+<p style="font-size:12px;color:green">🟢 Supabase Direct Mode</p>
 </div>
 
 <div id="mainSection" class="hidden">
-  <div style="padding:10px"><h2>Adverts</h2></div>
-  <div class="card">
-    <div class="top-count">Registered - <span id="regCount">3</span> | <span id="onlineCount">1 Online Now</span></div>
-    <div id="usersList">Loading users from Supabase...</div>
-  </div>
-
-  <div class="filters">
-    <div class="filter active" onclick="filterAd('All',this)">All</div>
-    <div class="filter" onclick="filterAd('Phone Repair',this)">Phone Repair</div>
-    <div class="filter" onclick="filterAd('Gadgets',this)">Gadgets</div>
-    <div class="filter" onclick="filterAd('Plumbing',this)">Plumbing</div>
-  </div>
-
-  <div class="card">
-    <input class="search" id="searchInput" placeholder="Search adverts..." onkeyup="searchAd()">
-    <div id="advertsList"><p style="text-align:center;color:#999;margin:20px">No adverts yet. Post from Sell tab!</p></div>
-  </div>
-
-  <div style="height:80px"></div>
-  <div class="bottom-nav">
-    <div class="nav-item active">Buy</div><div class="nav-item">Sell</div><div class="nav-item">Map</div><div class="nav-item">Chat</div><div class="nav-item">Account</div>
-  </div>
+<div class="card"><b>Registered - <span id="regCount">0</span> | <span id="onlineCount">1 Online</span></b><div id="usersList" style="margin-top:10px">Loading...</div></div>
+<div style="height:60px"></div>
 </div>
 
 <script>
-const SUPABASE_URL = "https://frgnfoltzqmbkovtomi.supabase.co";
-const SUPABASE_KEY = "sb_publishable_4q0pM7yTQYwB2P6G8YtKfH1J2LmNp3Qr4StUv5Wx6Yz7Aa8Bb9Cc0Dd1Ee2Ff3Gg4Hh5Ii6Jj7Mm0Nn1Oo2Pp3Qq4Rr5Ss6Tt7Uu8Vv9Ww0Xx1Yy2Zz3";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const URL = "https://frgnfoltzqmbkovtomi.supabase.co/rest/v1/akc_users";
+const KEY = "sb_publishable_4q0pM7yTQYwB2P6G8YtKfH1J2LmNp3Qr4StUv5Wx6Yz7Aa8Bb9Cc0Dd1Ee2Ff3Gg4Hh5Ii6Jj7Mm0Nn1Oo2Pp3Qq4Rr5Ss6Tt7Uu8Vv9Ww0Xx1Yy2Zz3";
 let currentUser=null;
-let allUsers=[];
 
-async function registerV36(){
+async function registerDirect(){
   const phone=document.getElementById('phone').value.trim();
   const pass=document.getElementById('password').value.trim();
   const name=document.getElementById('name').value.trim();
   const skill=document.getElementById('skill').value;
-  if(!phone||!pass||!name){document.getElementById('msg').innerText="Fill phone, password and name";return;}
-  document.getElementById('msg').innerText="Registering...";
+  if(!phone||!pass||!name){msg.innerText="Fill all";return;}
+  msg.innerText="Registering via Direct API...";
   try{
-    const {data,error}=await supabaseClient.from('akc_users').insert([{
-      id: Date.now().toString(), phone, name, password: pass, skill, is_owner: phone==='08105986759', wallet:0, live_location:{lat:5.0,lng:7.9}
-    }]).select();
-    if(error) document.getElementById('msg').innerText="Error: "+error.message;
-    else document.getElementById('msg').innerText="Registered! Click Login now";
-  }catch(e){document.getElementById('msg').innerText="Failed to fetch - Go to Supabase SQL and run FIX (DISABLE RLS) I sent before! Error: "+e.message}
+    const res = await fetch(URL,{
+      method:"POST",
+      headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json","Prefer":"return=representation"},
+      body: JSON.stringify({id:Date.now().toString(),phone,name,password:pass,skill,is_owner:phone==='08105986759',wallet:0})
+    });
+    const data = await res.json();
+    if(!res.ok){msg.innerText="Error: "+JSON.stringify(data);return;}
+    msg.innerText="✅ Registered! Now click Login";
+  }catch(e){msg.innerText="Fetch Error: "+e.message+" - Check internet";}
 }
 
-async function loginV36(){
+async function loginDirect(){
   const phone=document.getElementById('phone').value.trim();
   const pass=document.getElementById('password').value.trim();
-  document.getElementById('msg').innerText="Logging in...";
+  msg.innerText="Logging in...";
   try{
-    const {data,error}=await supabaseClient.from('akc_users').select('*').eq('phone',phone).eq('password',pass);
-    if(error||!data||data.length==0){document.getElementById('msg').innerText="Login failed - check phone/password or run RLS fix in Supabase";return;}
+    const res = await fetch(`${URL}?phone=eq.${phone}&password=eq.${pass}`,{
+      headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}
+    });
+    const data = await res.json();
+    if(!data||data.length===0){msg.innerText="Login failed - no user found. Register first!";return;}
     currentUser=data[0];
-    document.getElementById('authSection').classList.add('hidden');
-    document.getElementById('mainSection').classList.remove('hidden');
-    document.getElementById('currentName').innerText=currentUser.name;
-    loadAllUsers();
-    loadAdverts();
-  }catch(e){document.getElementById('msg').innerText="Failed to fetch - You never run the RLS FIX in Supabase! Go run: ALTER TABLE akc_users DISABLE ROW LEVEL SECURITY; "}
+    authSection.classList.add('hidden');
+    mainSection.classList.remove('hidden');
+    currentName.innerText=currentUser.name;
+    loadUsersDirect();
+  }catch(e){msg.innerText="Login Fetch Error: "+e.message;}
 }
 
-async function loadAllUsers(){
-  const {data}=await supabaseClient.from('akc_users').select('*').order('created_at',{ascending:false});
-  if(!data) return;
-  allUsers=data;
-  document.getElementById('regCount').innerText=data.length;
-  document.getElementById('userCount').innerText=data.length+" Users";
-  document.getElementById('onlineCount').innerText="1 Online Now";
-  let html="";
-  data.forEach(u=>{
-    const initial=u.name.charAt(0).toUpperCase();
-    const code="["+u.name.substring(0,4).toUpperCase()+Math.floor(100000+Math.random()*900000).toString().substring(0,5)+"]";
-    html+=`<div class="user-card"><div class="avatar">${initial}</div><div style="flex:1"><b>${u.name}</b> <span class="status">Offline</span> <span style="color:#0a1931;font-size:12px">${code}</span><br><small style="color:#888">Akungba Student - AAUA | ${u.skill}</small><br><span style="font-size:12px;background:#eee;padding:2px 6px;border-radius:5px">No rating</span><br><button class="btn btn-chat">Chat</button> <button class="btn btn-rate">Rate ⭐</button></div></div>`;
-  });
-  document.getElementById('usersList').innerHTML=html;
+async function loadUsersDirect(){
+  try{
+    const res = await fetch(`${URL}?select=*`,{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}});
+    const data = await res.json();
+    if(!data) return;
+    regCount.innerText=data.length;
+    userCount.innerText=data.length+" Users";
+    let html="";
+    data.forEach(u=>{
+      html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}<br><small>${u.phone}</small></div></div>`;
+    });
+    usersList.innerHTML=html;
+  }catch(e){usersList.innerHTML="Error loading: "+e.message;}
 }
-
-async function loadAdverts(){
-  const {data}=await supabaseClient.from('akc_products').select('*').order('created_at',{ascending:false});
-  if(!data||data.length==0) return;
-  let html="";
-  data.forEach(p=>{html+=`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${p.name}</b> - ₦${p.price}<br><small>by ${p.seller_name}</small></div>`});
-  document.getElementById('advertsList').innerHTML=html;
-}
-
 function logout(){location.reload()}
-function filterAd(cat,el){
-  document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));
-  el.classList.add('active');
-  // simple filter by skill
-  if(cat==='All'){loadAllUsers();return;}
-  const filtered=allUsers.filter(u=>u.skill===cat);
-  document.getElementById('regCount').innerText=filtered.length;
-  let html="";
-  filtered.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}</div></div>`});
-  document.getElementById('usersList').innerHTML=html||"No users for "+cat;
-}
-function searchAd(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const filtered=allUsers.filter(u=>u.name.toLowerCase().includes(q)||u.skill.toLowerCase().includes(q));
-  let html="";
-  filtered.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}</div></div>`});
-  document.getElementById('usersList').innerHTML=html;
-}
 </script>
 </body>
 </html>
