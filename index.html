@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKC V36.6 Map Reflect</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<title>AKC V36.7 Google Only</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#f6f7fb;padding-bottom:75px}
@@ -23,8 +21,7 @@ body{background:#f6f7fb;padding-bottom:75px}
 input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc}
 button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 .hidden{display:none}
-#map{height:350px;border-radius:12px;z-index:1;border:2px solid #4285f4}
-.google-embed{width:100%;height:350px;border-radius:12px;border:2px solid #4285f4;margin-top:10px}
+.google-embed{width:100%;height:450px;border-radius:12px;border:3px solid #4285f4}
 .google-box{background:#e8f0fe;padding:10px;border-radius:8px;margin:8px 0;border:1px solid #4285f4}
 .ref-box{background:#fff3cd;padding:12px;border-radius:10px;border:1px dashed #f9c74f}
 .profile-pic-large{width:90px;height:90px;border-radius:50%;background:#1a3a8f;color:white;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:bold;overflow:hidden;margin:10px auto}
@@ -47,7 +44,7 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 </div>
 
 <div id="authSection" class="card">
-<h3>AKC V36.6 Map Reflect</h3>
+<h3>AKC V36.7 Google Map Only</h3>
 <input id="phone" value="08105986759">
 <input id="password" type="password" placeholder="Password">
 <input id="name" value="Kareem Sheriff">
@@ -69,41 +66,35 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 </div>
 <div id="sellTab" class="hidden"><div class="card"><h3>Sell - Post</h3><input id="prodName" placeholder="Product"><input id="prodPrice" type="number" placeholder="Price ₦"><textarea id="prodDesc" placeholder="Desc"></textarea><button class="primary" onclick="postAdvert()">Post</button><p id="sellMsg"></p></div><div class="card"><h4>My Adverts</h4><div id="myAdverts"></div></div></div>
 
-<!-- MAP TAB - NOW WITH GOOGLE MAP REFLECT INSIDE APP -->
+<!-- MAP - ONLY GOOGLE MAP NOW -->
 <div id="mapTab" class="hidden">
 <div class="card">
-<h3>🗺️ Live Map - Reflect Inside App</h3>
+<h3>🗺️ Live Map - Google Maps Inside App</h3>
 <div class="google-box">
-<b>🌐 Google Location Status</b><br>
-<small>📍 You: <span id="myLocText">Not shared - Click Share below</span></small><br>
-<small>🟢 Reflect Mode: <b style="color:green">ON - Map shows inside app</b></small>
+<b>🌐 Google Location - Reflects Inside App</b><br>
+<small>📍 Your Location: <span id="myLocText">Not shared yet - Click Share</span></small><br>
+<small>✅ <b>Google Map is live inside AKC - No more Leaflet grey!</b></small>
 </div>
 
-<!-- 1. LEAFLET MAP WITH TILES -->
-<h4 style="margin:8px 0">📌 Leaflet Map (with tiles):</h4>
-<div id="map"></div>
-
-<!-- 2. REAL GOOGLE MAP EMBED REFLECT INSIDE APP -->
-<h4 style="margin:12px 0 8px">🌍 Real Google Map (Reflects Inside App):</h4>
-<iframe id="googleIframe" class="google-embed" src="https://www.google.com/maps?q=Akungba+Akoko+Nigeria&z=14&output=embed" loading="lazy"></iframe>
+<!-- ONLY GOOGLE MAP EMBED -->
+<iframe id="googleIframe" class="google-embed" src="https://www.google.com/maps?q=Akungba+Akoko+Nigeria&z=14&output=embed" loading="lazy" allowfullscreen></iframe>
 
 <div style="margin-top:10px;display:flex;gap:8px">
-<button class="primary" style="flex:1" onclick="shareLocation()">📍 Share My Location</button>
-<button class="primary" style="flex:1;background:#4285f4" onclick="refreshMaps()">🔄 Refresh Maps</button>
+<button class="primary" style="flex:1" onclick="shareLocation()">📍 Share My Live Location</button>
+<button class="primary" style="flex:1;background:#4285f4" onclick="refreshGoogleMap()">🔄 Refresh Google Map</button>
 </div>
-<button class="primary" style="background:#00b894;margin-top:8px" onclick="openGoogleMaps()">🌍 Open Full Google Maps</button>
+<button class="primary" style="background:#00b894;margin-top:8px" onclick="openGoogleMaps()">🌍 Open Full Google Maps App</button>
 
-<!-- Nearby list -->
 <div id="nearbyList" style="margin-top:12px"></div>
 </div>
 </div>
 
-<div id="chatTab" class="hidden"><div class="card"><h3>💬 Chats</h3><div class="chat-tabs"><div class="chat-tab active" id="privateTabBtn" onclick="switchChatType('private')">Private</div><div class="chat-tab" id="liveTabBtn" onclick="switchChatType('live')">🔴 Live</div></div><div id="privateChatSection"><div id="chatList"></div><div class="hidden" id="chatBox"><div id="chatMessages" style="height:250px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="chatInput" placeholder="Private..."><button class="primary" onclick="sendPrivate()">Send Private</button></div></div><div id="liveChatSection" class="hidden"><div id="liveMessages" style="height:300px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="liveInput" placeholder="Live..."><button class="primary" style="background:#e17055" onclick="sendLive()">🔴 Send Live</button></div></div></div>
+<div id="chatTab" class="hidden"><div class="card"><h3>💬 Chats</h3><div class="chat-tabs"><div class="chat-tab active" id="privateTabBtn" onclick="switchChatType('private')">Private Chat</div><div class="chat-tab" id="liveTabBtn" onclick="switchChatType('live')">🔴 Live Chat</div></div><div id="privateChatSection"><div id="chatList"></div><div class="hidden" id="chatBox"><div id="chatMessages" style="height:250px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="chatInput" placeholder="Private message..."><button class="primary" onclick="sendPrivate()">Send Private</button></div></div><div id="liveChatSection" class="hidden"><div id="liveMessages" style="height:300px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><input id="liveInput" placeholder="Live message..."><button class="primary" style="background:#e17055" onclick="sendLive()">🔴 Send Live</button></div></div></div>
 
 <div id="accountTab" class="hidden">
-<div class="card" style="text-align:center"><div class="profile-pic-large" id="accPicLarge">K</div><h3 id="accName"></h3><p id="accPhone"></p><p><span id="accSkill"></span> | <span id="accWallet" style="background:#00b894;color:white;padding:4px 8px;border-radius:10px">₦0</span></p><button onclick="document.getElementById('editPicInput').click()" style="width:auto;padding:6px 15px;background:#0984e3;color:white;border:none;border-radius:20px;font-size:12px">📸 Change Picture</button><input type="file" id="editPicInput" accept="image/*" style="display:none" onchange="changeProfilePic(event)"></div>
-<div class="card"><h4>✏️ Edit Account</h4><input id="editName" placeholder="Change Name"><input id="editSkill" placeholder="Change Skill"><input id="editLocation" placeholder="Location e.g Akungba"><button class="primary" style="background:#0984e3" onclick="updateAccount()">💾 Save</button><button class="primary" style="background:#00b894;margin-top:8px" onclick="fundWallet()">💰 Fund +₦1000</button><div class="google-box"><b>📍 Google Location:</b> <span id="accLoc">Not set</span></div></div>
-<div class="card"><h4>🔗 Referral Link</h4><div class="ref-box"><b>Code:</b> <span id="myRefCode">AKC-</span><br><input id="myRefLink" readonly style="font-size:11px"><br><div style="display:flex;gap:5px;margin-top:5px"><button onclick="copyRefLink()" style="flex:1;background:#0a1931;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📋 Copy</button><button onclick="shareRefLink()" style="flex:1;background:#00b894;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📤 Share</button></div><b>Referrals: <span id="refCount">0</span> | Earned: <span id="refEarned">₦0</span></b><div id="refList"></div></div></div>
+<div class="card" style="text-align:center"><div class="profile-pic-large" id="accPicLarge">K</div><h3 id="accName"></h3><p id="accPhone"></p><p><span id="accSkill"></span> | <span id="accWallet" style="background:#00b894;color:white;padding:4px 8px;border-radius:10px">₦0</span></p><button onclick="document.getElementById('editPicInput').click()" style="width:auto;padding:6px 15px;background:#0984e3;color:white;border:none;border-radius:20px;font-size:12px">📸 Change Profile Picture</button><input type="file" id="editPicInput" accept="image/*" style="display:none" onchange="changeProfilePic(event)"></div>
+<div class="card"><h4>✏️ Edit Account</h4><input id="editName" placeholder="Change Name"><input id="editSkill" placeholder="Change Skill"><input id="editLocation" placeholder="Location e.g Akungba"><button class="primary" style="background:#0984e3" onclick="updateAccount()">💾 Save Changes</button><button class="primary" style="background:#00b894;margin-top:8px" onclick="fundWallet()">💰 Fund Wallet +₦1000</button><div class="google-box"><b>📍 My Google Location:</b> <span id="accLoc">Not set</span><br><small>Tap Share to update</small></div></div>
+<div class="card"><h4>🔗 Referral Link</h4><div class="ref-box"><b>Code:</b> <span id="myRefCode">AKC-</span><br><input id="myRefLink" readonly style="font-size:11px"><br><div style="display:flex;gap:5px;margin-top:5px"><button onclick="copyRefLink()" style="flex:1;background:#0a1931;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📋 Copy Link</button><button onclick="shareRefLink()" style="flex:1;background:#00b894;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📤 Share</button></div><b>Referrals: <span id="refCount">0</span> | Earned: <span id="refEarned">₦0</span></b><div id="refList"></div></div></div>
 </div>
 </div>
 
@@ -116,7 +107,7 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none}
 </div>
 
 <script>
-let currentUser=null, activeChat=null, map=null, markers=[], tempRegPic="";
+let currentUser=null, activeChat=null, tempRegPic="";
 const getUsers=()=>JSON.parse(localStorage.getItem('akc_v36_users')||'[]');
 const saveUsers=u=>localStorage.setItem('akc_v36_users',JSON.stringify(u));
 const getAdverts=()=>JSON.parse(localStorage.getItem('akc_v36_adverts')||'[]');
@@ -136,56 +127,47 @@ function refreshAll(){
  const code=currentUser.refCode; document.getElementById('myRefCode').innerText=code; document.getElementById('myRefLink').value=`https://ffkareem75-9395.vercel.app?ref=${code}`; document.getElementById('refCount').innerText=(currentUser.referrals||[]).length; document.getElementById('refEarned').innerText="₦"+(currentUser.refEarned||0);
  const picL=document.getElementById('accPicLarge'); picL.innerHTML=currentUser.profilePic?`<img src="${currentUser.profilePic}">`:currentUser.name.charAt(0);
  const hLogo=document.getElementById('headerLogo'); hLogo.innerHTML=currentUser.profilePic?`<img src="${currentUser.profilePic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:currentUser.name.charAt(0);
- // users list
- let html=""; users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b><br><small>📍 ${u.location} - ${u.skill}</small><br><button onclick="openPrivate('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px">💬 Private</button> <button onclick="centerMapOn('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#4285f4;color:white;border:none;font-size:12px">📍 Map</button></div></div>`;});
+ let html=""; users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b><br><small>📍 ${u.location} - ${u.skill}</small><br><button onclick="openPrivate('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px">💬 Private</button> <button onclick="focusUserOnMap('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#4285f4;color:white;border:none;font-size:12px">📍 Show on Google Map</button></div></div>`;});
  document.getElementById('usersList').innerHTML=html;
  let adHtml=""; adverts.forEach(a=>{adHtml+=`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${a.name}</b> - ₦${a.price}<br><small>${a.desc}</small></div>`}); document.getElementById('advertsList').innerHTML=adHtml; document.getElementById('myAdverts').innerHTML=adHtml;
- // nearby list for map
- let nearHtml="<h4>Nearby Artisans (Tap to view on Google Map):</h4>"; users.forEach(u=>{nearHtml+=`<div class="user-card" onclick="openGoogleUser('${u.lat}','${u.lng}')"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}<br><small>📍 ${u.location}</small><br><small style="color:#4285f4">View on Google Maps →</small></div></div>`;}); document.getElementById('nearbyList').innerHTML=nearHtml;
- loadPrivateList(); loadLiveMessages(); refreshGoogleIframe();
+ let nearHtml="<h4>📍 Nearby Artisans - Tap to focus Google Map inside app:</h4>"; users.forEach(u=>{nearHtml+=`<div class="user-card" onclick="focusUserOnMap('${u.id}')" style="cursor:pointer"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b> - ${u.skill}<br><small>📍 ${u.location}</small><br><small style="color:#4285f4">👉 Tap to show on Google Map inside app</small></div></div>`;}); document.getElementById('nearbyList').innerHTML=nearHtml;
+ loadPrivateList(); loadLiveMessages(); refreshGoogleMap();
 }
-function switchTab(tab,el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(tab+'Tab').classList.remove('hidden'); if(tab==='map') setTimeout(()=>{initMap(); refreshGoogleIframe();},400);}
+function switchTab(tab,el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(tab+'Tab').classList.remove('hidden'); if(tab==='map') setTimeout(refreshGoogleMap,400);}
 function switchChatType(t){document.getElementById('privateTabBtn').classList.toggle('active',t==='private'); document.getElementById('liveTabBtn').classList.toggle('active',t==='live'); document.getElementById('privateChatSection').classList.toggle('hidden',t!=='private'); document.getElementById('liveChatSection').classList.toggle('hidden',t!=='live');}
 function filterSkill(c,el){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));el.classList.add('active');const users=c==='All'?getUsers():getUsers().filter(u=>u.skill===c); let h="";users.forEach(u=>{h+=`<div class="user-card"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b></div></div>`});document.getElementById('usersList').innerHTML=h;}
 function searchAll(){const q=document.getElementById('searchInput').value.toLowerCase(); const users=getUsers().filter(u=>u.name.toLowerCase().includes(q)||u.skill.toLowerCase().includes(q)); let h="";users.forEach(u=>{h+=`<div class="user-card"><div class="avatar">${u.name.charAt(0)}</div><div><b>${u.name}</b></div></div>`});document.getElementById('usersList').innerHTML=h;}
 function postAdvert(){const name=document.getElementById('prodName').value, price=document.getElementById('prodPrice').value, desc=document.getElementById('prodDesc').value; if(!name||!price){sellMsg.innerText="Fill";return;} const a=getAdverts(); a.unshift({id:Date.now().toString(),name,price,desc,sellerName:currentUser.name}); saveAdverts(a); sellMsg.innerHTML="<span style='color:green'>Posted</span>"; refreshAll();}
-function initMap(){
- if(!map){map=L.map('map').setView([currentUser.lat||7.476, currentUser.lng||5.738], 15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19, attribution:'© OpenStreetMap | Google Reflect'}).addTo(map);}
- setTimeout(()=>{
-  map.invalidateSize();
-  markers.forEach(m=>map.removeLayer(m)); markers=[];
-  const users=getUsers();
-  users.forEach(u=>{
-   const marker=L.marker([u.lat, u.lng]).addTo(map);
-   marker.bindPopup(`<div style="text-align:center">${u.profilePic?`<img src="${u.profilePic}" style="width:50px;height:50px;border-radius:50%">`:''}<br><b>${u.name}</b><br>${u.skill}<br>${u.location}<br><a href="https://www.google.com/maps?q=${u.lat},${u.lng}" target="_blank" style="color:#4285f4">Open in Google</a></div>`);
-   markers.push(marker);
-  });
-  if(users.length>0) map.setView([currentUser.lat, currentUser.lng], 14);
- },300);
-}
-function refreshGoogleIframe(){
+function refreshGoogleMap(){
  const iframe=document.getElementById('googleIframe');
  const lat=currentUser.lat||7.476, lng=currentUser.lng||5.738;
- iframe.src=`https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
- document.getElementById('myLocText').innerText=`${currentUser.location} (${lat.toFixed(4)}, ${lng.toFixed(4)}) - Reflecting in Google Map below!`;
+ // Google Map that reflects inside app - shows your location
+ iframe.src=`https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
+ document.getElementById('myLocText').innerText=`${currentUser.location} (${lat.toFixed(4)}, ${lng.toFixed(4)}) - Live in Google Map!`;
 }
-function refreshMaps(){initMap(); refreshGoogleIframe();}
+function focusUserOnMap(uid){
+ const u=getUsers().find(x=>x.id===uid);
+ if(!u) return;
+ switchTab('map',document.querySelectorAll('.nav-item')[2]);
+ setTimeout(()=>{
+  document.getElementById('googleIframe').src=`https://maps.google.com/maps?q=${u.lat},${u.lng}&z=17&output=embed`;
+  document.getElementById('myLocText').innerText=`Viewing: ${u.name} - ${u.location} (${u.lat.toFixed(4)}, ${u.lng.toFixed(4)})`;
+ },300);
+}
 function shareLocation(){
  if(!navigator.geolocation){alert("No geolocation");return;}
  document.getElementById('myLocText').innerText="Getting location...";
  navigator.geolocation.getCurrentPosition(pos=>{
   let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id);
-  if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; users[idx].location=document.getElementById('editLocation').value||`Akungba ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); refreshMaps(); alert("✅ Location Shared! Both maps now reflect your location!");}
- },err=>{alert("Location error: "+err.message); document.getElementById('myLocText').innerText="Failed - try again";});
+  if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; users[idx].location=document.getElementById('editLocation').value||`Akungba ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert("✅ Google Location Shared! Map reflects inside app now!");}
+ },err=>{alert("Location error: "+err.message);});
 }
-function centerMapOn(uid){const u=getUsers().find(x=>x.id===uid); if(!u) return; switchTab('map',document.querySelectorAll('.nav-item')[2]); setTimeout(()=>{if(map){map.setView([u.lat,u.lng],16); L.popup().setLatLng([u.lat,u.lng]).setContent(`<b>${u.name}</b><br>${u.skill}`).openOn(map);} document.getElementById('googleIframe').src=`https://www.google.com/maps?q=${u.lat},${u.lng}&z=17&output=embed`;},500);}
 function openGoogleMaps(){window.open(`https://www.google.com/maps?q=${currentUser.lat},${currentUser.lng}&z=15`,'_blank');}
-function openGoogleUser(lat,lng){window.open(`https://www.google.com/maps?q=${lat},${lng}&z=17`,'_blank'); document.getElementById('googleIframe').src=`https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;}
 function loadPrivateList(){const users=getUsers().filter(u=>u.id!==currentUser.id); let html=""; users.forEach(u=>{html+=`<div class="user-card" onclick="openPrivate('${u.id}')" style="cursor:pointer"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b><br><small>${u.skill}</small></div><div>💬</div></div>`;}); document.getElementById('chatList').innerHTML=html||"<p style='color:#999'>No users</p>";}
 function openPrivate(uid){activeChat=getUsers().find(u=>u.id===uid); document.getElementById('chatBox').classList.remove('hidden'); document.getElementById('chatList').innerHTML=`<p><b>Private with ${activeChat.name}</b> <a onclick="loadPrivateList()" style="color:#4285f4;cursor:pointer">Back</a></p>`; loadPrivateMessages();}
 function loadPrivateMessages(){const chats=getChats().filter(c=>(c.from===currentUser.id&&c.to===activeChat.id)||(c.from===activeChat.id&&c.to===currentUser.id)); let html=""; chats.forEach(c=>{html+=`<div class="msg-bubble ${c.from===currentUser.id?'msg-me':'msg-them'}">${c.text}</div>`}); document.getElementById('chatMessages').innerHTML=html||"<p>No messages</p>";}
 function sendPrivate(){const t=document.getElementById('chatInput').value.trim(); if(!t||!activeChat) return; const c=getChats(); c.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,text:t,time:Date.now()}); saveChats(c); document.getElementById('chatInput').value=""; loadPrivateMessages();}
-function loadLiveMessages(){const live=getLive(); let html=""; live.forEach(m=>{html+=`<div class="msg-bubble ${m.fromId===currentUser.id?'msg-me':'msg-them'}"><b>${m.fromName}:</b> ${m.text}</div>`}); document.getElementById('liveMessages').innerHTML=html||"<p>🔴 Live Chat - Everyone sees</p>";}
+function loadLiveMessages(){const live=getLive(); let html=""; live.forEach(m=>{html+=`<div class="msg-bubble ${m.fromId===currentUser.id?'msg-me':'msg-them'}"><b>${m.fromName}:</b> ${m.text}</div>`}); document.getElementById('liveMessages').innerHTML=html||"<p>🔴 Live Chat</p>";}
 function sendLive(){const t=document.getElementById('liveInput').value.trim(); if(!t) return; const live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,text:t,time:Date.now()}); saveLive(live); document.getElementById('liveInput').value=""; loadLiveMessages();}
 function changeProfilePic(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){users[idx].profilePic=ev.target.result; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert("✅ Picture Changed!");}}; r.readAsDataURL(f);}
 function updateAccount(){const n=document.getElementById('editName').value.trim(), s=document.getElementById('editSkill').value.trim(), l=document.getElementById('editLocation').value.trim(); let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){if(n) users[idx].name=n; if(s) users[idx].skill=s; if(l) users[idx].location=l; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert("✅ Updated!");}}
