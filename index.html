@@ -2,15 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKC V38 Voice Note</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AKC V42 Full - Voice Video Map Chat</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#f6f7fb;padding-bottom:75px}
 .header{background:#0a1931;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
 .logo{background:white;color:#0a1931;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;overflow:hidden}
 .logo img{width:100%;height:100%;object-fit:cover}
-.owner-badge{background:#f9c74f;color:#333;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:bold}
 .card{background:white;margin:10px;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 .user-card{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eee;align-items:center}
 .avatar{width:48px;height:48px;border-radius:50%;background:#1a3a8f;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;overflow:hidden;flex-shrink:0}
@@ -18,8 +17,8 @@ body{background:#f6f7fb;padding-bottom:75px}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #eee;z-index:1000}
 .nav-item{text-align:center;font-size:11px;color:#888;cursor:pointer}
 .nav-item.active{color:#0a1931;font-weight:bold}
-input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc}
-button.primary{background:#0a1931;color:white;font-weight:bold;border:none;cursor:pointer}
+input,select,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:15px}
+button.primary{background:#0a1931;color:white;font-weight:bold;border:none;cursor:pointer;min-height:48px}
 .hidden{display:none}
 .google-embed{width:100%;height:420px;border-radius:12px;border:3px solid #4285f4}
 .google-box{background:#e8f0fe;padding:10px;border-radius:8px;margin:8px 0;border:1px solid #4285f4}
@@ -29,117 +28,51 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none;curso
 .chat-tabs{display:flex;gap:5px;margin-bottom:10px}
 .chat-tab{flex:1;padding:10px;text-align:center;border-radius:8px;background:#eee;cursor:pointer;font-weight:bold;font-size:13px}
 .chat-tab.active{background:#0a1931;color:white}
-.msg-bubble{padding:10px 12px;border-radius:15px;margin:6px 0;max-width:80%;font-size:14px}
+.msg-bubble{padding:10px 12px;border-radius:15px;margin:6px 0;max-width:85%;font-size:14px}
 .msg-me{background:#0a1931;color:white;margin-left:auto}
 .msg-them{background:#eee}
-.filters{display:flex;gap:8px;padding:8px 10px;overflow:auto}
-.filter{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;white-space:nowrap;font-size:13px;cursor:pointer}
-.filter.active{background:#0a1931;color:white}
 .post-card{border:1px solid #eee;border-radius:12px;padding:10px;margin:10px 0;background:white;cursor:pointer}
-.post-media{width:100%;max-height:350px;border-radius:10px;object-fit:cover;margin:8px 0}
-.post-actions{display:flex;gap:8px;padding:8px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;margin:8px 0;flex-wrap:wrap}
-.action-btn{background:#f1f2f6;border:none;padding:7px 12px;cursor:pointer;font-size:13px;width:auto;display:flex;align-items:center;gap:5px;border-radius:20px}
+.post-media{width:100%;max-height:380px;border-radius:10px;object-fit:cover;margin:8px 0}
+.post-actions{display:flex;gap:6px;padding:8px 0;border-top:1px solid #eee;margin:8px 0;flex-wrap:wrap}
+.action-btn{background:#f1f2f6;border:none;padding:7px 12px;cursor:pointer;font-size:13px;width:auto;border-radius:20px}
 .action-btn.chat-direct{background:#00b894;color:white;font-weight:bold}
 .comment-box{background:#f8f9fa;padding:8px;border-radius:8px;margin:5px 0;font-size:13px}
 .media-preview{width:100%;max-height:200px;border-radius:10px;margin:5px 0;display:none;object-fit:cover}
 .tap-hint{background:#00b894;color:white;padding:6px 10px;border-radius:20px;font-size:11px;text-align:center;margin:8px 0;font-weight:bold}
-.voice-recording{background:#ff4757;color:white;padding:10px;border-radius:20px;text-align:center;animation:pulse 1s infinite;display:none;margin:5px 0}
-@keyframes pulse{0%{opacity:1}50%{opacity:0.6}100%{opacity:1}}
+.voice-recording{background:#ff4757;color:white;padding:10px;border-radius:20px;text-align:center;display:none;margin:5px 0}
 .chat-input-row{display:flex;gap:5px;align-items:center}
 .chat-input-row input{flex:1}
-.voice-btn{width:50px;background:#e17055;color:white;border:none;border-radius:50%;font-size:20px;cursor:pointer;flex-shrink:0}
-.voice-btn.recording{background:#ff4757;animation:pulse 1s infinite}
+.voice-btn{width:52px;background:#e17055;color:white;border:none;border-radius:50%;font-size:20px;cursor:pointer;flex-shrink:0;height:48px}
 </style>
 </head>
 <body>
 <div class="header">
-<div style="display:flex;gap:10px;align-items:center"><div class="logo" id="headerLogo">K</div><div><b>AKC V38 <span class="owner-badge">OWNER</span></b><br><small id="userCount">1 Users</small></div></div>
-<div style="display:flex;gap:5px;align-items:center"><small id="currentName">Guest</small><button onclick="logout()" style="width:auto;padding:5px 12px;border-radius:15px;background:white;color:#0a1931;border:none;font-size:11px">Logout</button></div>
+<div style="display:flex;gap:10px;align-items:center"><div class="logo" id="headerLogo">K</div><div><b>AKC V42 <span style="background:#00b894;color:white;padding:3px 8px;border-radius:10px;font-size:10px">FULL</span></b><br><small id="userCount">0 Users</small></div></div>
+<div style="display:flex;gap:5px;align-items:center"><small id="currentName">Guest</small><button type="button" onclick="logout()" style="width:auto;padding:5px 12px;border-radius:15px;background:white;color:#0a1931;border:none;font-size:11px">Logout</button></div>
 </div>
 
 <div id="authSection" class="card">
-<h3>AKC V38 - Login / Register + Voice Note</h3>
-<p style="font-size:12px;color:#666">Student fills by self - Empty fields!</p>
-<input id="phone" type="tel" placeholder="Enter Phone Number">
+<h3>AKC V42 - FULL APP Login</h3>
+<p style="font-size:12px;color:#0984e3;font-weight:bold;text-align:center">Empty fields - Student fills by self - Buttons must press!</p>
+<input id="phone" placeholder="Enter Phone Number">
 <input id="password" type="password" placeholder="Enter Password">
-<input id="name" type="text" placeholder="Enter Full Name">
-<select id="skill"><option value="" disabled selected>Choose Skill</option><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option><option>Tailoring</option><option>Baking</option><option>Barbing</option></select>
-<input type="file" id="regPic" accept="image/*" onchange="previewRegPic(event)">
-<img id="regPicPreview" class="media-preview">
+<input id="name" placeholder="Full Name - for Register only">
+<select id="skill"><option value="">Choose Skill - for Register</option><option>Plumbing</option><option>Phone Repair</option><option>Gadgets</option><option>Tailoring</option><option>Baking</option><option>Barbing</option><option>Electrical</option></select>
+<div style="border:1px dashed #ccc;padding:8px;border-radius:8px"><label style="font-size:12px">📸 Profile Picture (Optional):</label><input type="file" id="regPic" accept="image/*" onchange="previewRegPic(event)"><img id="regPicPreview" class="media-preview"></div>
 <input id="refCodeInput" placeholder="Referral Code (optional)">
-<button class="primary" onclick="register()">Register</button>
-<button class="primary" style="background:#0984e3" onclick="login()">Login</button>
-<p id="msg" style="margin-top:8px;font-weight:bold"></p>
+<button type="button" class="primary" onclick="doRegister()" style="background:#0a1931">REGISTER - Click to Register</button>
+<button type="button" class="primary" onclick="doLogin()" style="background:#0984e3">LOGIN - Click to Login</button>
+<button type="button" onclick="testBtn()" style="background:#636e72;color:white;height:38px">🔧 Test Buttons (If Register no press, click me)</button>
+<div id="msg" style="margin-top:10px;font-weight:bold;min-height:30px;background:#fff3cd;padding:8px;border-radius:8px;text-align:center">Ready - Fill phone, password, name, skill then Register</div>
+<p style="font-size:11px;text-align:center;margin-top:5px">Saved users: <span id="count">0</span> | <a href="#" onclick="clearAll()" style="color:red">Clear all</a></p>
 </div>
 
 <div id="mainSection" class="hidden">
-<div id="buyTab">
-<div style="padding:10px 12px"><h2>Buy - Tap Advert → Private Chat</h2></div>
-<div class="card"><b>Registered - <span id="regCount">1</span></b><div id="usersList"></div></div>
-<div class="card"><input id="searchInput" placeholder="Search..." onkeyup="searchAll()"></div>
-<div id="advertsFeed"></div>
-</div>
-
-<div id="sellTab" class="hidden">
-<div class="card">
-<h3>Sell - Post with Video/Picture</h3>
-<input id="prodName" placeholder="Product name">
-<input id="prodPrice" type="number" placeholder="Price ₦">
-<textarea id="prodDesc" placeholder="Description"></textarea>
-<div style="border:2px dashed #4285f4;padding:10px;border-radius:10px;margin:8px 0;background:#e8f0fe">
-<label style="font-weight:bold;font-size:13px">📸📹 Add Pictures / Videos:</label>
-<input type="file" id="prodMedia" accept="image/*,video/*" multiple onchange="previewPostMedia(event)">
-<div id="mediaPreviewContainer"></div>
-</div>
-<button class="primary" onclick="postAdvert()">📤 Post</button>
-<p id="sellMsg"></p>
-</div>
-<div class="card"><h4>My Adverts</h4><div id="myAdverts"></div></div>
-</div>
-
-<div id="mapTab" class="hidden">
-<div class="card">
-<h3>🗺️ Google Map Inside App</h3>
-<div class="google-box"><small>📍 <span id="myLocText">Not shared</span></small></div>
-<iframe id="googleIframe" class="google-embed" src="https://www.google.com/maps?q=Akungba+Akoko+Nigeria&z=14&output=embed" loading="lazy" allowfullscreen></iframe>
-<div style="margin-top:10px;display:flex;gap:8px"><button class="primary" style="flex:1" onclick="shareLocation()">📍 Share</button><button class="primary" style="flex:1;background:#4285f4" onclick="refreshGoogleMap()">🔄 Refresh</button></div>
-<div id="nearbyList"></div>
-</div>
-</div>
-
-<div id="chatTab" class="hidden">
-<div class="card">
-<h3>💬 Chats - Now with Voice Note 🎤</h3>
-<div class="chat-tabs"><div class="chat-tab active" id="privateTabBtn" onclick="switchChatType('private')">Private Chat</div><div class="chat-tab" id="liveTabBtn" onclick="switchChatType('live')">🔴 Live</div></div>
-<div id="privateChatSection">
-<div id="chatList"></div>
-<div class="hidden" id="chatBox">
-<div id="chatMessages" style="height:280px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div>
-<div class="voice-recording" id="voiceRecording">🔴 Recording voice... Tap stop to send</div>
-<div class="chat-input-row">
-<input id="chatInput" placeholder="Type message...">
-<button class="voice-btn" id="privateVoiceBtn" onclick="togglePrivateVoice()">🎤</button>
-</div>
-<button class="primary" onclick="sendPrivate()">Send Text</button>
-</div>
-</div>
-<div id="liveChatSection" class="hidden">
-<div id="liveMessages" style="height:280px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div>
-<div class="voice-recording" id="liveVoiceRecording">🔴 Recording...</div>
-<div class="chat-input-row">
-<input id="liveInput" placeholder="Live message...">
-<button class="voice-btn" id="liveVoiceBtn" onclick="toggleLiveVoice()">🎤</button>
-</div>
-<button class="primary" style="background:#e17055" onclick="sendLive()">🔴 Send Live</button>
-</div>
-</div>
-</div>
-
-<div id="accountTab" class="hidden">
-<div class="card" style="text-align:center"><div class="profile-pic-large" id="accPicLarge">K</div><h3 id="accName"></h3><p id="accPhone"></p><p><span id="accSkill"></span> | <span id="accWallet" style="background:#00b894;color:white;padding:4px 8px;border-radius:10px">₦0</span></p><button onclick="document.getElementById('editPicInput').click()" style="width:auto;padding:6px 15px;background:#0984e3;color:white;border:none;border-radius:20px;font-size:12px">📸 Change Picture</button><input type="file" id="editPicInput" accept="image/*" style="display:none" onchange="changeProfilePic(event)"></div>
-<div class="card"><h4>✏️ Edit</h4><input id="editName" placeholder="Change Name"><input id="editSkill" placeholder="Change Skill"><input id="editLocation" placeholder="Location"><button class="primary" style="background:#0984e3" onclick="updateAccount()">💾 Save</button><button class="primary" style="background:#00b894;margin-top:8px" onclick="fundWallet()">💰 Fund +₦1000</button><div class="google-box"><b>📍 Google:</b> <span id="accLoc">Not set</span></div></div>
-<div class="card"><h4>🔗 Referral</h4><div class="ref-box"><b>Code:</b> <span id="myRefCode">AKC-</span><br><input id="myRefLink" readonly style="font-size:11px"><br><div style="display:flex;gap:5px;margin-top:5px"><button onclick="copyRefLink()" style="flex:1;background:#0a1931;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📋 Copy</button><button onclick="shareRefLink()" style="flex:1;background:#00b894;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📤 Share</button></div><b>Referrals: <span id="refCount">0</span> | Earned: <span id="refEarned">₦0</span></b><div id="refList"></div></div></div>
-</div>
+<div id="buyTab"><div style="padding:10px 12px"><h2>Buy - Tap Advert → Private Chat 💬</h2><small style="color:#00b894;font-weight:bold">👉 Tap any advert picture/video to chat seller privately!</small></div><div class="card"><b>Users: <span id="regCount">0</span></b><div id="usersList"></div></div><div class="card"><input id="searchInput" placeholder="Search posts..."></div><div id="advertsFeed"></div></div>
+<div id="sellTab" class="hidden"><div class="card"><h3>Sell - Post with Video/Picture + Comments</h3><input id="prodName" placeholder="Product name e.g iPhone"><input id="prodPrice" type="number" placeholder="Price ₦"><textarea id="prodDesc" placeholder="Description"></textarea><div style="border:2px dashed #4285f4;padding:10px;border-radius:10px;margin:8px 0;background:#e8f0fe"><label style="font-weight:bold;font-size:13px">📸📹 Add Pictures / Videos (Max 3 - Must add 1):</label><input type="file" id="prodMedia" accept="image/*,video/*" multiple onchange="previewPostMedia(event)"><div id="mediaPreviewContainer"></div></div><button type="button" class="primary" onclick="postAdvert()">📤 Post - Student tap → your private chat!</button><p id="sellMsg" style="font-weight:bold;margin-top:8px"></p></div><div class="card"><h4>My Posts</h4><div id="myAdverts"></div></div></div>
+<div id="mapTab" class="hidden"><div class="card"><h3>🗺️ Google Map Inside App - No Leaflet</h3><div class="google-box"><b>🌐 Google Location - Reflects inside app</b><br><small>📍 <span id="myLocText">Not shared yet - Click Share</span></small></div><iframe id="googleIframe" class="google-embed" src="https://www.google.com/maps?q=Akungba+Akoko+Nigeria&z=14&output=embed" loading="lazy" allowfullscreen></iframe><div style="margin-top:10px;display:flex;gap:8px"><button type="button" class="primary" style="flex:1" onclick="shareLocation()">📍 Share My Location</button><button type="button" class="primary" style="flex:1;background:#4285f4" onclick="refreshGoogleMap()">🔄 Refresh Map</button></div><button type="button" class="primary" style="background:#00b894;margin-top:8px" onclick="openGoogleMaps()">🌍 Open Full Google Maps App</button><div id="nearbyList" style="margin-top:12px"></div></div></div>
+<div id="chatTab" class="hidden"><div class="card"><h3>💬 Chats + Voice Note 🎤</h3><div class="chat-tabs"><div class="chat-tab active" id="privateTabBtn" onclick="switchChatType('private')">Private Chat</div><div class="chat-tab" id="liveTabBtn" onclick="switchChatType('live')">🔴 Live Chat</div></div><div id="privateChatSection"><div id="chatList"></div><div class="hidden" id="chatBox"><div id="chatMessages" style="height:300px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><div class="voice-recording" id="voiceRecording">🔴 Recording voice... Tap ⏹️ to stop & send</div><div class="chat-input-row"><input id="chatInput" placeholder="Type message..."><button type="button" class="voice-btn" id="privateVoiceBtn" onclick="togglePrivateVoice()">🎤</button></div><button type="button" class="primary" onclick="sendPrivate()">Send Text</button></div></div><div id="liveChatSection" class="hidden"><div id="liveMessages" style="height:300px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px;display:flex;flex-direction:column"></div><div class="voice-recording" id="liveVoiceRecording">🔴 Recording live voice...</div><div class="chat-input-row"><input id="liveInput" placeholder="Live message..."><button type="button" class="voice-btn" id="liveVoiceBtn" onclick="toggleLiveVoice()">🎤</button></div><button type="button" class="primary" style="background:#e17055" onclick="sendLive()">🔴 Send Live</button></div></div></div>
+<div id="accountTab" class="hidden"><div class="card" style="text-align:center"><div class="profile-pic-large" id="accPicLarge">K</div><h3 id="accName"></h3><p id="accPhone"></p><p><span id="accSkill"></span> | <span id="accWallet" style="background:#00b894;color:white;padding:4px 8px;border-radius:10px">₦0</span></p><button type="button" onclick="document.getElementById('editPicInput').click()" style="width:auto;padding:6px 15px;background:#0984e3;color:white;border:none;border-radius:20px;font-size:12px">📸 Change Profile Picture</button><input type="file" id="editPicInput" accept="image/*" style="display:none" onchange="changeProfilePic(event)"></div><div class="card"><h4>✏️ Edit Account</h4><input id="editName" placeholder="Change Name"><input id="editSkill" placeholder="Change Skill"><input id="editLocation" placeholder="Location e.g Akungba"><button type="button" class="primary" style="background:#0984e3" onclick="updateAccount()">💾 Save Changes</button><button type="button" class="primary" style="background:#00b894;margin-top:8px" onclick="fundWallet()">💰 Fund Wallet +₦1000</button><div class="google-box"><b>📍 Google Location:</b> <span id="accLoc">Not set</span></div></div><div class="card"><h4>🔗 Referral Link</h4><div class="ref-box"><b>Code:</b> <span id="myRefCode">AKC-</span><br><input id="myRefLink" readonly style="font-size:11px"><br><div style="display:flex;gap:5px;margin-top:5px"><button type="button" onclick="copyRefLink()" style="flex:1;background:#0a1931;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📋 Copy</button><button type="button" onclick="shareRefLink()" style="flex:1;background:#00b894;color:white;border:none;padding:8px;border-radius:8px;font-size:12px">📤 Share</button></div><b>Referrals: <span id="refCount">0</span> | Earned: <span id="refEarned">₦0</span></b><div id="refList"></div></div></div></div>
 </div>
 
 <div class="bottom-nav" id="bottomNav" style="display:none">
@@ -151,105 +84,165 @@ button.primary{background:#0a1931;color:white;font-weight:bold;border:none;curso
 </div>
 
 <script>
-let currentUser=null, activeChat=null, tempRegPic="", tempPostMedia=[], mediaRecorder=null, audioChunks=[], isRecording=false, recordingType="";
-const getUsers=()=>JSON.parse(localStorage.getItem('akc_v36_users')||'[]');
-const saveUsers=u=>localStorage.setItem('akc_v36_users',JSON.stringify(u));
-const getAdverts=()=>JSON.parse(localStorage.getItem('akc_v36_adverts')||'[]');
-const saveAdverts=a=>localStorage.setItem('akc_v36_adverts',JSON.stringify(a));
-const getChats=()=>JSON.parse(localStorage.getItem('akc_v36_chats')||'[]');
-const saveChats=c=>localStorage.setItem('akc_v36_chats',JSON.stringify(c));
-const getLive=()=>JSON.parse(localStorage.getItem('akc_v36_live')||'[]');
-const saveLive=l=>localStorage.setItem('akc_v36_live',JSON.stringify(l));
+var currentUser=null, activeChat=null, tempRegPic="", tempPostMedia=[], mediaRecorder=null, audioChunks=[], isRecording=false, recordingType="";
+function getUsers(){try{var u=localStorage.getItem('akc_v36_users'); return u?JSON.parse(u):[];}catch(e){return [];}}
+function saveUsers(u){localStorage.setItem('akc_v36_users',JSON.stringify(u)); var c=document.getElementById('count'); if(c) c.innerText=u.length; var rc=document.getElementById('regCount'); if(rc) rc.innerText=u.length; var uc=document.getElementById('userCount'); if(uc) uc.innerText=u.length+' Users';}
+function getAdverts(){try{var a=localStorage.getItem('akc_v36_adverts'); return a?JSON.parse(a):[];}catch(e){return [];}}
+function saveAdverts(a){localStorage.setItem('akc_v36_adverts',JSON.stringify(a));}
+function getChats(){try{var ch=localStorage.getItem('akc_v36_chats'); return ch?JSON.parse(ch):[];}catch(e){return [];}}
+function saveChats(c){localStorage.setItem('akc_v36_chats',JSON.stringify(c));}
+function getLive(){try{var l=localStorage.getItem('akc_v36_live'); return l?JSON.parse(l):[];}catch(e){return [];}}
+function saveLive(l){localStorage.setItem('akc_v36_live',JSON.stringify(l));}
 function genRefCode(n){return "AKC-"+(n||"USER").substring(0,4).toUpperCase()+Math.floor(100+Math.random()*900);}
-function previewRegPic(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{tempRegPic=ev.target.result; const img=document.getElementById('regPicPreview'); img.src=tempRegPic; img.style.display='block';}; r.readAsDataURL(f);}
-function previewPostMedia(e){const files=e.target.files; tempPostMedia=[]; const container=document.getElementById('mediaPreviewContainer'); container.innerHTML=""; if(files.length>3){alert("Max 3!");return;} for(let f of files){const reader=new FileReader(); reader.onload=ev=>{const isVideo=f.type.startsWith('video'); tempPostMedia.push({data:ev.target.result,[STRIPPED] const el=isVideo?document.createElement('video'):document.createElement('img'); if(isVideo){el.src=ev.target.result; el.controls=true;} else {el.src=ev.target.result;} el.style.cssText="width:100%;max-height:150px;border-radius:8px;margin:5px 0;object-fit:cover;display:block"; container.appendChild(el);}; reader.readAsDataURL(f);}}
-function register(){const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim(), name=document.getElementById('name').value.trim(), skill=document.getElementById('skill').value, ref=document.getElementById('refCodeInput').value.trim(); const msgEl=document.getElementById('msg'); if(!phone||!pass||!name||!skill){msgEl.innerHTML="<span style='color:red'>⚠️ Fill all fields!</span>";return;} let users=getUsers(); if(users.find(x=>x.phone===phone)){msgEl.innerHTML="<span style='color:red'>Exists! Login.</span>";return;} const code=genRefCode(name); const u={id:Date.now().toString(),phone,name,password:pass,skill,is_owner:phone==='08105986759',wallet:0,lat:7.476+Math.random()*0.02,lng:5.738+Math.random()*0.02,location:'Akungba, AAUA',profilePic:tempRegPic||"",refCode:code,referredBy:ref,referrals:[],refEarned:0}; users.push(u); if(ref){const idx=users.findIndex(x=>x.refCode===ref); if(idx>=0){users[idx].referrals.push({name,phone}); users[idx].refEarned+=200; users[idx].wallet+=200;}} saveUsers(users); msgEl.innerHTML="<span style='color:green'>✅ Registered! Code: "+code+" - Now Login</span>";}
-function login(){const phone=document.getElementById('phone').value.trim(), pass=document.getElementById('password').value.trim(); const msgEl=document.getElementById('msg'); if(!phone||!pass){msgEl.innerHTML="<span style='color:red'>Enter phone & password!</span>";return;} let users=getUsers(); if(users.length===0){users=[{id:'1',phone:'08105986759',name:'Kareem Sheriff',password:'123',skill:'Plumbing',is_owner:true,wallet:5000,lat:7.476,lng:5.738,location:'Akungba',profilePic:"",refCode:genRefCode('Kareem'),referrals:[],refEarned:0}]; saveUsers(users);} const found=users.find(u=>u.phone===phone && u.password===pass); if(!found){msgEl.innerHTML="<span style='color:red'>Wrong phone/password!</span>";return;} currentUser=found; localStorage.setItem('akc_v36_current',JSON.stringify(found)); msgEl.innerHTML="<span style='color:green'>✅ Login success!</span>"; showMain();}
+function testBtn(){alert('✅ Buttons WORKING! If you see this, Register/Login will work!');}
+function previewRegPic(e){var f=e.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(ev){tempRegPic=ev.target.result; var img=document.getElementById('regPicPreview'); img.src=tempRegPic; img.style.display='block';}; r.readAsDataURL(f);}
+function previewPostMedia(e){var files=e.target.files; tempPostMedia=[]; var container=document.getElementById('mediaPreviewContainer'); container.innerHTML=""; if(files.length>3){alert("Max 3 files!"); return;} for(var i=0;i<files.length;i++){var f=files[i]; (function(file){var reader=new FileReader(); reader.onload=function(ev){var isVideo=file.type.indexOf('video')===0; tempPostMedia.push({data:ev.target.result,type:isVideo?'video':'image'}); var el=isVideo?document.createElement('video'):document.createElement('img'); if(isVideo){el.src=ev.target.result; el.controls=true;} else {el.src=ev.target.result;} el.style.cssText="width:100%;max-height:150px;border-radius:8px;margin:5px 0;object-fit:cover;display:block"; container.appendChild(el);}; reader.readAsDataURL(file);})(f);}}
+function clearAll(){if(confirm('Clear all users?')){localStorage.clear(); location.reload();}}
+function doRegister(){
+  try{
+    var phone=document.getElementById('phone').value.trim();
+    var pass=document.getElementById('password').value.trim();
+    var name=document.getElementById('name').value.trim();
+    var skill=document.getElementById('skill').value;
+    var ref=document.getElementById('refCodeInput').value.trim();
+    var msg=document.getElementById('msg');
+    if(!phone||!pass||!name||!skill){msg.innerHTML="<span style='color:red'>⚠️ Fill Phone, Password, Name, Skill!</span>"; alert('Fill all fields!'); return;}
+    var users=getUsers();
+    if(users.find(function(x){return x.phone===phone;})){msg.innerHTML="<span style='color:red'>Phone exists! Click LOGIN with same phone & password</span>"; alert('Phone exists - Use LOGIN'); return;}
+    var code=genRefCode(name);
+    var u={id:Date.now().toString(),phone:phone,name:name,password:pass,skill:skill,is_owner:phone==='08105986759',wallet:0,lat:7.476+Math.random()*0.02,lng:5.738+Math.random()*0.02,location:'Akungba, AAUA',profilePic:tempRegPic||"",refCode:code,referredBy:ref,referrals:[],refEarned:0};
+    users.push(u);
+    if(ref){var idx=users.findIndex(function(x){return x.refCode===ref;}); if(idx>=0){users[idx].referrals.push({name:name,phone:phone}); users[idx].refEarned+=200; users[idx].wallet+=200;}}
+    saveUsers(users);
+    msg.innerHTML="<span style='color:green'>✅ REGISTERED! "+name+" Code: "+code+" - Now click LOGIN with phone "+phone+"</span>";
+    alert('✅ REGISTERED! '+name+' - Now LOGIN with same phone & password!');
+  }catch(e){alert('Register Error: '+e.message);}
+}
+function doLogin(){
+  try{
+    var phone=document.getElementById('phone').value.trim();
+    var pass=document.getElementById('password').value.trim();
+    var msg=document.getElementById('msg');
+    if(!phone||!pass){msg.innerHTML="<span style='color:red'>Enter phone & password!</span>"; alert('Enter phone & password'); return;}
+    var users=getUsers();
+    if(users.length===0){msg.innerHTML="<span style='color:red'>No users! Register first!</span>"; alert('No users - Register first'); return;}
+    var found=null; for(var i=0;i<users.length;i++){if(users[i].phone===phone && users[i].password===pass){found=users[i]; break;}}
+    if(!found){
+      var exists=users.find(function(u){return u.phone===phone;});
+      if(exists){msg.innerHTML="<span style='color:red'>Wrong password!</span>"; alert('Wrong password!');}
+      else{msg.innerHTML="<span style='color:red'>Phone not found! Register first!</span>"; alert('Phone not found - Register first');}
+      return;
+    }
+    currentUser=found;
+    localStorage.setItem('akc_v36_current',JSON.stringify(found));
+    msg.innerHTML="<span style='color:green'>✅ LOGIN SUCCESS! Welcome "+found.name+"</span>";
+    alert('✅ LOGIN SUCCESS! Welcome '+found.name);
+    showMain();
+  }catch(e){alert('Login Error: '+e.message);}
+}
 function showMain(){document.getElementById('authSection').classList.add('hidden');document.getElementById('mainSection').classList.remove('hidden');document.getElementById('bottomNav').style.display='flex';refreshAll();}
 function refreshAll(){
- const users=getUsers(), adverts=getAdverts();
- document.getElementById('regCount').innerText=users.length; document.getElementById('userCount').innerText=users.length+" Users"; document.getElementById('currentName').innerText=currentUser?currentUser.name:'Guest'; if(!currentUser) return;
- document.getElementById('accName').innerText=currentUser.name; document.getElementById('accPhone').innerText=currentUser.phone; document.getElementById('accSkill').innerText=currentUser.skill; document.getElementById('accWallet').innerText="₦"+(currentUser.wallet||0); document.getElementById('accLoc').innerText=currentUser.location; document.getElementById('myLocText').innerText=currentUser.location; document.getElementById('editName').value=currentUser.name;
- document.getElementById('myRefCode').innerText=currentUser.refCode; document.getElementById('myRefLink').value=`https://ffkareem75-9395.vercel.app?ref=${currentUser.refCode}`; document.getElementById('refCount').innerText=(currentUser.referrals||[]).length; document.getElementById('refEarned').innerText="₦"+(currentUser.refEarned||0);
- const picL=document.getElementById('accPicLarge'); picL.innerHTML=currentUser.profilePic?`<img src="${currentUser.profilePic}">`:currentUser.name.charAt(0);
- const hLogo=document.getElementById('headerLogo'); hLogo.innerHTML=currentUser.profilePic?`<img src="${currentUser.profilePic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:currentUser.name.charAt(0);
- let html=""; users.forEach(u=>{html+=`<div class="user-card"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div style="flex:1"><b>${u.name}</b><br><small>📍 ${u.location} - ${u.skill}</small><br><button onclick="openPrivate('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px">💬 Private</button> <button onclick="focusUserOnMap('${u.id}')" style="width:auto;padding:5px 12px;border-radius:15px;background:#4285f4;color:white;border:none;font-size:12px">📍 Map</button></div></div>`;});
+ var users=getUsers(), adverts=getAdverts();
+ document.getElementById('regCount').innerText=users.length; document.getElementById('userCount').innerText=users.length+' Users'; document.getElementById('currentName').innerText=currentUser?currentUser.name:'Guest';
+ if(!currentUser) return;
+ document.getElementById('accName').innerText=currentUser.name; document.getElementById('accPhone').innerText=currentUser.phone; document.getElementById('accSkill').innerText=currentUser.skill; document.getElementById('accWallet').innerText='₦'+(currentUser.wallet||0); document.getElementById('accLoc').innerText=currentUser.location; document.getElementById('myLocText').innerText=currentUser.location; document.getElementById('editName').value=currentUser.name;
+ document.getElementById('myRefCode').innerText=currentUser.refCode; document.getElementById('myRefLink').value='https://ffkareem75-9395.vercel.app?ref='+currentUser.refCode; document.getElementById('refCount').innerText=(currentUser.referrals||[]).length; document.getElementById('refEarned').innerText='₦'+(currentUser.refEarned||0);
+ var picL=document.getElementById('accPicLarge'); picL.innerHTML=currentUser.profilePic?'<img src="'+currentUser.profilePic+'">':currentUser.name.charAt(0);
+ var hLogo=document.getElementById('headerLogo'); hLogo.innerHTML=currentUser.profilePic?'<img src="'+currentUser.profilePic+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':currentUser.name.charAt(0);
+ var html=""; users.forEach(function(u){html+='<div class="user-card"><div class="avatar">'+(u.profilePic?'<img src="'+u.profilePic+'">':u.name.charAt(0))+'</div><div style="flex:1"><b>'+u.name+'</b><br><small>📍 '+u.location+' - '+u.skill+'</small><br><button type="button" onclick="openPrivate(\''+u.id+'\')" style="width:auto;padding:5px 12px;border-radius:15px;background:#00b894;color:white;border:none;font-size:12px">💬 Private</button> <button type="button" onclick="focusUserOnMap(\''+u.id+'\')" style="width:auto;padding:5px 12px;border-radius:15px;background:#4285f4;color:white;border:none;font-size:12px">📍 Map</button></div></div>';});
  document.getElementById('usersList').innerHTML=html;
- let feedHtml=""; if(adverts.length===0) feedHtml="<div class='card'><p style='text-align:center;color:#999'>No posts yet!</p></div>";
- else adverts.forEach(a=>{
-  let mediaHtml=""; (a.media||[]).forEach(m=>{if(m.type==='video') mediaHtml+=`<video src="${m.data}" controls class="post-media"></video>`; else mediaHtml+=`<img src="${m.data}" class="post-media">`;});
-  let commentsHtml=""; (a.comments||[]).forEach(c=>{commentsHtml+=`<div class="comment-box"><b>${c.user}:</b> ${c.text}</div>`;});
-  const liked=(a.likes||[]).includes(currentUser.id);
-  feedHtml+=`<div class="post-card" onclick="openAdvertChat('${a.id}')"><div class="tap-hint">👆 TAP TO CHAT SELLER PRIVATELY!</div><div style="display:flex;gap:8px;align-items:center"><div class="avatar" style="width:36px;height:36px">${a.sellerPic?`<img src="${a.sellerPic}">`:a.sellerName.charAt(0)}</div><div><b>${a.sellerName}</b><br><small>${a.location}</small></div><div style="margin-left:auto;font-weight:bold">₦${a.price}</div></div><h4 style="margin:8px 0">${a.name}</h4><p style="font-size:13px">${a.desc}</p>${mediaHtml}<div style="background:#00b894;color:white;padding:8px;border-radius:20px;text-align:center;font-weight:bold;margin:8px 0">💬 TAP TO CHAT ${a.sellerName.toUpperCase()}</div><div class="post-actions" onclick="event.stopPropagation()"><button class="action-btn ${liked?'liked':''}" onclick="toggleLike('${a.id}')">${liked?'❤️':'🤍'} Like (${(a.likes||[]).length})</button><button class="action-btn" onclick="focusComment('${a.id}')">💬 Comment (${(a.comments||[]).length})</button><button class="action-btn chat-direct" onclick="openAdvertChat('${a.id}')">💬 Private</button></div><div id="comments-${a.id}" onclick="event.stopPropagation()">${commentsHtml}</div><div style="display:flex;gap:5px;margin-top:8px" onclick="event.stopPropagation()"><input id="comment-input-${a.id}" placeholder="Write comment..." style="flex:1;padding:8px;border-radius:20px"><button onclick="addComment('${a.id}')" style="width:auto;padding:8px 15px;background:#0a1931;color:white;border:none;border-radius:20px">Post</button></div></div>`;
+ var feedHtml=""; if(adverts.length===0) feedHtml="<div class='card'><p style='text-align:center;color:#999'>No posts yet! Go Sell tab to post video/picture!</p></div>";
+ else adverts.forEach(function(a){
+  var mediaHtml=""; (a.media||[]).forEach(function(m){if(m.type==='video') mediaHtml+='<video src="'+m.data+'" controls class="post-media"></video>'; else mediaHtml+='<img src="'+m.data+'" class="post-media">';});
+  var commentsHtml=""; (a.comments||[]).forEach(function(c){commentsHtml+='<div class="comment-box"><b>'+c.user+':</b> '+c.text+'</div>';});
+  var liked=(a.likes||[]).indexOf(currentUser.id)>=0;
+  feedHtml+='<div class="post-card" onclick="openAdvertChat(\''+a.id+'\')"><div class="tap-hint">👆 TAP TO CHAT SELLER PRIVATELY - Goes to Private Chat!</div><div style="display:flex;gap:8px;align-items:center"><div class="avatar" style="width:36px;height:36px">'+(a.sellerPic?'<img src="'+a.sellerPic+'">':a.sellerName.charAt(0))+'</div><div><b>'+a.sellerName+'</b><br><small>'+a.location+'</small></div><div style="margin-left:auto;font-weight:bold">₦'+a.price+'</div></div><h4 style="margin:8px 0">'+a.name+'</h4><p style="font-size:13px">'+a.desc+'</p>'+mediaHtml+'<div style="background:#00b894;color:white;padding:8px;border-radius:20px;text-align:center;font-weight:bold;margin:8px 0">💬 TAP TO CHAT '+a.sellerName.toUpperCase()+' PRIVATELY</div><div class="post-actions" onclick="event.stopPropagation()"><button type="button" class="action-btn '+(liked?'liked':'')+'" onclick="toggleLike(\''+a.id+'\')">'+(liked?'❤️':'🤍')+' Like ('+(a.likes||[]).length+')</button><button type="button" class="action-btn" onclick="focusComment(\''+a.id+'\')">💬 Comment ('+(a.comments||[]).length+')</button><button type="button" class="action-btn chat-direct" onclick="openAdvertChat(\''+a.id+'\')">💬 Private Chat</button></div><div id="comments-'+a.id+'" onclick="event.stopPropagation()">'+commentsHtml+'</div><div style="display:flex;gap:5px;margin-top:8px" onclick="event.stopPropagation()"><input id="comment-input-'+a.id+'" placeholder="Write comment..." style="flex:1;padding:8px;border-radius:20px"><button type="button" onclick="addComment(\''+a.id+'\')" style="width:auto;padding:8px 15px;background:#0a1931;color:white;border:none;border-radius:20px">Post</button></div></div>';
  });
  document.getElementById('advertsFeed').innerHTML=feedHtml;
- let myHtml=""; adverts.filter(a=>a.sellerId===currentUser.id).forEach(a=>{myHtml+=`<div style="padding:8px 0;border-bottom:1px solid #eee"><b>${a.name}</b> - ₦${a.price}<br><small>${(a.likes||[]).length} likes</small><br><button onclick="deletePost('${a.id}')" style="width:auto;padding:4px 8px;background:#d63031;color:white;border:none;border-radius:5px;font-size:11px">Delete</button></div>`}); document.getElementById('myAdverts').innerHTML=myHtml||"<p>No posts</p>";
- let nearHtml="<h4>📍 Nearby:</h4>"; users.forEach(u=>{nearHtml+=`<div class="user-card" onclick="focusUserOnMap('${u.id}')" style="cursor:pointer"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b><br><small>${u.location}</small></div></div>`;}); document.getElementById('nearbyList').innerHTML=nearHtml;
+ var myHtml=""; adverts.filter(function(a){return a.sellerId===currentUser.id;}).forEach(function(a){myHtml+='<div style="padding:8px 0;border-bottom:1px solid #eee"><b>'+a.name+'</b> - ₦'+a.price+'<br><small>'+(a.likes||[]).length+' likes, '+(a.comments||[]).length+' comments - Students tap to chat you!</small><br><button type="button" onclick="deletePost(\''+a.id+'\')" style="width:auto;padding:4px 8px;background:#d63031;color:white;border:none;border-radius:5px;font-size:11px">Delete</button></div>';}); document.getElementById('myAdverts').innerHTML=myHtml||"<p style='color:#999'>No posts yet - Post from Sell tab</p>";
+ var nearHtml="<h4>📍 Nearby - Tap to show on Google Map:</h4>"; users.forEach(function(u){nearHtml+='<div class="user-card" onclick="focusUserOnMap(\''+u.id+'\')" style="cursor:pointer"><div class="avatar">'+(u.profilePic?'<img src="'+u.profilePic+'">':u.name.charAt(0))+'</div><div><b>'+u.name+'</b> - '+u.skill+'<br><small>'+u.location+'</small></div></div>';}); document.getElementById('nearbyList').innerHTML=nearHtml;
  loadPrivateList(); loadLiveMessages(); refreshGoogleMap();
 }
-// VOICE NOTE FUNCTIONS - NEW!
-async function togglePrivateVoice(){
- if(isRecording && recordingType==='private'){ stopRecording(); return; }
- if(isRecording){alert("Stop other recording first!"); return;}
- await startRecording('private');
+function openAdvertChat(postId){
+ var advert=getAdverts().find(function(a){return a.id===postId;}); if(!advert) return;
+ if(advert.sellerId===currentUser.id){alert('This is your own advert! Students will chat YOU when they tap it.'); return;}
+ activeChat=getUsers().find(function(u){return u.id===advert.sellerId;}); if(!activeChat){alert('Seller not found'); return;}
+ switchTab('chat',document.querySelectorAll('.nav-item')[3]);
+ setTimeout(function(){
+  document.getElementById('privateTabBtn').classList.add('active'); document.getElementById('liveTabBtn').classList.remove('active');
+  document.getElementById('privateChatSection').classList.remove('hidden'); document.getElementById('liveChatSection').classList.add('hidden');
+  document.getElementById('chatBox').classList.remove('hidden');
+  document.getElementById('chatList').innerHTML='<p><b>💬 Private with '+activeChat.name+' about: '+advert.name+'</b><br><small>₦'+advert.price+'</small> <a onclick="loadPrivateList()" style="color:#4285f4;cursor:pointer">Back</a></p>';
+  document.getElementById('chatInput').value='Hi '+activeChat.name+', I am interested in your advert: '+advert.name+' - ₦'+advert.price+'. Is it still available? ';
+  document.getElementById('chatInput').focus();
+  loadPrivateMessages();
+ },200);
 }
-async function toggleLiveVoice(){
- if(isRecording && recordingType==='live'){ stopRecording(); return; }
- if(isRecording){alert("Stop other recording first!"); return;}
- await startRecording('live');
+function postAdvert(){
+ var name=document.getElementById('prodName').value.trim(), price=document.getElementById('prodPrice').value.trim(), desc=document.getElementById('prodDesc').value.trim();
+ var sellMsg=document.getElementById('sellMsg');
+ if(!name||!price){sellMsg.innerHTML="<span style='color:red'>Add name and price!</span>"; return;}
+ if(tempPostMedia.length===0){sellMsg.innerHTML="<span style='color:red'>⚠️ Add at least 1 picture or video!</span>"; return;}
+ var adverts=getAdverts();
+ adverts.unshift({id:Date.now().toString(),name:name,price:price,desc:desc,media:tempPostMedia,sellerName:currentUser.name,sellerId:currentUser.id,sellerPic:currentUser.profilePic||"",location:currentUser.location,time:Date.now(),likes:[],comments:[]});
+ saveAdverts(adverts); tempPostMedia=[]; document.getElementById('mediaPreviewContainer').innerHTML=""; document.getElementById('prodName').value=""; document.getElementById('prodPrice').value=""; document.getElementById('prodDesc').value=""; document.getElementById('prodMedia').value="";
+ sellMsg.innerHTML="<span style='color:green'>✅ Posted with video/pictures! Students tap → your private chat!</span>"; refreshAll(); switchTab('buy',document.querySelectorAll('.nav-item')[0]);
 }
+function toggleLike(postId){var adverts=getAdverts(); var idx=adverts.findIndex(function(a){return a.id===postId;}); if(idx<0) return; adverts[idx].likes=adverts[idx].likes||[]; var i=adverts[idx].likes.indexOf(currentUser.id); if(i>=0) adverts[idx].likes.splice(i,1); else adverts[idx].likes.push(currentUser.id); saveAdverts(adverts); refreshAll();}
+function addComment(postId){var input=document.getElementById('comment-input-'+postId); var text=input.value.trim(); if(!text) return; var adverts=getAdverts(); var idx=adverts.findIndex(function(a){return a.id===postId;}); if(idx<0) return; adverts[idx].comments=adverts[idx].comments||[]; adverts[idx].comments.push({user:currentUser.name,userId:currentUser.id,text:text,time:Date.now()}); saveAdverts(adverts); input.value=""; refreshAll();}
+function focusComment(postId){var el=document.getElementById('comment-input-'+postId); if(el) el.focus();}
+function deletePost(postId){if(!confirm('Delete this post?')) return; var adverts=getAdverts(); adverts=adverts.filter(function(a){return a.id!==postId;}); saveAdverts(adverts); refreshAll();}
+function switchTab(tab,el){document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');}); el.classList.add('active'); ['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(function(t){document.getElementById(t).classList.add('hidden');}); document.getElementById(tab+'Tab').classList.remove('hidden'); if(tab==='map') setTimeout(refreshGoogleMap,400);}
+function switchChatType(t){document.getElementById('privateTabBtn').classList.toggle('active',t==='private'); document.getElementById('liveTabBtn').classList.toggle('active',t==='live'); document.getElementById('privateChatSection').classList.toggle('hidden',t!=='private'); document.getElementById('liveChatSection').classList.toggle('hidden',t!=='live');}
+function refreshGoogleMap(){var iframe=document.getElementById('googleIframe'); var lat=currentUser?currentUser.lat:7.476, lng=currentUser?currentUser.lng:5.738; iframe.src='https://maps.google.com/maps?q='+lat+','+lng+'&z=15&output=embed'; if(currentUser) document.getElementById('myLocText').innerText=currentUser.location+' ('+lat.toFixed(4)+', '+lng.toFixed(4)+') - Live in Google Map!';}
+function focusUserOnMap(uid){var u=getUsers().find(function(x){return x.id===uid;}); if(!u) return; switchTab('map',document.querySelectorAll('.nav-item')[2]); setTimeout(function(){document.getElementById('googleIframe').src='https://maps.google.com/maps?q='+u.lat+','+u.lng+'&z=17&output=embed'; document.getElementById('myLocText').innerText='Viewing: '+u.name+' - '+u.location;},300);}
+function shareLocation(){if(!navigator.geolocation){alert('No geolocation'); return;} document.getElementById('myLocText').innerText='Getting location...'; navigator.geolocation.getCurrentPosition(function(pos){var users=getUsers(); var idx=users.findIndex(function(u){return u.id===currentUser.id;}); if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; users[idx].location=document.getElementById('editLocation').value||'Akungba '+pos.coords.latitude.toFixed(4); saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert('✅ Location Shared! Google Map reflects inside app now!');}},function(err){alert('Location error: '+err.message);});}
+function openGoogleMaps(){window.open('https://www.google.com/maps?q='+currentUser.lat+','+currentUser.lng+'&z=15','_blank');}
+function loadPrivateList(){var users=getUsers().filter(function(u){return u.id!==currentUser.id;}); var html=""; users.forEach(function(u){html+='<div class="user-card" onclick="openPrivate(\''+u.id+'\')" style="cursor:pointer"><div class="avatar">'+(u.profilePic?'<img src="'+u.profilePic+'">':u.name.charAt(0))+'</div><div><b>'+u.name+'</b><br><small>'+u.skill+'</small></div><div>💬</div></div>';}); document.getElementById('chatList').innerHTML=html||"<p style='color:#999'>No other users yet - Register with another phone to test!</p>";}
+function openPrivate(uid){activeChat=getUsers().find(function(u){return u.id===uid;}); document.getElementById('chatBox').classList.remove('hidden'); document.getElementById('chatList').innerHTML='<p><b>Private with '+activeChat.name+'</b> <a onclick="loadPrivateList()" style="color:#4285f4;cursor:pointer">Back</a></p>'; loadPrivateMessages();}
+function loadPrivateMessages(){if(!activeChat) return; var chats=getChats().filter(function(c){return (c.from===currentUser.id&&c.to===activeChat.id)||(c.from===activeChat.id&&c.to===currentUser.id);}); var html=""; chats.forEach(function(c){if(c.type==='voice'){html+='<div class="msg-bubble '+(c.from===currentUser.id?'msg-me':'msg-them')+'">🎤 Voice Note:<br><audio controls src="'+c.audio+'" style="width:180px"></audio><br><small>'+new Date(c.time).toLocaleTimeString()+'</small></div>';} else {html+='<div class="msg-bubble '+(c.from===currentUser.id?'msg-me':'msg-them')+'">'+(c.text||'')+'<br><small>'+new Date(c.time).toLocaleTimeString()+'</small></div>';}}); document.getElementById('chatMessages').innerHTML=html||"<p>No messages - Type or tap 🎤 for voice note!</p>"; document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;}
+function sendPrivate(){var t=document.getElementById('chatInput').value.trim(); if(!t||!activeChat) return; var c=getChats(); c.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,type:'text',text:t,time:Date.now()}); saveChats(c); document.getElementById('chatInput').value=""; loadPrivateMessages();}
+function loadLiveMessages(){var live=getLive(); var html=""; live.forEach(function(m){if(m.type==='voice'){html+='<div class="msg-bubble '+(m.fromId===currentUser.id?'msg-me':'msg-them')+'"><b>'+m.fromName+':</b> 🎤<br><audio controls src="'+m.audio+'" style="width:180px"></audio></div>';} else {html+='<div class="msg-bubble '+(m.fromId===currentUser.id?'msg-me':'msg-them')+'"><b>'+m.fromName+':</b> '+(m.text||'')+'</div>';}}); document.getElementById('liveMessages').innerHTML=html||"<p>🔴 Live Chat - Everyone sees</p>";}
+function sendLive(){var t=document.getElementById('liveInput').value.trim(); if(!t) return; var live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,type:'text',text:t,time:Date.now()}); saveLive(live); document.getElementById('liveInput').value=""; loadLiveMessages();}
+async function togglePrivateVoice(){if(isRecording && recordingType==='private'){stopRecording(); return;} if(isRecording){alert('Stop other recording first!'); return;} await startRecording('private');}
+async function toggleLiveVoice(){if(isRecording && recordingType==='live'){stopRecording(); return;} if(isRecording){alert('Stop other first!'); return;} await startRecording('live');}
 async function startRecording(type){
  try{
-  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  var stream=await navigator.mediaDevices.getUserMedia({audio:true});
   mediaRecorder=new MediaRecorder(stream);
   audioChunks=[]; isRecording=true; recordingType=type;
-  mediaRecorder.ondataavailable=e=>{if(e.data.size>0) audioChunks.push(e.data);};
-  mediaRecorder.onstop=()=>{ handleVoiceSend(); stream.getTracks().forEach(t=>t.stop()); };
+  mediaRecorder.ondataavailable=function(e){if(e.data.size>0) audioChunks.push(e.data);};
+  mediaRecorder.onstop=function(){handleVoiceSend(); stream.getTracks().forEach(function(t){t.stop();});};
   mediaRecorder.start();
-  if(type==='private'){ document.getElementById('voiceRecording').style.display='block'; document.getElementById('privateVoiceBtn').classList.add('recording'); document.getElementById('privateVoiceBtn').innerText='⏹️'; }
-  else { document.getElementById('liveVoiceRecording').style.display='block'; document.getElementById('liveVoiceBtn').classList.add('recording'); document.getElementById('liveVoiceBtn').innerText='⏹️'; }
- }catch(err){ alert("Mic permission needed! Allow microphone: "+err.message); isRecording=false;}
+  if(type==='private'){document.getElementById('voiceRecording').style.display='block'; document.getElementById('privateVoiceBtn').innerText='⏹️';}
+  else {document.getElementById('liveVoiceRecording').style.display='block'; document.getElementById('liveVoiceBtn').innerText='⏹️';}
+ }catch(err){alert('Mic permission needed! Allow microphone: '+err.message); isRecording=false;}
 }
-function stopRecording(){ if(mediaRecorder && isRecording){ mediaRecorder.stop(); isRecording=false; document.getElementById('voiceRecording').style.display='none'; document.getElementById('liveVoiceRecording').style.display='none'; document.getElementById('privateVoiceBtn').classList.remove('recording'); document.getElementById('liveVoiceBtn').classList.remove('recording'); document.getElementById('privateVoiceBtn').innerText='🎤'; document.getElementById('liveVoiceBtn').innerText='🎤'; } }
+function stopRecording(){if(mediaRecorder && isRecording){mediaRecorder.stop(); isRecording=false; document.getElementById('voiceRecording').style.display='none'; document.getElementById('liveVoiceRecording').style.display='none'; document.getElementById('privateVoiceBtn').innerText='🎤'; document.getElementById('liveVoiceBtn').innerText='🎤';}}
 function handleVoiceSend(){
- const blob=new Blob(audioChunks,{type:'audio/webm'});
- const reader=new FileReader();
- reader.onload=ev=>{
-  const audioData=ev.target.result;
+ var blob=new Blob(audioChunks,{type:'audio/webm'});
+ var reader=new FileReader();
+ reader.onload=function(ev){
+  var audioData=ev.target.result;
   if(recordingType==='private'){
-   if(!activeChat){alert("Select private chat first!"); return;}
-   const chats=getChats(); chats.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,type:'voice',audio:audioData,time:Date.now()}); saveChats(chats); loadPrivateMessages();
+   if(!activeChat){alert('Select private chat first!'); return;}
+   var chats=getChats(); chats.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,type:'voice',audio:audioData,time:Date.now()}); saveChats(chats); loadPrivateMessages();
   } else {
-   const live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,type:'voice',audio:audioData,time:Date.now()}); saveLive(live); loadLiveMessages();
+   var live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,type:'voice',audio:audioData,time:Date.now()}); saveLive(live); loadLiveMessages();
   }
   recordingType="";
  };
  reader.readAsDataURL(blob);
 }
-function openAdvertChat(postId){const advert=getAdverts().find(a=>a.id===postId); if(!advert) return; if(advert.sellerId===currentUser.id){alert("Your advert! Students tap to chat you."); return;} activeChat=getUsers().find(u=>u.id===advert.sellerId); switchTab('chat',document.querySelectorAll('.nav-item')[3]); setTimeout(()=>{document.getElementById('privateTabBtn').classList.add('active'); document.getElementById('liveTabBtn').classList.remove('active'); document.getElementById('privateChatSection').classList.remove('hidden'); document.getElementById('liveChatSection').classList.add('hidden'); document.getElementById('chatBox').classList.remove('hidden'); document.getElementById('chatList').innerHTML=`<p><b>💬 Private with ${activeChat.name} about: ${advert.name}</b> <a onclick="loadPrivateList()" style="color:#4285f4">Back</a></p>`; document.getElementById('chatInput').value=`Hi ${activeChat.name}, interested in ${advert.name} - ₦${advert.price}. `; loadPrivateMessages();},200);}
-function postAdvert(){const name=document.getElementById('prodName').value.trim(), price=document.getElementById('prodPrice').value.trim(), desc=document.getElementById('prodDesc').value.trim(); if(!name||!price){sellMsg.innerHTML="<span style='color:red'>Add name & price!</span>";return;} if(tempPostMedia.length===0){sellMsg.innerHTML="<span style='color:red'>Add picture/video!</span>";return;} const adverts=getAdverts(); adverts.unshift({id:Date.now().toString(),name,price,desc,media:tempPostMedia,sellerName:currentUser.name,sellerId:currentUser.id,sellerPic:currentUser.profilePic||"",location:currentUser.location,time:Date.now(),likes:[],comments:[]}); saveAdverts(adverts); tempPostMedia=[]; document.getElementById('mediaPreviewContainer').innerHTML=""; document.getElementById('prodName').value=""; document.getElementById('prodPrice').value=""; document.getElementById('prodDesc').value=""; document.getElementById('prodMedia').value=""; sellMsg.innerHTML="<span style='color:green'>✅ Posted!</span>"; refreshAll(); switchTab('buy',document.querySelectorAll('.nav-item')[0]);}
-function toggleLike(postId){let adverts=getAdverts(); const idx=adverts.findIndex(a=>a.id===postId); if(idx<0) return; adverts[idx].likes=adverts[idx].likes||[]; const i=adverts[idx].likes.indexOf(currentUser.id); if(i>=0) adverts[idx].likes.splice(i,1); else adverts[idx].likes.push(currentUser.id); saveAdverts(adverts); refreshAll();}
-function addComment(postId){const input=document.getElementById(`comment-input-${postId}`); const text=input.value.trim(); if(!text) return; let adverts=getAdverts(); const idx=adverts.findIndex(a=>a.id===postId); adverts[idx].comments=adverts[idx].comments||[]; adverts[idx].comments.push({user:currentUser.name,userId:currentUser.id,text,time:Date.now()}); saveAdverts(adverts); input.value=""; refreshAll();}
-function focusComment(postId){document.getElementById(`comment-input-${postId}`)?.focus();}
-function deletePost(postId){if(!confirm("Delete?")) return; let adverts=getAdverts(); adverts=adverts.filter(a=>a.id!==postId); saveAdverts(adverts); refreshAll();}
-function switchTab(tab,el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');['buyTab','sellTab','mapTab','chatTab','accountTab'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(tab+'Tab').classList.remove('hidden'); if(tab==='map') setTimeout(refreshGoogleMap,400);}
-function switchChatType(t){document.getElementById('privateTabBtn').classList.toggle('active',t==='private'); document.getElementById('liveTabBtn').classList.toggle('active',t==='live'); document.getElementById('privateChatSection').classList.toggle('hidden',t!=='private'); document.getElementById('liveChatSection').classList.toggle('hidden',t!=='live');}
-function refreshGoogleMap(){const iframe=document.getElementById('googleIframe'); const lat=currentUser?.lat||7.476, lng=currentUser?.lng||5.738; iframe.src=`https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`; if(currentUser) document.getElementById('myLocText').innerText=`${currentUser.location} (${lat.toFixed(4)}, ${lng.toFixed(4)})`;}
-function focusUserOnMap(uid){const u=getUsers().find(x=>x.id===uid); if(!u) return; switchTab('map',document.querySelectorAll('.nav-item')[2]); setTimeout(()=>{document.getElementById('googleIframe').src=`https://maps.google.com/maps?q=${u.lat},${u.lng}&z=17&output=embed`;},300);}
-function shareLocation(){if(!navigator.geolocation){alert("No geo");return;} navigator.geolocation.getCurrentPosition(pos=>{let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){users[idx].lat=pos.coords.latitude; users[idx].lng=pos.coords.longitude; users[idx].location=document.getElementById('editLocation').value||`Akungba ${pos.coords.latitude.toFixed(4)}`; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}});}
-function loadPrivateList(){const users=getUsers().filter(u=>u.id!==currentUser?.id); let html=""; users.forEach(u=>{html+=`<div class="user-card" onclick="openPrivate('${u.id}')" style="cursor:pointer"><div class="avatar">${u.profilePic?`<img src="${u.profilePic}">`:u.name.charAt(0)}</div><div><b>${u.name}</b><br><small>${u.skill}</small></div><div>💬</div></div>`;}); document.getElementById('chatList').innerHTML=html||"<p style='color:#999'>No other users yet</p>";}
-function openPrivate(uid){activeChat=getUsers().find(u=>u.id===uid); document.getElementById('chatBox').classList.remove('hidden'); document.getElementById('chatList').innerHTML=`<p><b>Private with ${activeChat.name}</b> <a onclick="loadPrivateList()" style="color:#4285f4;cursor:pointer">Back</a></p>`; loadPrivateMessages();}
-function loadPrivateMessages(){if(!activeChat) return; const chats=getChats().filter(c=>(c.from===currentUser.id&&c.to===activeChat.id)||(c.from===activeChat.id&&c.to===currentUser.id)); let html=""; chats.forEach(c=>{if(c.type==='voice'){html+=`<div class="msg-bubble ${c.from===currentUser.id?'msg-me':'msg-them'}">🎤 Voice Note:<br><audio controls src="${c.audio}" style="width:180px"></audio><br><small>${new Date(c.time).toLocaleTimeString()}</small></div>`;} else {html+=`<div class="msg-bubble ${c.from===currentUser.id?'msg-me':'msg-them'}">${c.text||''}<br><small>${new Date(c.time).toLocaleTimeString()}</small></div>`;}}); document.getElementById('chatMessages').innerHTML=html||"<p>No messages - Type or tap 🎤 for voice note!</p>"; document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;}
-function sendPrivate(){const t=document.getElementById('chatInput').value.trim(); if(!t||!activeChat) return; const c=getChats(); c.push({id:Date.now().toString(),from:currentUser.id,to:activeChat.id,type:'text',text:t,time:Date.now()}); saveChats(c); document.getElementById('chatInput').value=""; loadPrivateMessages();}
-function loadLiveMessages(){const live=getLive(); let html=""; live.forEach(m=>{if(m.type==='voice'){html+=`<div class="msg-bubble ${m.fromId===currentUser.id?'msg-me':'msg-them'}"><b>${m.fromName}:</b> 🎤<br><audio controls src="${m.audio}" style="width:180px"></audio></div>`;} else {html+=`<div class="msg-bubble ${m.fromId===currentUser.id?'msg-me':'msg-them'}"><b>${m.fromName}:</b> ${m.text||''}</div>`;}}); document.getElementById('liveMessages').innerHTML=html||"<p>🔴 Live Chat</p>"; document.getElementById('liveMessages').scrollTop=document.getElementById('liveMessages').scrollHeight;}
-function sendLive(){const t=document.getElementById('liveInput').value.trim(); if(!t) return; const live=getLive(); live.push({id:Date.now().toString(),fromId:currentUser.id,fromName:currentUser.name,type:'text',text:t,time:Date.now()}); saveLive(live); document.getElementById('liveInput').value=""; loadLiveMessages();}
-function changeProfilePic(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){users[idx].profilePic=ev.target.result; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}}; r.readAsDataURL(f);}
-function updateAccount(){const n=document.getElementById('editName').value.trim(), s=document.getElementById('editSkill').value.trim(), l=document.getElementById('editLocation').value.trim(); let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){if(n) users[idx].name=n; if(s) users[idx].skill=s; if(l) users[idx].location=l; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}}
-function copyRefLink(){const link=document.getElementById('myRefLink'); link.select(); document.execCommand('copy'); alert("Copied");}
-function shareRefLink(){const link=document.getElementById('myRefLink').value; if(navigator.share){navigator.share({title:'AKC',url:link});} else {copyRefLink();}}
-function fundWallet(){let users=getUsers(); const idx=users.findIndex(u=>u.id===currentUser.id); if(idx>=0){users[idx].wallet+=1000; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}}
-function logout(){localStorage.removeItem('akc_v36_current');location.reload();}
-let stored=JSON.parse(localStorage.getItem('akc_v36_current')||'null'); if(stored){currentUser=stored; showMain();}
+function changeProfilePic(e){var f=e.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(ev){var users=getUsers(); var idx=users.findIndex(function(u){return u.id===currentUser.id;}); if(idx>=0){users[idx].profilePic=ev.target.result; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert('✅ Picture Changed!');}}; r.readAsDataURL(f);}
+function updateAccount(){var n=document.getElementById('editName').value.trim(), s=document.getElementById('editSkill').value.trim(), l=document.getElementById('editLocation').value.trim(); var users=getUsers(); var idx=users.findIndex(function(u){return u.id===currentUser.id;}); if(idx>=0){if(n) users[idx].name=n; if(s) users[idx].skill=s; if(l) users[idx].location=l; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll(); alert('✅ Updated!');}}
+function copyRefLink(){var link=document.getElementById('myRefLink'); link.select(); document.execCommand('copy'); alert('Copied: '+link.value);}
+function shareRefLink(){var link=document.getElementById('myRefLink').value; if(navigator.share){navigator.share({title:'AKC',url:link});} else {copyRefLink();}}
+function fundWallet(){var users=getUsers(); var idx=users.findIndex(function(u){return u.id===currentUser.id;}); if(idx>=0){users[idx].wallet+=1000; saveUsers(users); currentUser=users[idx]; localStorage.setItem('akc_v36_current',JSON.stringify(currentUser)); refreshAll();}}
+function logout(){localStorage.removeItem('akc_v36_current'); location.reload();}
+// INIT
+document.getElementById('count').innerText=getUsers().length;
+var stored=null; try{stored=JSON.parse(localStorage.getItem('akc_v36_current')||'null');}catch(e){} if(stored){currentUser=stored; showMain();}
 </script>
 </body>
- </html>
+</html>
